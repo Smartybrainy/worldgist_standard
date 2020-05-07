@@ -1,0 +1,83 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<br />
+<div class="row w-50 mt-3 ml-auto mr-auto">
+  <kbd style="text-align: center;" class="m-3">
+    You Are Welcome To Worldgist Please Complete Your Credentials.
+  </kbd>
+  <div class="col">
+    <form action="{% url 'accounts:register' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First Name:"
+          name="first_name"
+          required
+          autofocus
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name:"
+          name="last_name"
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Username:"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          class="form-control"
+          aria-describedby="emailHelp"
+          placeholder="Email@gmail.com"
+          name="email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password:"
+          name="password"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Confirm Password:"
+          name="confirm_password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="reset" class="btn btn-primary">Reset</button>
+    </form>
+  </div>
+</div>
+<br />
+<div class="container w-50 ml-auto mr-auto">
+  <a href="/"
+    ><button type="submit" class="btn btn-primary">Home page</button></a
+  >
+</div>
+<br />
+<div class="white-color">
+  {% for message in messages %}
+  <h4><i>{{ message }}</i></h4>
+  {% endfor %}
+</div>
+{% endblock content %}

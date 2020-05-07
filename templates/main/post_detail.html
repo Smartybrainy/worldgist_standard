@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row shadow-sm p-3 mb-3 bg-success rounded">
+  <div class="col">
+    {% for page in created_detail %}
+    <div class="card">
+      <div class="card-header">Worldgist Our Home</div>
+      <div class="card-body">
+        {% block title %}
+        {{ object.title }}
+        {% endblock title %}
+        <p class="card-text">
+          <small>{{ page.date_created }}</small>
+          <p>{{ page.title }} | <kbd>By:</kbd>   {{ page.author }}</p>
+        </p>
+        <pre class="card-text">{{ page.content | safe }}</pre>
+        <!-- the image section -->
+        {% if page.image %}
+        <img src="{{ page.image.url }}" alt="Does'nt Exis!" class="img-fluid 
+        rounded-lg border border-success" />
+        {% endif %}
+        <!-- the image section ends here -->
+        <div class="sharethis-inline-share-buttons"></div>
+      </div>
+      <!-- the below code belongs to comment -->
+      {% for comment in page.my_comments.all %}
+        {% if user.is_authenticated or comment.approved_comment %}
+        <div class="card-body">
+          <p class="card-header">
+            <h6>{{ comment.added_date }}</h6>
+            <h6>Author: {{ comment.author }}</h6>
+          </p>
+          <p class="card-text">{{ comment.body | safe }}</p>
+          <!-- the below goes for comment image -->
+          {% if comment.comment_img %}
+          <img src="{{ comment.comment_img.url }}" alt="Does'nt Exis!" 
+          class="img-fluid rounded-lg border border-success" />
+          {% endif %}
+          <!-- the comment image ends here  -->
+          <!-- this section checks to approve comments -->
+          {% if not comment.approved_comment %}
+            <a href="{% url 'blog:comment-approve' page_id=comment.pk %}">
+              <button type="button" class="btn btn-success">Ok</button>
+            </a>
+            <a href="{% url 'blog:comment-remove' page_id=comment.pk %}">
+              <button type="button" class="btn btn-danger">Remove</button>
+            </a>
+            {% endif %}
+            <!-- comments approval ends here --> 
+        </div>
+        {% endif %}
+        {% empty %}
+            <h5><i>NO COMMENT YET :(</i></h5>
+            <h6>Be the first to comment here</h6>
+        {% endfor %}
+        {% if user.is_authenticated %}
+        <div>
+          <a href="{% url 'blog:add-comment-to-post' page_id=page.pk %}">
+            <button type="submit" class="btn btn-info">Add Comment</button>
+          </a>
+          <strong>({{ page.my_comments.count }})</strong>
+        </div> <br />
+        {% else %}
+        <div>
+          <a href="{% url 'accounts:register' %}">
+            <button type="submit" class="btn btn-info">Add Comment</button>
+          </a>
+          <strong>({{ page.my_comments.count }})</strong>
+        </div> <br />
+        {% endif %}
+        <!-- This section belongs to the like button -->
+<div>
+  {% if user.is_authenticated %}
+  <form action="{% url 'blog:post-likes' page.id %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="hidden" class="form-control" name="like_id" value="{{ page.id }}" />
+    </div>
+    {% if user not in page.liked.all %}
+      <button type="submit" class="btn btn-success">Like</button>
+    {% else %}
+      <button type="submit" class="btn btn-danger">Unlike</button>
+    {% endif %}
+      <strong class="white"><span class="like-count-color">({{ page.liked.count }})
+      </span></strong>
+  </form>
+  {% else %}
+  <a href="{% url 'accounts:register' %}">
+    <button type="button" class="btn btn-success">Like</button></a>
+  <strong class="white"><span class="like-count-color">({{ page.liked.count }})</span></strong>
+  {% endif %}
+  <!--  -->
+  {% endfor %}
+</div>
+<!-- like button ends here -->
+    </div>
+  </div>
+  {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+</div>
+<!--  -->
+
+<div class="container mb-5">
+  <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
+</div>
+{% endblock content %}
+

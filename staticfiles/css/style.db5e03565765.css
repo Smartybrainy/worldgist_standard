@@ -1,0 +1,24 @@
+:root {
+  --primary-color: green;
+}
+
+.background {
+  color: var(--primary-color);
+  background-color: var(--primary-color);
+}
+.like-count-color {
+  color: green;
+}
+/* for the message that gets print out on register page */
+.white-color {
+  color: #fff;
+  text-align: center;
+}
+/* for the user welcome */
+.white {
+  color: #fff;
+}
+/* form design section */
+.form-white {
+  color: aliceblue;
+}

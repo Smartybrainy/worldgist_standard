@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="row" class="card-body">
+    <div class="col">
+      <p class="card-title"><h5 class="form-white">
+          Thanks for you beautiful comment!</h5></p>
+      <form action="" method="POST" class="form-white" 
+        enctype="multipart/form-data">
+        {% csrf_token %} {{ form | crispy }}
+        <button type="submit" class="btn btn-primary">Post</button>
+        <button type="reset" class="btn btn-warning">Reset</button>
+        <a href="{% url 'blog:post-detail' page_id=nav_post.pk %}">
+          <button type="button" class="btn btn-primary">&laquo;</button></a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

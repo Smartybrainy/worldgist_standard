@@ -1,0 +1,59 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row shadow p-3 mb-3 bg-info rounded">
+  <div class="col">
+    {% for blog in qs %}
+    <div class="card">
+      <div class="card-header">Worldgist News</div>
+      <div class="card-body">
+        <h5 class="card-title">{{ blog.title }}</h5>
+        <p class="card-text">
+          <small>{{ blog.date_created }}</small>
+        </p>
+        <pre class="card-text">
+          {{ blog.content | slice:":150" }}&nbsp;&raquo;
+        </pre>
+        <!-- This is the image field -->
+        {% if blog.image %}
+        <img
+          src="{{ blog.image.url }}"
+          alt="Does'nt Exis!"
+          class="img-fluid rounded-lg border border-success"
+        />
+        {% endif %}
+        <!-- the image field ends here  -->
+        <a
+          href="{% url 'blog:post-detail' page_id=blog.pk %}"
+          class="btn btn-primary"
+          >Read more</a
+        >
+        <!-- the below counts the comments in a post -->
+        <a
+          href="{% url 'blog:post-detail' page_id=blog.pk %}"
+          title="Total comments"
+          class="border border-primary rounded-lg"
+          >Comments:({{ blog.my_approved_comments.count }})</a
+        >
+        <div class="sharethis-inline-share-buttons"></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="row">
+    <div class="col">
+      {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+      <br />
+      <br />
+      {% if user.is_authenticated %}
+      <h4 class="white">Hello! {{ user.username }}</h4>
+      <a href="{% url 'accounts:logout' %}" class="btn btn-warning">Logout</a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
+      <a href="{% url 'accounts:register' %}" class="btn btn-success"
+        >Sign Up</a
+      >
+      {% endif %}
+    </div>
+  </div>
+</div>
+<!-- this is for the footer -->
+{% endblock content %}

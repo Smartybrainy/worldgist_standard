@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %}
+<br />
+<br />
+<br />
+<div class="row w-50 mt-3 ml-auto mr-auto">
+  <div class="col">
+    <form action="{% url 'accounts:login' %}" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Username:"
+          name="username"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="password"
+          class="form-control"
+          placeholder="Password:"
+          name="password"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+</div>
+<br />
+<div class="container w-50 ml-auto mr-auto">
+  <a href="/"
+    ><button type="submit" class="btn btn-primary">Home page</button></a
+  >
+</div>
+<div class="white-color">
+  {% for message in messages %}
+  <h4><i>{{ message }}</i></h4>
+  {% endfor %}
+</div>
+{% endblock content %}
