@@ -12,7 +12,10 @@
           <small>{{ page.date_created }}</small>
           <p>{{ page.title }} | <kbd>By:</kbd>   {{ page.author }}</p>
         </p>
-        <pre class="card-text">{{ page.content | safe }}</pre>
+        <div class="text-content">
+          <p class="card-text">{{ page.content | linebreaks }}</p>
+        </div>
+        
         <!-- the image section -->
         {% if page.image %}
         <img src="{{ page.image.url }}" alt="Does'nt Exis!" class="img-fluid 

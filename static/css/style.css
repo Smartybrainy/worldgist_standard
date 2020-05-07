@@ -22,3 +22,7 @@
 .form-white {
   color: aliceblue;
 }
+/* for content text */
+.text-content p:first-child {
+  text-indent: 50px;
+}

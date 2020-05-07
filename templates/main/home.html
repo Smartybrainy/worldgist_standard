@@ -9,9 +9,11 @@
         <p class="card-text">
           <small>{{ blog.date_created }}</small>
         </p>
-        <pre class="card-text">
-          {{ blog.content | slice:":150" }}&nbsp;&raquo;
-        </pre>
+        <div class="text-content">
+          <p class="card-text">
+            {{ blog.content | slice:":200" }}&nbsp;&raquo;
+          </p>
+        </div>
         <!-- This is the image field -->
         {% if blog.image %}
         <img
