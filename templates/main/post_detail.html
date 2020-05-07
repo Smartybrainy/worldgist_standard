@@ -10,7 +10,7 @@
         {% endblock title %}
         <p class="card-text">
           <small>{{ page.date_created }}</small>
-          <p>{{ page.title }} | <kbd>By:</kbd>   {{ page.author }}</p>
+          <h5>{{ page.title }} | <kbd>By:</kbd>   {{ page.author }}</h5>
         </p>
         <div class="text-content">
           <p class="card-text">{{ page.content | linebreaks }}</p>
