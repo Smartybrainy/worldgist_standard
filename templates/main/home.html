@@ -1,39 +1,37 @@
 {% extends 'base.html' %} {% block content %}
 <div class="row shadow p-3 mb-3 bg-info rounded">
   <div class="col">
-    {% for blog in qs %}
+    {% for post in post_list %}
     <div class="card">
       <div class="card-header">Worldgist News</div>
       <div class="card-body">
-        <h5 class="card-title">{{ blog.title }}</h5>
+        <h5 class="card-title">{{ post.title }}</h5>
         <p class="card-text">
-          <small>{{ blog.date_created }}</small>
+          <small>{{ post.date_created }}</small>
         </p>
         <div class="text-content">
           <p class="card-text">
-            {{ blog.content | slice:":200" | linebreaks }}&nbsp;&raquo;
+            {{ post.content | slice:":150" | linebreaks }}&raquo;
           </p>
         </div>
         <!-- This is the image field -->
-        {% if blog.image %}
+        {% if post.image %}
         <img
-          src="{{ blog.image.url }}"
+          src="{{ post.image.url }}"
           alt="Does'nt Exis!"
           class="img-fluid rounded-lg border border-success"
         />
         {% endif %}
         <!-- the image field ends here  -->
-        <a
-          href="{% url 'blog:post-detail' page_id=blog.pk %}"
-          class="btn btn-primary"
+        <a href="{% url 'blog:post-detail' post.slug %}" class="btn btn-primary"
           >Read more</a
         >
         <!-- the below counts the comments in a post -->
         <a
-          href="{% url 'blog:post-detail' page_id=blog.pk %}"
+          href=""
           title="Total comments"
           class="border border-primary rounded-lg"
-          >Comments:({{ blog.my_approved_comments.count }})</a
+          >Comments:({{ post.my_approved_comments.count }})</a
         >
         <div class="sharethis-inline-share-buttons"></div>
       </div>
@@ -47,6 +45,14 @@
       <br />
       {% if user.is_authenticated %}
       <h4 class="white">Hello! {{ user.username }}</h4>
+      <!-- This section goes fot User history -->
+      <a
+        href="{% url 'tracker:history-list' %}"
+        class="white"
+        title="About the user page history"
+        >Histories</a
+      ><br />
+      <hr />
       <a href="{% url 'accounts:logout' %}" class="btn btn-warning">Logout</a>
       {% else %}
       <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
@@ -57,5 +63,31 @@
     </div>
   </div>
 </div>
-<!-- this is for the footer -->
+<!-- Pagination section -->
+{% if is_paginated %}
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-left">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="?page={{ page_obj.previous_page_number }}"
+        tabindex="-1"
+        aria-disabled="true"
+        >&laquo; Prev</a
+      >
+    </li>
+    {% endif %}
+    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+    {% if page_obj.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+        >Next &raquo;</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+<!--  -->
 {% endblock content %}

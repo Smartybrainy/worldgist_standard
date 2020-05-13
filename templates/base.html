@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google Adsense -->
+    <script data-ad-client="ca-pub-7668756215633518" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- google adsense ends here -->
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
@@ -10,9 +13,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <link
-      href="https://console.aws.amazon.com/s3/buckets/smartybrainy-bucket/?region=us-east-2&tab=overview"
-    />
+
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -28,18 +29,10 @@
       src="https://platform-api.sharethis.com/js/sharethis.js#property=5eb2f53d9fbb400012e5ad58&product=inline-share-buttons&cms=sop"
       async="async"
     ></script>
-    <!-- Google Adsense -->
-    <script
-      data-ad-client="ca-pub-
-    7668756215633518"
-      async
-      src="https://pagead2.googlesyndication.com/page
-    ad/js/adsbygoogle.js"
-    ></script>
   </head>
   <body class="background">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Worldgist</a>
+      <a class="navbar-brand" href="/">Worldgist</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -53,18 +46,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
-          <!-- <li class="nav-item active">
-            <a class="nav-link" href="#"
-              >Home<span class="sr-only">(current)</span></a
-            >
-          </li> -->
+          {% if user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="{% url 'tracker:history-list' %}">Histories</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item dropdown">
+          {% endif %}
+          <!-- <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -80,7 +67,7 @@
               <a class="dropdown-item" href="#">Action</a>
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            </div> -->
           </li>
         </ul>
       </div>
@@ -106,5 +93,15 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+
+    <!-- footer page -->
+  <footer>
+    <div class="row bg-dark p-3">
+      <div class="col">
+        <p class="white" style="text-align: center;">
+          &copy; Worldgist.herokuapp.com 2020</p>
+      </div>
+    </div>  
+  </footer>
   </body>
 </html>

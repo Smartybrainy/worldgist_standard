@@ -1,37 +1,49 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.views import generic
+
 from .models import Post, Like, Comment
 from .forms import CommentForm
-from django.contrib.auth.decorators import login_required
-# from django.views.decorators.csrf import csrf_exempt
+from tracker.mixins import ObjectViewedMixin
 
 
-def home(request):
-    qs = Post.objects.filter(status=1).order_by('-date_created')
-    user = request.user
-    context = {
-        'qs': qs,
-        'user': user
-    }
-    return render(request, 'main/home.html', context)
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-date_created')
+    template_name = 'main/home.html'
+    paginate_by = 10
+
+# def home(request):
+#     qs = Post.objects.filter(status=1).order_by('-date_created')[:10]
+#     user = request.user
+#     context = {
+#         'qs': qs,
+#         'user': user
+#     }
+#     return render(request, 'main/home.html', context)
 
 
-def post_detail(request, page_id):
-    user = request.user
-    created_detail = Post.objects.filter(pk=page_id)
-    context = {
-        "created_detail": created_detail,
-        "user": user
-    }
-    return render(request, 'main/post_detail.html', context)
+class PostDetail(ObjectViewedMixin, generic.DetailView):
+    model = Post
+    template_name = 'main/post_detail.html'
 
 
-def post_likes(request, page_id):
+# def post_detail(request, page_id):
+#     user = request.user
+#     created_detail = Post.objects.filter(pk=page_id)
+#     context = {
+#         "created_detail": created_detail,
+#         'user': user
+#     }
+#     return render(request, 'main/post_detail.html', context)
+
+
+def post_likes(request, *args, **kwargs):
     user = request.user
     if request.method == 'POST':
         like_id = request.POST.get('like_id')
-        like_obj = Post.objects.get(id=like_id)
+        like_obj = Post.objects.get(pk=like_id)
 
         if user in like_obj.liked.all():
             like_obj.liked.remove(user)
@@ -47,10 +59,10 @@ def post_likes(request, page_id):
                 like.value = "Like"
 
         like.save()
-    return HttpResponseRedirect(reverse("blog:post-detail", args=str(page_id)))
+    return redirect("blog:post-detail", slug=like_obj.slug)
 
 
-def add_comment_to_post(request, page_id):
+def add_comment_to_post(request, page_id, *args, **kwargs):
     post = get_object_or_404(Post, pk=page_id)
     if request.method == 'POST':
         form = CommentForm(request.POST or None, request.FILES or None)
@@ -58,7 +70,7 @@ def add_comment_to_post(request, page_id):
             new_comment = form.save(commit=False)
             new_comment.post = post
             new_comment.save()
-            return redirect('blog:post-detail', page_id=post.pk)
+            return redirect('blog:post-detail', slug=post.slug)
     else:
         form = CommentForm
     return render(request, 'main/add_post_to_comment.html',
@@ -69,11 +81,11 @@ def add_comment_to_post(request, page_id):
 def comment_approve(request, page_id):
     comment = get_object_or_404(Comment, pk=page_id)
     comment.approve()
-    return redirect('blog:post-detail', page_id=comment.post.pk)
+    return redirect('blog:post-detail', slug=comment.post.slug)
 
 
 @login_required
 def comment_remove(request, page_id):
     comment = get_object_or_404(Comment, pk=page_id)
     comment.delete()
-    return redirect('blog:post-detail', page_id=comment.post.pk)
+    return redirect('blog:post-detail', slug=comment.post.slug)

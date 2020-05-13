@@ -11,7 +11,7 @@
         {% csrf_token %} {{ form | crispy }}
         <button type="submit" class="btn btn-primary">Post</button>
         <button type="reset" class="btn btn-warning">Reset</button>
-        <a href="{% url 'blog:post-detail' page_id=nav_post.pk %}">
+        <a href="{% url 'blog:post-detail' slug=nav_post.slug %}">
           <button type="button" class="btn btn-primary">&laquo;</button></a>
       </form>
     </div>

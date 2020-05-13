@@ -1,44 +1,39 @@
 {% extends 'base.html' %} {% block content %}
 <div class="row shadow-sm p-3 mb-3 bg-success rounded">
   <div class="col">
-    {% for page in created_detail %}
     <div class="card">
       <div class="card-header">Worldgist Our Home</div>
       <div class="card-body">
-        {% block title %}
-        {{ object.title }}
-        {% endblock title %}
-        <p class="card-text">
-          <small>{{ page.date_created }}</small>
-          <h5>{{ page.title }} | <kbd>By:</kbd>   {{ page.author }}</h5>
-        </p>
+        <h5>{% block title %} | {{ object.title }}{% endblock title %}</h5>
+        <h5 class="card-text">
+          <kbd>By:</kbd>{{ post.author }} | <small>{{ post.date_created }}</small>
+        </h5>
         <div class="text-content">
-          <p class="card-text">{{ page.content | linebreaks }}</p>
+          <p class="card-text">{{ post.content | linebreaks }}</p>
         </div>
         
         <!-- the image section -->
-        {% if page.image %}
-        <img src="{{ page.image.url }}" alt="Does'nt Exis!" class="img-fluid 
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid 
         rounded-lg border border-success" />
         {% endif %}
         <!-- the image section ends here -->
         <div class="sharethis-inline-share-buttons"></div>
       </div>
       <!-- the below code belongs to comment -->
-      {% for comment in page.my_comments.all %}
+      {% for comment in post.my_comments.all %}
         {% if user.is_authenticated or comment.approved_comment %}
         <div class="card-body">
           <p class="card-header">
             <h6>{{ comment.added_date }}</h6>
             <h6>Author: {{ comment.author }}</h6>
           </p>
-          <p class="card-text">{{ comment.body | safe }}</p>
+          <p class="card-text">{{ comment.body | linebreaks }}</p> <!--safe prevents linebreaks-->
           <!-- the below goes for comment image -->
           {% if comment.comment_img %}
           <img src="{{ comment.comment_img.url }}" alt="Does'nt Exis!" 
           class="img-fluid rounded-lg border border-success" />
           {% endif %}
-          <!-- the comment image ends here  -->
           <!-- this section checks to approve comments -->
           {% if not comment.approved_comment %}
             <a href="{% url 'blog:comment-approve' page_id=comment.pk %}">
@@ -57,52 +52,53 @@
         {% endfor %}
         {% if user.is_authenticated %}
         <div>
-          <a href="{% url 'blog:add-comment-to-post' page_id=page.pk %}">
+          <a href="{% url 'blog:add-comment-to-post' post.pk %}">
             <button type="submit" class="btn btn-info">Add Comment</button>
           </a>
-          <strong>({{ page.my_comments.count }})</strong>
+          <strong>({{ post.my_comments.count }})</strong>
         </div> <br />
         {% else %}
         <div>
           <a href="{% url 'accounts:register' %}">
             <button type="submit" class="btn btn-info">Add Comment</button>
           </a>
-          <strong>({{ page.my_comments.count }})</strong>
+          <strong>({{ post.my_comments.count }})</strong>
         </div> <br />
         {% endif %}
         <!-- This section belongs to the like button -->
 <div>
   {% if user.is_authenticated %}
-  <form action="{% url 'blog:post-likes' page.id %}" method="POST">
+  <form action="{% url 'blog:post-likes' pk=post.pk %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
-      <input type="hidden" class="form-control" name="like_id" value="{{ page.id }}" />
+      <input type="hidden" class="form-control" name="like_id" value="{{ post.pk }}" />
     </div>
-    {% if user not in page.liked.all %}
+    {% if user not in post.liked.all %}
       <button type="submit" class="btn btn-success">Like</button>
     {% else %}
       <button type="submit" class="btn btn-danger">Unlike</button>
     {% endif %}
-      <strong class="white"><span class="like-count-color">({{ page.liked.count }})
+      <strong class="white"><span class="like-count-color">({{ post.liked.count }})
       </span></strong>
   </form>
   {% else %}
   <a href="{% url 'accounts:register' %}">
     <button type="button" class="btn btn-success">Like</button></a>
-  <strong class="white"><span class="like-count-color">({{ page.liked.count }})</span></strong>
+  <strong class="white"><span class="like-count-color">({{ post.liked.count }})</span>
+  </strong>
   {% endif %}
   <!--  -->
-  {% endfor %}
+  <!-- the end entire end for loop -->
 </div>
 <!-- like button ends here -->
     </div>
   </div>
   {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
 </div>
-<!--  -->
 
 <div class="container mb-5">
   <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
 </div>
+<br />
 {% endblock content %}
 

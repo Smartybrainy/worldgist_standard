@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container bg-light">
+  <h2>History Page</h2>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Page</th>
+            <th scope="col">Viewed_On</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for history in history_list %}
+          <tr>
+            <td>
+              <a href="/"> {{ history.content_object }}</a>
+            </td>
+            <td>{{ history.time_viewed }}</td>
+            <td>
+              <a
+                href="{% url 'tracker:history-delete' page_id=history.pk %}"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{% endblock content %}

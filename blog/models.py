@@ -37,7 +37,7 @@ class Post(models.Model):
         return self.title
 
     @property
-    def nom_likes(self):
+    def num_likes(self):
         return self.liked.all().count()
 
     # the below function counts only the approved comments
