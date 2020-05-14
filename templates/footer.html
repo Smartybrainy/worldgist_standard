@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    {% block footer %}
+    <footer id="footer">
+      <div class="row">
+        <div class="col">
+          <p class="white" style="text-align: center;">
+            &copy; Worldgist.herokuapp.com 2020
+          </p>
+        </div>
+      </div>
+    </footer>
+    {% endblock footer %}
+  </body>
+</html>

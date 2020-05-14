@@ -50,6 +50,10 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'tracker:history-list' %}">Histories</a>
           </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:register' %}">Histories</a>
+          </li>
           {% endif %}
           <!-- <li class="nav-item dropdown">
             <a
@@ -72,7 +76,7 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container-fluid">
       {% block content %} {% endblock content %}
     </div>
 
@@ -93,15 +97,5 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
-
-    <!-- footer page -->
-  <footer>
-    <div class="row bg-dark p-3">
-      <div class="col">
-        <p class="white" style="text-align: center;">
-          &copy; Worldgist.herokuapp.com 2020</p>
-      </div>
-    </div>  
-  </footer>
   </body>
 </html>

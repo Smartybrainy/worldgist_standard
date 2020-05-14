@@ -26,3 +26,12 @@
 .text-content p:first-child {
   text-indent: 50px;
 }
+
+#footer {
+  position: relative;
+  background-color: #222;
+  margin-top: -100px;
+  clear: both;
+  height: 100px;
+  width: 100%;
+}

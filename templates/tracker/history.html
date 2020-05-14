@@ -14,9 +14,7 @@
         <tbody>
           {% for history in history_list %}
           <tr>
-            <td>
-              <a href="/"> {{ history.content_object }}</a>
-            </td>
+            <td>{{ history.content_object }}</td>
             <td>{{ history.time_viewed }}</td>
             <td>
               <a
@@ -33,13 +31,6 @@
     {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
   </div>
 </div>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
+{% block footer %}{% include 'footer.html' %}{% endblock footer %}
+<!--  -->
 {% endblock content %}
