@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
+from django.contrib.auth import views as auth_views
 
 from .models import Post, Like, Comment
 from .forms import CommentForm
@@ -12,7 +13,7 @@ from tracker.mixins import ObjectViewedMixin
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-date_created')
     template_name = 'main/home.html'
-    paginate_by = 10
+    paginate_by = 15
 
 # def home(request):
 #     qs = Post.objects.filter(status=1).order_by('-date_created')[:10]

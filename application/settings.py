@@ -155,3 +155,5 @@ AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_SIGNATURE_VERSION = "s3v4"
 
 django_heroku.settings(locals())
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

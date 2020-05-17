@@ -50,7 +50,13 @@ def login(request):
         return render(request, 'main/login.html')
 
 
+def remember_user(request, template_name="main/login.html",
+                  extra_context=None):
+    response = auth_views.login(request, template_name)
+    if request.POST.has_key('remember_me') and request.POST.has_key('password'):
+        request.sessions.set_expiry(1209600)  # weeks
+
+
 def logout(request):
     auth.logout(request)
     return redirect('/')
-

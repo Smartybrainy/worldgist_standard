@@ -8,25 +8,24 @@
     <title></title>
   </head>
   <body>
-    {% block footer %}
-    <footer id="footer" class="footer-responsive">
-      <div class="container">
+    <footer id="footer">
+      <div class="container footer-responsive">
         <div class="row">
           <div class="col-md-4" id="admin-info">
             Admin info.
             <p>
               <i class="fas fa-phone-square-alt"> +234-813-016-5966</i>
             </p>
-            <p><i class="fas fa-envelope">smartyleey@gmail.com</i></p>
+            <p><i class="fas fa-envelope"> smartyleey@gmail.com</i></p>
           </div>
 
           <div class="col-md-4">
-            <p class="white text-muted">
+            <p class="white text-muted" id="para-footer">
               &copy; Worldgist.herokuapp.com 2020
             </p>
           </div>
 
-          <div class="col-md-4">
+          <div class="col-md-4 pt-5">
             <a
               href="https://www.facebook.com/Worldgist-105412447839199/?modal=admin_todo_tour"
               ><i class="fab fa-facebook"> </i></a
@@ -43,6 +42,6 @@
         </div>
       </div>
     </footer>
-    {% endblock footer %}
+    {% block footer %} {% endblock footer %}
   </body>
 </html>

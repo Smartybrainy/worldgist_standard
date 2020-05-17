@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container">
+<div class="container responsive">
   <div class="row w-50 mt-3 ml-auto mr-auto">
     <div class="col">
       <form action="{% url 'accounts:login' %}" method="POST">
@@ -23,6 +23,9 @@
           />
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
+        <!-- Checkbox remember key -->
+        <input type="checkbox" name="remember_me" id="me" value="true" />
+        <label for="me" class="white-color">Remember me</label>
       </form>
     </div>
   </div>

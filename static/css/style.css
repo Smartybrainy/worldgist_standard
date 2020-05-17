@@ -33,7 +33,7 @@
   background-color: #222;
   padding: 30px;
   clear: both;
-  height: 200px;
+  height: 300px;
   width: 100%;
   color: #efefef;
 }
@@ -42,10 +42,8 @@
   display: block;
   background-color: #efefef;
   height: 2px;
-  width: 78px;
+  width: 150px;
 }
-#p-admin::after {
-  content: "";
-  display: inline-block;
-  clear: both;
+#para-footer {
+  padding-top: 48px;
 }

@@ -13,5 +13,5 @@ urlpatterns = [
     path('<int:page_id>/comment_approve', views.comment_approve,
          name="comment-approve"),
     path('<int:page_id>/comment_remove', views.comment_remove,
-         name="comment-remove")
+         name="comment-remove"),
 ]
