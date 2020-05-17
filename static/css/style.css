@@ -27,12 +27,25 @@
   text-indent: 50px;
 }
 
+/* for the footer */
 #footer {
   position: relative;
   background-color: #222;
-  border-radius: 5px;
   padding: 30px;
   clear: both;
-  height: 100px;
+  height: 150px;
   width: 100%;
+  color: #efefef;
+}
+#admin-info::after {
+  content: "";
+  display: block;
+  background-color: #efefef;
+  height: 2px;
+  width: 78px;
+}
+#p-admin::after {
+  content: "";
+  display: inline-block;
+  clear: both;
 }

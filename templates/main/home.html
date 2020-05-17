@@ -64,32 +64,42 @@
   </div>
 </div>
 <!-- Pagination section -->
-{% if is_paginated %}
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-left">
-    {% if page_obj.has_previous %}
-    <li class="page-item">
-      <a
-        class="page-link"
-        href="?page={{ page_obj.previous_page_number }}"
-        tabindex="-1"
-        aria-disabled="true"
-        >&laquo; Prev</a
-      >
-    </li>
-    {% endif %}
-    <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-    {% if page_obj.has_next %}
-    <li class="page-item">
-      <a class="page-link" href="?page={{ page_obj.next_page_number }}"
-        >Next &raquo;</a
-      >
-    </li>
-    {% endif %}
-  </ul>
-</nav>
-{% endif %}
-<!--  -->
+<div class="container-fluid">
+  {% if is_paginated %}
+  <nav aria-label="Page navigation example container-fluid">
+    <ul class="pagination justify-content-left">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a
+          class="page-link"
+          href="?page={{ page_obj.previous_page_number }}"
+          tabindex="-1"
+          aria-disabled="true"
+          >&laquo; Prev</a
+        >
+      </li>
+      {% endif %}
+      <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+          >Next &raquo;</a
+        >
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+<!-- for convertKit email list -->
+<div class="container-fluid">
+  <script
+    async
+    data-uid="626ce8d1da"
+    src="https://awesome-innovator-8071.ck.page/626ce8d1da/index.js"
+  ></script>
+</div>
+<!-- convertKit ends here -->
 {% block footer %}{% include 'footer.html' %}{% endblock footer %}
 <!--  -->
 {% endblock content %}
