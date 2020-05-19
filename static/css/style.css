@@ -35,7 +35,9 @@
 
 /* for the footer */
 #footer {
-  position: relative;
+  position: sticky;
+  position: -webkit-sticky;
+  bottom: 0;
   background-color: #222;
   padding: 30px;
   clear: both;

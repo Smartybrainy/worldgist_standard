@@ -2,7 +2,7 @@
 <div class="container bg-light">
   <h2>History Page</h2>
   <div class="row">
-    <div class="col-12">
+    <div class="col-8">
       <table class="table">
         <thead>
           <tr>
@@ -12,9 +12,14 @@
           </tr>
         </thead>
         <tbody>
-          {% for history in history_list %}
+          {% for history in object_list %}
           <tr>
-            <td><a href="/">{{ history.content_object }}</a></td>
+            <td>
+              <a href="{% url 'blog:post-detail' slug=history.content_object.slug %}" 
+                title="Back to the post"
+                >{{ history.content_object }}
+              >
+            </td>
             <td>{{ history.time_viewed }}</td>
             <td>
               <a

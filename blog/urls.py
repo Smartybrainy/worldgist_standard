@@ -14,4 +14,5 @@ urlpatterns = [
          name="comment-approve"),
     path('<int:page_id>/comment_remove', views.comment_remove,
          name="comment-remove"),
+    path('search/', views.search_queryset, name="search-query")
 ]

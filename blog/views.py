@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.contrib.auth import views as auth_views
+from django.db.models import Q
 
 from .models import Post, Like, Comment
 from .forms import CommentForm
@@ -14,6 +15,20 @@ class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-date_created')
     template_name = 'main/home.html'
     paginate_by = 15
+
+
+def search_queryset(request):
+    query = request.GET.get('query')
+    object_list = Post.objects.filter(
+        Q(title__icontains='query') | Q(content__icontains="query")
+    )
+    if query in object_list:
+        print(query)
+        return redirect('/')
+    else:
+        print("does not exit")
+    return render(request, 'main/home.html')
+
 
 # def home(request):
 #     qs = Post.objects.filter(status=1).order_by('-date_created')[:10]
