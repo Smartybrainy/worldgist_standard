@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 # The migration from :4 is perfect
 
@@ -75,7 +74,7 @@ class Comment(models.Model):
     height_field = models.IntegerField(default=0)
     author = models.CharField(max_length=150)
     body = models.TextField()
-    added_date = models.DateTimeField(default=timezone.now())
+    added_date = models.DateTimeField()
     approved_comment = models.BooleanField(default=False)
 
     def approve(self):

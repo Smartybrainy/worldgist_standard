@@ -1,13 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <!-- the search box -->
-<!-- <div class="container-fluid p-2 bg-info">
+<!-- <div class="container-fluid p-2 search-gradient">
   <form action="{% url 'blog:post-list' %}" method="GET" class="form-white">
     <label for="label">Search: </label>
     <input type="text" name="query" id="label" />
   </form>
 </div> -->
 
-<div class="row shadow p-3 mb-3 bg-info rounded">
+<div class="row shadow p-3 mb-3 background-gradient rounded">
   <div class="col">
     {% for post in post_list %}
     <br />
@@ -103,6 +103,15 @@
     </ul>
   </nav>
   {% endif %}
+</div>
+<div class="container bg-light rounded-circle">
+  <marquee behavior="async" direction="rtl"
+    ><h1>
+      <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
+        ><i>Click Me! Let's Here From You!</i></a
+      >
+    </h1></marquee
+  >
 </div>
 <!-- for convertKit email list -->
 <div class="container-fluid">

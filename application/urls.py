@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('blog.urls', namespace="blog")),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('tracker/', include('tracker.urls', namespace="tracker")),
+    path('reaction/', include('reaction.urls', namespace="reaction")),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

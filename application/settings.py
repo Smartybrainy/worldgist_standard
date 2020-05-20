@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'tracker.apps.TrackerConfig',
+    'reaction.apps.ReactionConfig',
     'crispy_forms',
 
     'storages',
