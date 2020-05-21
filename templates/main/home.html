@@ -1,11 +1,16 @@
 {% extends 'base.html' %} {% block content %}
 <!-- the search box -->
-<!-- <div class="container-fluid p-2 search-gradient">
-  <form action="{% url 'blog:post-list' %}" method="GET" class="form-white">
-    <label for="label">Search: </label>
-    <input type="text" name="query" id="label" />
+<div class="container-fluid p-2 search-gradient">
+  <form
+    action="{% url 'blog:search-query' %}"
+    method="GET"
+    class="form-white ml-3"
+  >
+    <label for="label"><i class="far fa-arrow-alt-circle-right"></i></label>
+    <input type="search" name="qs" id="label" placeholder="Search" required />
+    <button type="submit"><i class="fas fa-search"></i></button>
   </form>
-</div> -->
+</div>
 
 <div class="row shadow p-3 mb-3 background-gradient rounded">
   <div class="col">
@@ -108,7 +113,7 @@
   <marquee behavior="async" direction="rtl"
     ><h3>
       <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
-        ><i>Click Me! Let's Here From You!</i></a
+        ><i>Click Me!... We Love Here From You!</i></a
       >
     </h3></marquee
   >

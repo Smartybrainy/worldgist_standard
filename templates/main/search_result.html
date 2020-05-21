@@ -1,0 +1,52 @@
+{% extends 'base.html' %}{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search result</title>
+
+    <!-- for the styling -->
+    <style>
+      #background-gradient {
+        background-image: linear-gradient(
+          90deg,
+          #020024 0%,
+          #090979 35%,
+          #00d4ff 100%
+        );
+      }
+    </style>
+  </head>
+  <body style="color: white;" id="background-gradient">
+    <div class="container p-5">
+      <div class="row">
+        <div class="col">
+          {% for result in search_list %}
+          <p class="card-text">
+          <h4>Title: {{ result.title }}</h4>
+          <p>
+            <strong>Content: <i class="fas fa-arrow-down"></i></strong>
+            <!--  -->
+            {{ result.content | slice:":1000" | linebreaks }}
+            <hr />
+            <a href="/"><button class="btn btn-primary">&laquo;</button></a>
+            <a href="{% url 'blog:post-detail' slug=result.slug %}">
+                <button class="btn btn-primary">Read more &raquo;</button></a>
+          </p>
+          </p>
+
+          {% empty %}
+          <h4><i>No result match for your search :( {{ search_list }} </i></h4>
+          <marquee behavior="async" direction="rtl"><h5>Try searching for more random words.
+          </h5></marquee>
+          <hr />
+          <a href="/"><button class="btn btn-primary">&laquo;</button></a>
+          {% endfor %}
+        </div>
+        <div style="color: green;">
+          {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
+        </div>
+      </div>
+    </div>
+{% endblock content %}

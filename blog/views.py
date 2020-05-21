@@ -17,16 +17,13 @@ class PostList(generic.ListView):
 
 
 def search_queryset(request):
-    query = request.GET.get('query')
-    object_list = Post.objects.filter(
-        Q(title__icontains='query') | Q(content__icontains="query")
-    )
-    if query in object_list:
-        print(query)
-        return redirect('/')
-    else:
-        print("does not exit")
-    return render(request, 'main/home.html')
+    query = request.GET.get('qs')
+    if query is not None:
+        search_list = Post.objects.filter(
+            Q(title__icontains=query) | Q(content__icontains=query)
+        )
+    return render(request, 'main/search_result.html',
+                  {'search_list': search_list})
 
 
 # def home(request):
