@@ -62,75 +62,88 @@
       {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
       <br />
       <br />
-      {% if user.is_authenticated %}
-      <h4 class="white">Hello! {{ user.username }}</h4>
-      <!-- This section goes fot User history -->
-      <a
-        href="{% url 'tracker:history-list' %}"
-        class="white"
-        title="About the user visited page history"
-        >Histories</a
-      >
-      <br />
-      <hr />
-      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning"
-        >Logout</a
-      >
-      {% else %}
-      <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
-      <a href="{% url 'accounts:register' %}" class="btn btn-success"
-        >Sign Up</a
-      >
-      {% endif %}
+      {% if user.is_authenticated %} 
+      <!--  -->
+        {% if user.profile.image %}
+        <div class="media">
+          <img
+            src="{{ user.profile.image.url }}"
+            alt="Profile-img"
+            class="rounded-circle img-fluid mr-4"
+            id="image-size"
+          />
+        </div>
+        {% endif %}
+        <h4 class="white">Hello! {{ user.username }}</h4>
+        <hr />
+        <!-- This section goes fot User history -->
+        <a
+          href="{% url 'tracker:history-list' %}"
+          class="white"
+          title="About the user visited page history"
+          >Histories</a
+        >
+        <br />
+        <hr />
+        <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning"
+          >Logout</a
+        >
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-success"
+          >Sign Up</a
+        >
+        {% endif %}
+      </div>
     </div>
   </div>
-</div>
-<!-- Pagination section -->
-<div class="container-fluid">
-  {% if is_paginated %}
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-left">
-      {% if page_obj.has_previous %}
-      <li class="page-item">
-        <a
-          class="page-link"
-          href="?page={{ page_obj.previous_page_number }}"
-          tabindex="-1"
-          aria-disabled="true"
-          >&laquo; Prev</a
+  <!-- Pagination section -->
+  <div class="container-fluid">
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-left">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            tabindex="-1"
+            aria-disabled="true"
+            >&laquo; Prev</a
+          >
+        </li>
+        {% endif %}
+        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+            >Next &raquo;</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+  <div class="container rounded-circle" id="animation">
+    <marquee behavior="async" direction="rtl"
+      ><h2>
+        <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
+          ><i>Click Me!... We Love To Here From You!</i></a
         >
-      </li>
-      {% endif %}
-      <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-      {% if page_obj.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ page_obj.next_page_number }}"
-          >Next &raquo;</a
-        >
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
-  {% endif %}
+      </h2></marquee
+    >
+  </div>
+  <!-- for convertKit email list -->
+  <div class="container-fluid">
+    <script
+      async
+      data-uid="d15840a258"
+      src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"
+    ></script>
+  </div>
+  <!-- convertKit ends here -->
+  {% block footer %}{% include 'footer.html' %}{% endblock footer %}
+  <!--  -->
+  {% endblock content %}
 </div>
-<div class="container rounded-circle" id="animation">
-  <marquee behavior="async" direction="rtl"
-    ><h2>
-      <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
-        ><i>Click Me!... We Love To Here From You!</i></a
-      >
-    </h2></marquee
-  >
-</div>
-<!-- for convertKit email list -->
-<div class="container-fluid">
-  <script
-    async
-    data-uid="d15840a258"
-    src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"
-  ></script>
-</div>
-<!-- convertKit ends here -->
-{% block footer %}{% include 'footer.html' %}{% endblock footer %}
-<!--  -->
-{% endblock content %}

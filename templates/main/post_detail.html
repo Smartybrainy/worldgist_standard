@@ -8,19 +8,20 @@
             {% block title %} {{ object.title }} {% endblock title %}</h5>
             <h5 class="card-text background-gradient p-2 rounded-lg">
               <!-- For profile picture -->
-              {% if user.profile.image %}
+                {% if post.author.profile.image %}
                 <div class="media">
                   <img
-                    src="{{ user.profile.image.url }}"
+                    src="{{ post.author.profile.image.url }}"
                     alt="Profile-img"
                     class="rounded-circle img-fluid mr-4"
                     id="image-size"
                   />
+                {% endif %}
+                    <div class="media-body">
+                      <code>By:{{ post.author }}</code><br />
+                      <small class="text-secondary">{{ post.date_created }}</small>
+                    </div>
                 </div>
-              {% endif %}
-
-                  <code>By:{{ post.author }}</code><br>
-                  <small class="text-secondary">{{ post.date_created }}</small>
             </h5>
             <hr />
             <div class="text-content">
