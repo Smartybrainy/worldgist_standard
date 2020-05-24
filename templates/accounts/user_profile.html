@@ -1,0 +1,54 @@
+{% extends 'base.html' %}{% load crispy_forms_tags %} {% block content %}
+
+<div class="container-fluid p-5 background-gradient">
+  <div class="row">
+    <div class="col">
+      <div
+        class="content-section border border-light rounded p-3 white responsive"
+      >
+        {% if user.profile.image %}
+        <div class="media">
+          <img
+            src="{{ user.profile.image.url }}"
+            alt="Profile-img"
+            class="rounded-circle img-fluid mr-4"
+            id="image-size"
+          />
+          {% endif %}
+          <div class="media-body">
+            <h3 class="account-heading">Username: {{ user.username }}</h3>
+            <h4 class="text-secondary">Gender: {{ user.profile.gender }}</h4>
+            <h4 class="text-secondary">Email: {{ user.email }}</h4>
+          </div>
+        </div>
+        <br /><br />
+        <!-- Form Here -->
+        <form action="" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Profile Info</legend>
+            {{ u_form | crispy }}
+            <!--  -->
+            {{ p_form | crispy }}
+          </fieldset>
+          <div class="form-group">
+            <button type="submit" class="btn btn-outline-success">
+              Update
+            </button>
+            <input type="reset" value="Reset" class="btn btn-outline-warning" />
+          </div>
+        </form>
+      </div>
+    </div>
+    {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
+  </div>
+  <!-- For success message -->
+  <div class="white">
+    {% for message in messages %}
+    <h4><i>{{ message }}</i></h4>
+    {% endfor %}
+  </div>
+</div>
+{% block footer %}{% include 'footer.html' %}{% endblock footer %}
+<!--  -->
+{% endblock content %}

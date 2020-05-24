@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'tracker.apps.TrackerConfig',
     'reaction.apps.ReactionConfig',
+    'accounts.apps.AccountsConfig',
     'crispy_forms',
 
     'storages',

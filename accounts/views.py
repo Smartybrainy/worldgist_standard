@@ -2,6 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
+
+from .models import Profile
+from .forms import UserUpdateForm, ProfileUpdateForm
 
 
 def register(request):
@@ -61,3 +66,35 @@ def remember_user(request, template_name="main/login.html",
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+# Now for v4 of the app the user profile
+
+
+class Profile(ListView):
+    model = Profile
+    template_name = 'accounts/user_profile.html'
+    # context_object_name = 'user_nav'
+
+
+@login_required
+def profile_view(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST or None, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST or None,
+                                   request.FILES or None,
+                                   instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('accounts:profile-view')
+
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'accounts/user_profile.html', context)

@@ -3,23 +3,38 @@
   <div class="col">
     <div class="card">
       <div class="card-header">Worldgist Our Home</div>
-      <div class="card-body">
-        <h5>{% block title %} | {{ object.title }}{% endblock title %}</h5>
-        <h5 class="card-text">
-          <kbd>By:</kbd>{{ post.author }} | <small>{{ post.date_created }}</small>
-        </h5>
-        <div class="text-content">
-          <p class="card-text">{{ post.content | linebreaks }}</p>
+        <div class="card-body">
+          <h5 class="border border-light p-2 text-primary">
+            {% block title %} {{ object.title }} {% endblock title %}</h5>
+            <h5 class="card-text background-gradient p-2 rounded-lg">
+              <!-- For profile picture -->
+              {% if user.profile.image %}
+                <div class="media">
+                  <img
+                    src="{{ user.profile.image.url }}"
+                    alt="Profile-img"
+                    class="rounded-circle img-fluid mr-4"
+                    id="image-size"
+                  />
+                </div>
+              {% endif %}
+
+                  <code>By:{{ post.author }}</code><br>
+                  <small class="text-secondary">{{ post.date_created }}</small>
+            </h5>
+            <hr />
+            <div class="text-content">
+              <p class="card-text">{{ post.content | linebreaks | urlizetrunc:30 }}</p>
+            </div>
+          
+          <!-- the image section -->
+          {% if post.image %}
+          <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid
+          rounded-lg border border-success" />
+          {% endif %}
+          <!-- the image section ends here -->
+          <div class="sharethis-inline-share-buttons"></div>
         </div>
-        
-        <!-- the image section -->
-        {% if post.image %}
-        <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid 
-        rounded-lg border border-success" />
-        {% endif %}
-        <!-- the image section ends here -->
-        <div class="sharethis-inline-share-buttons"></div>
-      </div>
       <!-- the below code belongs to comment -->
       {% for comment in post.my_comments.all %}
         {% if user.is_authenticated or comment.approved_comment %}
@@ -28,11 +43,11 @@
             <h6>{{ comment.added_date }}</h6>
             <h6>Author: {{ comment.author }}</h6>
           </p>
-          <p class="card-text">{{ comment.body | linebreaks }}</p> <!--safe prevents linebreaks-->
+          <p class="card-text">{{ comment.body | linebreaks | urlizetrunc:30 }}</p> <!--safe prevents linebreaks-->
           <!-- the below goes for comment image -->
           {% if comment.comment_img %}
           <img src="{{ comment.comment_img.url }}" alt="Does'nt Exis!" 
-          class="img-fluid rounded-lg border border-success" />
+          class="img-fluid image-resize rounded-lg border border-success" />
           {% endif %}
           <!-- this section checks to approve comments -->
           {% if not comment.approved_comment %}
@@ -71,7 +86,7 @@
   <form action="{% url 'blog:post-likes' pk=post.pk %}" method="POST">
     {% csrf_token %}
     <div class="form-group">
-      <input type="hidden" class="form-control" name="like_id" value="{{ post.pk }}" />
+      <input type="hidden" name="like_id" value="{{ post.pk }}" />
     </div>
     {% if user not in post.liked.all %}
       <button type="submit" class="btn btn-success">Like</button>

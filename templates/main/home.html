@@ -19,13 +19,15 @@
     <div class="card">
       <div class="card-header">Worldgist News</div>
       <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
+        <h5 class="card-title border border-light p-2 text-primary">
+          {{ post.title }}
+        </h5>
         <p class="card-text">
           <small>{{ post.date_created }}</small>
         </p>
         <div class="text-content">
           <p class="card-text">
-            {{ post.content | slice:":150" | linebreaks }}&raquo;
+            {{ post.content | slice:":150" | linebreaks | urlize }}&raquo;
           </p>
         </div>
         <!-- This is the image field -->
@@ -45,7 +47,7 @@
         <!-- the below counts the comments in a post -->
         <a
           href=""
-          title="Total comments"
+          title="Total approved comments"
           class="border border-primary rounded-lg"
           >Comments:({{ post.my_approved_comments.count }})</a
         >
@@ -66,12 +68,14 @@
       <a
         href="{% url 'tracker:history-list' %}"
         class="white"
-        title="About the user page history"
+        title="About the user visited page history"
         >Histories</a
       >
       <br />
       <hr />
-      <a href="{% url 'accounts:logout' %}" class="btn btn-warning">Logout</a>
+      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning"
+        >Logout</a
+      >
       {% else %}
       <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
       <a href="{% url 'accounts:register' %}" class="btn btn-success"
@@ -109,13 +113,13 @@
   </nav>
   {% endif %}
 </div>
-<div class="container bg-light rounded-circle">
+<div class="container rounded-circle" id="animation">
   <marquee behavior="async" direction="rtl"
-    ><h3>
+    ><h2>
       <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
-        ><i>Click Me!... We Love Here From You!</i></a
+        ><i>Click Me!... We Love To Here From You!</i></a
       >
-    </h3></marquee
+    </h2></marquee
   >
 </div>
 <!-- for convertKit email list -->

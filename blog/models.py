@@ -74,7 +74,7 @@ class Comment(models.Model):
     height_field = models.IntegerField(default=0)
     author = models.CharField(max_length=150)
     body = models.TextField()
-    added_date = models.DateTimeField()
+    added_date = models.DateTimeField(auto_now_add=True)
     approved_comment = models.BooleanField(default=False)
 
     def approve(self):
