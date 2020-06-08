@@ -4,11 +4,16 @@
   <form
     action="{% url 'blog:search-query' %}"
     method="GET"
-    class="form-white ml-3"
+    class="form-white ml-2"
   >
-    <label for="label"><i class="far fa-arrow-alt-circle-right"></i></label>
-    <input type="search" name="qs" id="label" placeholder="Search" required />
-    <button type="submit"><i class="fas fa-search"></i></button>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <label for="label"><i class="far fa-arrow-alt-circle-right"></i></label></div>
+          <input type="search" name="qs" id="label" placeholder="Search" required />
+          <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
   </form>
 </div>
 
@@ -92,7 +97,14 @@
         <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
         <a href="{% url 'accounts:register' %}" class="btn btn-success"
           >Sign Up</a
-        >
+        ><br />
+        <hr />
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mt-2" style="width: 180px;">
+          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+        </a><br />
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
+          <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
+        </a>
         {% endif %}
       </div>
     </div>

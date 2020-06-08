@@ -22,7 +22,7 @@
     90deg,
     #020024 0%,
     #090979 35%,
-    #00d4ff 100%
+    #056477 100%
   );
 }
 
@@ -84,7 +84,7 @@
 input:focus {
   background-color: #222;
   color: white;
-  border: 2px outset white;
+  border: 1px outset white !important;
   border-radius: 5px;
 }
 

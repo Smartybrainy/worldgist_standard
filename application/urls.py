@@ -25,6 +25,10 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('tracker/', include('tracker.urls', namespace="tracker")),
     path('reaction/', include('reaction.urls', namespace="reaction")),
+
+    path('accounts/', include('django.contrib.auth.urls')),
+    # For the social login
+    path('oauth/', include('social_django.urls', namespace="social")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

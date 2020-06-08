@@ -22,12 +22,25 @@
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button><br />
+        <button type="submit" class="btn btn-primary">Login</button>
         <!-- Checkbox remember key -->
         <input type="checkbox" name="remember_me" id="me" value="true" />
         <label for="me" class="white-color">Remember me</label>
       </form>
+      &nbsp;<br /><a
+        href="{% url 'accounts:password_reset' %}"
+        class="white-color rounded-sm"
+        >Forgot Password</a
+      >
     </div>
+  </div>
+  <br />
+  <div class="container w-50 ml-auto mr-auto">
+    <h3>
+      <a href="{% url 'accounts:register' %}" class="white-color"
+        >Don't have an account: Sign Up</a
+      >
+    </h3>
   </div>
 
   <br />

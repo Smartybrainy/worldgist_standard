@@ -25,28 +25,36 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
-INSTALLED_APPS = [
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+LOCAL_APPS = [
     'blog.apps.BlogConfig',
     'tracker.apps.TrackerConfig',
     'reaction.apps.ReactionConfig',
     'accounts.apps.AccountsConfig',
-    'crispy_forms',
-
-    'storages',
 ]
+
+THIRD_PARTY_APPS = [
+    'crispy_forms',
+    'storages',
+    'social_django',  # I already install social-auth-app-django
+]
+
+INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # below are third party for social login effect
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'application.urls'
@@ -73,9 +83,22 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Below were added for social login
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
+]
+# Below is also for the social login auth
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 WSGI_APPLICATION = 'application.wsgi.application'
@@ -158,4 +181,35 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 
 django_heroku.settings(locals())
 
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# FOR THE REMEMBER ME CHECKBOX
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Fmail configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_WORLDGIST')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_WORLDGIST')
+
+# For the social login
+LOGIN_URL = 'accounts/login'
+LOGOUT_URL = 'accounts/logout'
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '757003195039910'  # APP ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'b42c67a0a45efe907d557c354f31068f'  # APP SECRET
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']  # add this
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
+    'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'd6_9LrFkooGW5HAtaudDlaa-'

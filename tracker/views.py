@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, View
 
 from .models import History
 
@@ -18,3 +18,8 @@ def history_delete(request, page_id, *args, **kwargs):
     if obj is not None:
         obj.delete()
     return redirect('tracker:history-list')
+
+
+class HistoryAlert(TemplateView, View):
+    model = History
+    template_name = 'tracker/tracker_alert.html'

@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+<div class="alert alert-info">
+  Please sign up first as a user to be able to view your page histories.
+</div>
+<div class="container">
+  <a href="{% url 'accounts:register' %}"
+    ><button class="btn btn-success">Sign Up Here</button></a
+  >
+</div>
+{% endblock content %}
