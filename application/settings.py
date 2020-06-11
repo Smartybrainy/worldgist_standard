@@ -200,16 +200,16 @@ LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '757003195039910'  # APP ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'b42c67a0a45efe907d557c354f31068f'  # APP SECRET
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']  # add this
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
-    'fields': 'id, name, email, picture.type(large), link'
-}
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
-    ('name', 'name'),
-    ('email', 'email'),
-    ('picture', 'picture'),
-    ('link', 'profile_url'),
-]
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']  # add this
+# SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
+#     'fields': 'id, name, email, picture.type(large), link'
+# }
+# SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
+#     ('name', 'name'),
+#     ('email', 'email'),
+#     ('picture', 'picture'),
+#     ('link', 'profile_url'),
+# ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'd6_9LrFkooGW5HAtaudDlaa-'
