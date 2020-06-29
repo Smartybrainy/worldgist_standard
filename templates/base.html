@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- FOR THE COOKIEBOT -->
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="de8d01fc-4746-4e0d-9c25-915dd5e528d7" data-blockingmode="auto" type="text/javascript"></script>
+
     <!-- Google Adsense -->
     <script data-ad-client="ca-pub-6922361781329640" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <!-- google adsense ends here -->
@@ -34,8 +37,14 @@
       async='async'>
   </script>
   </head>
-  <body class="background">
+  <body class="background bg-dark">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="sticky">
+      <span class="navbar-brand">
+        {% for logo in logos %} {% if logo.img %}
+          <img src="{{ logo.img.url }}" alt="Logo" />
+        {% endif %} {% endfor %}
+      </span>
+
       <a class="navbar-brand" href="/">Worldgist</a>
       <button
         class="navbar-toggler"
@@ -61,7 +70,7 @@
           {% endif %}
           <!-- Reaction section of the homepage -->
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'reaction:reaction-list' %}">Reactions</a>
+            <a class="nav-link" href="{% url 'reaction:reaction-list' %}">Commentary</a>
           </li>
           <!-- <li class="nav-item dropdown">
             <a
@@ -91,8 +100,7 @@
     </nav>
     <div class="base-overflow">
       {% block content %} {% endblock content %}
-    </div>    
-
+    </div>   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script

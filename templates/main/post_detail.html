@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<div class="row shadow-sm p-3 mb-3 background-gradient rounded">
+<div class="row shadow-sm p-3 mb-3 background-gradient rounded mx-auto w-75">
   <div class="col">
     <div class="card">
       <div class="card-header">Worldgist Our Home</div>
         <div class="card-body">
           <h5 class="border border-light p-2 text-primary">
-            {% block title %} {{ object.title }} {% endblock title %}</h5>
+            {% block title %} | {{ object.title }} {% endblock title %}</h5>
             <h5 class="card-text background-gradient p-2 rounded-lg">
               <!-- For profile picture -->
                 {% if post.author.profile.image %}
@@ -111,7 +111,6 @@
 <!-- like button ends here -->
     </div>
   </div>
-  {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
 </div>
 
 <div class="container mb-5">

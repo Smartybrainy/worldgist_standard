@@ -20,7 +20,7 @@
   </head>
   <body style="color: white;" id="background-gradient">
     <div class="container p-5">
-      <div class="row">
+      <div class="row mx-auto w-75">
         <div class="col">
           {% for result in search_list %}
           <p class="card-text">
@@ -48,7 +48,6 @@
           {% endfor %}
         </div>
         <div style="color: green;">
-          {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
         </div>
       </div>
     </div>

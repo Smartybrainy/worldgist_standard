@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # The migration from :4 is perfect
 
@@ -20,7 +21,7 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='blog_post')
-    updated = models.DateTimeField(auto_now=True)
+    updated = models.DateTimeField(timezone.now())
     date_created = models.DateTimeField()
     status = models.IntegerField(choices=STATUS, default=0)
     liked = models.ManyToManyField(
@@ -86,3 +87,14 @@ class Comment(models.Model):
 
     class Meta:
         verbose_name_plural = "Documentation of Comments"
+
+
+class Logo(models.Model):
+    img = models.ImageField(upload_to="Logo_pics")
+    name = models.CharField(max_length=20, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.img}'
+
+    class Meta:
+        verbose_name_plural = "Logo Image"

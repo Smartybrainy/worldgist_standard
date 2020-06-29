@@ -60,7 +60,7 @@ def remember_user(request, template_name="main/login.html",
                   extra_context=None):
     response = auth_views.login(request, template_name)
     if request.POST.has_key('remember_me'):
-        request.sessions.set_expiry(1209600)  # weeks
+        request.sessions.set_expiry(1209600)  # 2weeks
 
 
 def logout(request):

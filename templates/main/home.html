@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% load socialaccount %} {% providers_media_js %}
+<!--  -->
+{% block content %}
 <!-- the search box -->
 <div class="container-fluid p-2 search-gradient">
   <form
@@ -17,7 +19,17 @@
   </form>
 </div>
 
-<div class="row shadow p-3 mb-3 background-gradient rounded">
+<!-- FOR THE SUB MENUS -->
+<ul class="nav white bg-dark">
+  <li class="nav-item">
+    <a class="nav-link active" href="{% url 'player:video-list' %}">Videos</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'player:audio-list' %}">Music</a>
+  </li>
+</ul>
+
+<div class="row shadow p-3 mb-3 background-gradient rounded mx-auto w-75">
   <div class="col">
     {% for post in post_list %}
     <br />
@@ -65,6 +77,7 @@
     <div class="col">
       <br />
       {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+      <!--  -->
       <br />
       <br />
       {% if user.is_authenticated %} 
@@ -99,9 +112,14 @@
           >Sign Up</a
         ><br />
         <hr />
-        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mt-2" style="width: 180px;">
+        <a href="{% provider_login_url 'facebook' method='js_sdk' %}" 
+          class="btn btn-primary mt-2" style="width: 180px;">
           <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
         </a><br />
+        <!-- <a href="{% url 'social:begin' 'facebook' %}" 
+          class="btn btn-primary mt-2" style="width: 180px;">
+          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+        </a><br /> -->
         <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
           <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
         </a>
@@ -138,12 +156,12 @@
     {% endif %}
   </div>
   <div class="container rounded-circle" id="animation">
-    <marquee behavior="async" direction="rtl"
-      ><h2>
+    <marquee direction="rtl"
+      ><h3>
         <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
-          ><i>Click Me!... We Love To Here From You!</i></a
+          ><i>Click Me!... We Love To Here Your Comment!</i></a
         >
-      </h2></marquee
+      </h3></marquee
     >
   </div>
   <!-- for convertKit email list -->
@@ -155,6 +173,12 @@
     ></script>
   </div>
   <!-- convertKit ends here -->
+
+  <!-- FOR COOKIEBOT -->
+  <script id="CookieDeclaration" 
+    src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js" 
+    type="text/javascript" async>
+  </script>
   {% block footer %}{% include 'footer.html' %}{% endblock footer %}
   <!--  -->
   {% endblock content %}

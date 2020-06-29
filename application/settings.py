@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -46,12 +47,18 @@ LOCAL_APPS = [
     'tracker.apps.TrackerConfig',
     'reaction.apps.ReactionConfig',
     'accounts.apps.AccountsConfig',
+    'player.apps.PlayerConfig',
 ]
 
 THIRD_PARTY_APPS = [
     'crispy_forms',
     'storages',
     'social_django',  # I already install social-auth-app-django
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -80,12 +87,14 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request',
+                'django.template.context_processors.request',  # neccessay for allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # Below were added for social login
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
+
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -96,10 +105,11 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.github.GithubOAuth2',
     'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.instagram.InstagramOAuth2',
 
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
+SITE_ID = 1
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
@@ -143,7 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/Lagos'
 
 USE_I18N = True
 
@@ -182,10 +192,9 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 django_heroku.settings(locals())
 
 # FOR THE REMEMBER ME CHECKBOX
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 # Fmail configuration
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -200,7 +209,8 @@ LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '757003195039910'  # APP ID
 SOCIAL_AUTH_FACEBOOK_SECRET = 'b42c67a0a45efe907d557c354f31068f'  # APP SECRET
-# SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']  # add this
+# SOCIAL_AUTH_RAISE_EXCEPTION = False
+# SOCIAL_AUTH_FACEBOOK_SCOPE = ['public_profile', 'user_link']  # add this
 # SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
 #     'fields': 'id, name, email, picture.type(large), link'
 # }
@@ -213,3 +223,27 @@ SOCIAL_AUTH_FACEBOOK_SECRET = 'b42c67a0a45efe907d557c354f31068f'  # APP SECRET
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'd6_9LrFkooGW5HAtaudDlaa-'
+
+
+# django-allauth registraion settings
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+
+# 1 day
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
+
+# or any other page
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
+
+# redirects to profile page if not configured.
+LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNTS_PROVIDERS = {
+    'facebook': {
+        'scope': ['email'],
+        'AUTH_PARAMS': {'auth_type': 'reauthentication'},
+        'METHOD': 'oauth2',
+        'VERIFIED_EMAIL': False
+    }
+}

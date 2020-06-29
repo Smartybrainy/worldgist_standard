@@ -1,10 +1,11 @@
 :root {
-  --primary-color: green;
+  --text-color: green;
 }
 
 .background:not(footer) {
-  color: var(--primary-color);
-  background-color: var(--primary-color);
+  color: var(--text-color);
+  position: relative;
+  position: -webkit-relative;
 }
 .like-count-color {
   color: green;
@@ -49,12 +50,12 @@
 /* for the footer */
 #footer {
   position: sticky;
-  position: -webkit-sticky;
-  bottom: 0;
+  position: -webkit-sticky !important;
+  bottom: 0 !important;
   background-color: #222;
-  padding: 30px;
+  padding: 20px;
   clear: both;
-  height: 300px;
+  height: auto;
   width: 100%;
   color: #efefef;
 }
@@ -101,16 +102,31 @@ input:focus {
 
 /* ANIMATION FOR MARQUEE */
 #animation {
-  background-color: yellow !important;
-  color: blue !important;
-  animation-name: anime;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
+  background-color: aquamarine;
+  color: blue;
+  animation: anime 10s linear 2s infinite both;
+}
+@-webkit-keyframes anime {
+  0% {
+    background-color: aquamarine;
+  }
+  25% {
+    background-color: coral;
+  }
+  50% {
+    background-color: brown;
+  }
+  75% {
+    background-color: blueviolet;
+  }
+  100% {
+    background-color: aliceblue;
+  }
 }
 
 @keyframes anime {
   0% {
-    background-color: yellow;
+    background-color: aquamarine;
   }
   25% {
     background-color: coral;
@@ -131,7 +147,7 @@ input:focus {
   position: sticky;
   position: -webkit-sticky;
   top: 0;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* REGISTER FORM HEIGHT */
