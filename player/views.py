@@ -19,6 +19,7 @@ class MusicList(ListView):
     model = Music
     template_name = 'player/audio.html'
     ordering = ['-time_added']
+    paginate_by = 15
 
 
 class MusicDetail(DetailView):
