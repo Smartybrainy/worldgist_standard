@@ -1,0 +1,39 @@
+{% extends 'base.html' %} {% block content %}
+<main class="white" style="height: auto;">
+  <section>
+    <div class="container w-75 h-auto">
+      <p class="search-gradient rounded-lg p-2">{{ video.name }}</p>
+      <video style="width: 100%; height: auto;" id="vid" controls>
+        <source src="{{ video.video_file.url }}" type="video/mp4" />
+        Your browsers does not support video tag.
+      </video>
+    </div>
+    <div class="container w-75 h-auto">
+      <button type="button" onclick="startLoop()">Loop</button>
+      <button type="button" onclick="stopLoop()">Stop Loop</button>
+      <button type="button" onclick="checkLoop()">Check Loop</button>
+      <hr />
+    </div>
+  </section>
+  <div class="container w-75 h-auto ml-4">
+    <a href="{% url 'player:video-list' %}"
+      ><button class="btn btn-primary">&laquo;</button></a
+    >
+  </div>
+</main>
+
+<script>
+  let x = document.getElementById("vid");
+  function startLoop() {
+    x.loop = true;
+    x.load();
+  }
+  function stopLoop() {
+    x.loop = false;
+    x.load();
+  }
+  function checkLoop() {
+    alert(x.loop);
+  }
+</script>
+{% endblock content %}

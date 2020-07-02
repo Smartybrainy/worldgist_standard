@@ -37,7 +37,7 @@
       <div class="card-header">Worldgist News</div>
       <div class="card-body">
         <h5 class="card-title border border-light p-2 text-primary">
-          {{ post.title }}
+          <a href="{% url 'blog:post-detail' slug=post.slug %}">{{ post.title }}</a>
         </h5>
         <p class="card-text">
           <small>{{ post.date_created }}</small>

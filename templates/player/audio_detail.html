@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %}
+<main class="white" style="height: auto;">
+  <section>
+    <div class="container p-5">
+      <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
+      <hr />
+      <p>{{ object.name }}</p>
+      <audio controls id="aud">
+        <source src="{{ music.audio_file.url }}" type="audio/mp3" />
+        Your browsers does not support audio tag.
+      </audio>
+    </div>
+    <div class="container p-5">
+      <button type="button" onclick="startLoop()">Loop</button>
+      <button type="button" onclick="stopLoop()">Stop Loop</button>
+      <button type="button" onclick="checkLoop()">Check Loop</button>
+      <hr />
+    </div>
+  </section>
+</main>
+
+<script>
+  let x = document.getElementById("aud");
+  function startLoop() {
+    x.loop = true;
+    x.load();
+  }
+  function stopLoop() {
+    x.loop = false;
+    x.load();
+  }
+  function checkLoop() {
+    alert(x.loop);
+  }
+</script>
+{% endblock content %}

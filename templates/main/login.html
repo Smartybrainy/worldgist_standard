@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container responsive mx-auto rounded shadow-lg" id="height">
-  <div class="row w-50 mt-3 ml-auto mr-auto">
+<div class="container rounded shadow-lg bg-light w-75 h-auto pb-2">
+  <div class="row w-50 mt-2 pt-2 ml-auto mr-auto">
     <div class="col">
       <form action="{% url 'accounts:login' %}" method="POST">
         {% csrf_token %}
@@ -29,7 +29,7 @@
       </form>
       &nbsp;<br /><a
         href="{% url 'accounts:password_reset' %}"
-        class="white-color rounded-sm"
+        class="rounded-sm"
         >Forgot Password</a
       >
     </div>
@@ -37,9 +37,7 @@
   <br />
   <div class="container w-50 ml-auto mr-auto">
     <h3>
-      <a href="{% url 'accounts:register' %}" class="white-color"
-        >Don't have an account: Sign Up</a
-      >
+      <a href="{% url 'accounts:register' %}">Don't have an account: Sign Up</a>
     </h3>
   </div>
 
@@ -49,7 +47,8 @@
       ><button type="submit" class="btn btn-primary">Home page</button></a
     >
   </div>
-  <div class="white-color">
+  <br />
+  <div class="text-secondary text-center rounded-lg alert alert-danger">
     {% for message in messages %}
     <h4><i>{{ message }}</i></h4>
     {% endfor %}

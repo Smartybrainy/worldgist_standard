@@ -3,41 +3,62 @@
   <header style="text-align: center;" class="p-5 search-gradient">
     WELCOME TO WORLDGIST VIDEOS
   </header>
+  <br />
+  <div class="container h-auto">
+    <a href="{% url 'blog:post-list' %}"
+      ><button class="btn btn-primary">&laquo;</button></a
+    >
+  </div>
   <hr />
 
   <section>
     {% for video in object_list %}
-    <div class="container">
-      <p>{{ video.name }}</p>
-      <video width="600" height="400" id="vid" controls>
-        <source src="{{ video.video_file.url }}" type="video/mp4" />
-        Your browsers does not support video tag.
-      </video>
-    </div>
-    <div class="container">
-      <button type="button" onclick="startLoop()">Loop</button>
-      <button type="button" onclick="stopLoop()">Stop Loop</button>
-      <button type="button" onclick="checkLoop()">Check Loop</button>
-      <hr />
-    </div>
+    <a href="{% url 'player:video-detail' pk=video.id %}">
+      <div class="container">
+        <p>{{ video.name }}</p>
+        <video
+          style="width: 25%; height: auto;"
+          autoplay
+          muted
+          loop="1"
+          class="rounded-lg"
+        >
+          <source src="{{ video.video_file.url }}" type="video/mp4" />
+          Your browsers does not support video tag.
+        </video>
+      </div>
+    </a>
     {% empty %}
     <div class="container alert alert-info">No videos uploaded.</div>
     {% endfor %}
   </section>
+  <!-- Pagination section -->
+  <div class="container">
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-left">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            tabindex="-1"
+            aria-disabled="true"
+            >&laquo; Prev</a
+          >
+        </li>
+        {% endif %}
+        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+            >Next &raquo;</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
 </main>
-
-<script>
-  let x = document.getElementById("vid");
-  function startLoop() {
-    x.loop = true;
-    x.load();
-  }
-  function stopLoop() {
-    x.loop = false;
-    x.load();
-  }
-  function checkLoop() {
-    alert(x.loop);
-  }
-</script>
 {% endblock content %}

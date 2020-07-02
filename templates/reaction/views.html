@@ -1,7 +1,7 @@
 {% extends 'base.html' %}{% block content %}
-<div class="container-fluid p-5 background-gradient">
+<div class="px-5 background-gradient">
   <!-- for the comment output -->
-  <div class="row mx-auto w-75" id="output-font-family">
+  <div class="row mx-auto" id="output-font-family">
     <div class="col">
       <ul class="card">
         {% for obj in object_list %}
@@ -20,7 +20,7 @@
   <!-- for the frontend form -->
   <form
     action="add_reaction/"
-    class="form-block white mx-auto w-75"
+    class="form-block white mx-auto"
     method="POST">
     {% csrf_token %}
     <fieldset class="border border-light p-3">

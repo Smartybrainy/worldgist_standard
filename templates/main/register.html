@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container bg-light mx-auto rounded shadow-lg">
-  <div class="row w-50 mt-3 ml-auto mr-auto">
+<div class="container bg-light rounded shadow-lg w-75 h-auto">
+  <div class="row w-50 mt-2 pt-2 ml-auto mr-auto">
     <kbd class="m-3 text-center">
       You Are Welcome To Worldgist Please Complete Your Credentials.
     </kbd>
@@ -62,23 +62,27 @@
             required
           />
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="reset" class="btn btn-primary">Reset</button>
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <button type="reset" class="btn btn-outline-primary">Reset</button>
       </form>
     </div>
   </div>
   <br />
   <div class="container w-50 ml-auto mr-auto">
+    <h3>
+      <a href="{% url 'accounts:login' %}">Already have an account: Login</a>
+    </h3>
     <a href="/"
       ><button type="submit" class="btn btn-primary">Home page</button></a
     >
   </div>
   <br />
-  <div class="white-color">
+  <div class="text-secondary text-center rounded-lg alert alert-danger">
     {% for message in messages %}
     <h4><i>{{ message }}</i></h4>
     {% endfor %}
   </div>
+  <br />
 </div>
 {% block footer %}{% include 'footer.html' %}{% endblock footer %}
 <!--  -->

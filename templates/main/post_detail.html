@@ -5,7 +5,7 @@
       <div class="card-header">Worldgist Our Home</div>
         <div class="card-body">
           <h5 class="border border-light p-2 text-primary">
-            {% block title %} | {{ object.title }} {% endblock title %}</h5>
+            {% block title %} {{ object.title }} {% endblock title %}</h5>
             <h5 class="card-text background-gradient p-2 rounded-lg">
               <!-- For profile picture -->
                 {% if post.author.profile.image %}
@@ -50,7 +50,7 @@
           <!-- the below goes for comment image -->
           {% if comment.comment_img %}
           <img src="{{ comment.comment_img.url }}" alt="Does'nt Exis!" 
-          class="img-fluid image-resize rounded-lg border border-success" />
+          class="img-fluid rounded-lg border border-success" />
           {% endif %}
           <!-- this section checks to approve comments -->
           {% if not comment.approved_comment %}

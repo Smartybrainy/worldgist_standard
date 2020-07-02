@@ -3,41 +3,66 @@
   <header style="text-align: center;" class="p-5 search-gradient">
     WELCOME TO WORLDGIST MUSIC
   </header>
+  <br />
+  <div class="container h-auto">
+    <a href="{% url 'blog:post-list' %}"
+      ><button class="btn btn-primary">&laquo;</button></a
+    >
+  </div>
   <hr />
 
-  <section>
+  <section style="position: relative;">
     {% for music in object_list %}
-    <div class="container">
-      <p>{{ music.name }}</p>
-      <audio controls id="aud">
-        <source src="{{ music.audio_file.url }}" type="audio/mp3" />
-        Your browsers does not support audio tag.
-      </audio>
-    </div>
-    <div class="container">
-      <button type="button" onclick="startLoop()">Loop</button>
-      <button type="button" onclick="stopLoop()">Stop Loop</button>
-      <button type="button" onclick="checkLoop()">Check Loop</button>
-      <hr />
-    </div>
+    <a href="{% url 'player:audio-detail' pk=music.id %}">
+      <div class="container p-5">
+        <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
+        <hr />
+        <p>{{ music.name }}</p>
+        <audio
+          controls
+          controlsList="nodownload"
+          title="Click the music name to play in a download mode!"
+        >
+          <source src="{{ music.audio_file.url }}" type="audio/mp3" />
+          Your browsers does not support audio tag.
+        </audio>
+      </div>
+    </a>
+    <hr />
+    <br /><br />
+
     {% empty %}
     <div class="container alert alert-info">No Audio uploaded.</div>
     {% endfor %}
   </section>
-</main>
 
-<script>
-  let x = document.getElementById("aud");
-  function startLoop() {
-    x.loop = true;
-    x.load();
-  }
-  function stopLoop() {
-    x.loop = false;
-    x.load();
-  }
-  function checkLoop() {
-    alert(x.loop);
-  }
-</script>
+  <!-- Pagination section -->
+  <div class="container">
+    {% if is_paginated %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-left">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            tabindex="-1"
+            aria-disabled="true"
+            >&laquo; Prev</a
+          >
+        </li>
+        {% endif %}
+        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
+            >Next &raquo;</a
+          >
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+</main>
 {% endblock content %}

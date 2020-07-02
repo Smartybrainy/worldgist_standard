@@ -94,11 +94,6 @@ input:focus {
   max-width: 100px !important;
   max-height: 100px !important;
 }
-/* THE POST IMAGE UPLOAD RESIZE */
-.image-resize {
-  max-width: 350px !important;
-  max-height: 500px !important;
-}
 
 /* ANIMATION FOR MARQUEE */
 #animation {
@@ -148,9 +143,4 @@ input:focus {
   position: -webkit-sticky;
   top: 0;
   z-index: 2;
-}
-
-/* REGISTER FORM HEIGHT */
-#height {
-  height: 1000px;
 }
