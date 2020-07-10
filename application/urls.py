@@ -26,6 +26,7 @@ urlpatterns = [
     path('tracker/', include('tracker.urls', namespace="tracker")),
     path('reaction/', include('reaction.urls', namespace="reaction")),
     path('player/', include('player.urls', namespace="player")),
+    path('chat/', include('chat.urls', namespace="chat")),
 
     path('accounts/', include('django.contrib.auth.urls')),
     # For the social login

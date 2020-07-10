@@ -48,12 +48,15 @@ LOCAL_APPS = [
     'reaction.apps.ReactionConfig',
     'accounts.apps.AccountsConfig',
     'player.apps.PlayerConfig',
+    'chat.apps.ChatConfig',
 ]
 
 THIRD_PARTY_APPS = [
     'crispy_forms',
     'storages',
     'social_django',  # I already install social-auth-app-django
+    'widget_tweaks',  # for chat app
+    'rest_framework',  # for chat app
 
     'allauth',
     'allauth.account',
@@ -176,8 +179,8 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')

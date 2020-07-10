@@ -1,51 +1,46 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
-  </head>
-  <body>
-    <footer id="footer">
-      <div class="container footer-responsive">
-        <div class="row">
-          <div class="col-md-4" id="admin-info">
-            Admin info.
-            <p>
-              <i class="fas fa-phone-square-alt"> +234-813-016-5966</i>
-            </p>
-            <p><i class="fas fa-envelope"> smartyleey@gmail.com</i></p>
-            <p><i class="fas fa-envelope"> myworldgist@gmail.com</i></p>
-          </div>
 
-          <div class="col-md-4">
-            <p class="white text-muted" id="para-footer">
-              &copy; myworldgist.com 2020
-            </p>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+</head>
 
-          <div class="col-md-4 pt-5">
-            <a
-              href="https://www.facebook.com/Worldgist-105412447839199/?modal=admin_todo_tour"
-              ><i class="fab fa-facebook fa-2x"></i></a
-            >&nbsp;
+<body>
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4" id="admin-info">
+          Admin info.
+          <p>
+            <i class="fas fa-phone-square-alt"> +234-813-016-5966</i>
+          </p>
+          <p><i class="fas fa-envelope"> smartyleey@gmail.com</i></p>
+          <p><i class="fas fa-envelope"> myworldgist@gmail.com</i></p>
+        </div>
 
-            <a href="https://twitter.com/home"
-              ><i class="fab fa-twitter fa-2x"></i></a
-            >&nbsp;
+        <div class="col-md-4">
+          <p class="white text-muted" id="para-footer">
+            &copy; myworldgist.com 2020
+          </p>
+        </div>
 
-            <a href="https://www.instagram.com/smarty_beat/?hl=en"
-              ><i class="fab fa-instagram fa-2x"></i></a
-            >&nbsp;
-            <a href="https://github.com/"
-              ><i class="fab fa-github fa-2x"></i
-            ></a>
-          </div>
+        <div class="col-md-4 pt-5">
+          <a href="https://www.facebook.com/Worldgist-105412447839199/?modal=admin_todo_tour"><i
+              class="fab fa-facebook fa-2x"></i></a>&nbsp;
+
+          <a href="https://twitter.com/home"><i class="fab fa-twitter fa-2x"></i></a>&nbsp;
+
+          <a href="https://www.instagram.com/smarty_beat/?hl=en"><i class="fab fa-instagram fa-2x"></i></a>&nbsp;
+          <a href="https://github.com/"><i class="fab fa-github fa-2x"></i></a>
         </div>
       </div>
-    </footer>
-    {% block footer %} {% endblock footer %}
-  </body>
+    </div>
+  </footer>
+  {% block footer %} {% endblock footer %}
+</body>
+
 </html>

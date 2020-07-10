@@ -1,23 +1,35 @@
 {% extends 'base.html' %} {% block content %}
-<main class="white" style="height: auto;">
+<main class="white background-gradient" style="height: auto;">
   <section>
-    <div class="container p-5">
-      <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
-      <hr />
-      <p>{{ object.name }}</p>
-      <audio controls id="aud">
-        <source src="{{ music.audio_file.url }}" type="audio/mp3" />
-        Your browsers does not support audio tag.
-      </audio>
-    </div>
-    <div class="container p-5">
-      <button type="button" onclick="startLoop()">Loop</button>
-      <button type="button" onclick="stopLoop()">Stop Loop</button>
-      <button type="button" onclick="checkLoop()">Check Loop</button>
-      <hr />
+    <div class="container p-3">
+      <div class="row">
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6">
+          <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
+          <hr />
+          <h4><u>{{ object.name }}</u></h4>
+          <audio controls id="aud">
+            <source src="{{ music.audio_file.url }}" type="audio/mp3" />
+            Your browsers does not support audio tag.
+          </audio>
+          <div class="container">
+            <button type="button" onclick="startLoop()">Loop</button>
+            <button type="button" onclick="stopLoop()">Stop Loop</button>
+            <button type="button" onclick="checkLoop()">Check Loop</button>
+            <hr />
+          </div>
+          <p>{{ music.desc | linebreaks | urlize }}</p>
+          <a href="{% url 'player:audio-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
+              Back</button></a>
+        </div>
+
+        <div class="col-md-3"></div>
+      </div>
     </div>
   </section>
 </main>
+{% block footer %}{% include 'footer.html' %}{% endblock footer %}
 
 <script>
   let x = document.getElementById("aud");

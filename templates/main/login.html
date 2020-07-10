@@ -1,59 +1,43 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container rounded shadow-lg bg-light w-75 h-auto pb-2">
-  <div class="row w-50 mt-2 pt-2 ml-auto mr-auto">
-    <div class="col">
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-md-3"></div>
+
+    <div class="col-md-6 bg-light rounded pt-2 mt-3 mb-3">
       <form action="{% url 'accounts:login' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Username:"
-            name="username"
-            required
-          />
+          <input type="text" class="form-control" placeholder="Username:" name="username" maxlength="30" size="25"
+            required />
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            class="form-control"
-            placeholder="Password:"
-            name="password"
-            required
-          />
+          <input type="password" class="form-control" placeholder="Password:" maxlength="12" name="password" required />
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
         <!-- Checkbox remember key -->
-        <input type="checkbox" name="remember_me" id="me" value="true" />
+        <input type="checkbox" name="remember_me" id="me" value="false" />
         <label for="me" class="white-color">Remember me</label>
       </form>
-      &nbsp;<br /><a
-        href="{% url 'accounts:password_reset' %}"
-        class="rounded-sm"
-        >Forgot Password</a
-      >
+      <br />
+      <a href="{% url 'accounts:password_reset' %}" class="rounded-sm">Forgot Password</a>
+      <br />
+      <h3>
+        <a href="{% url 'accounts:register' %}">Don't have an account: Sign Up</a>
+      </h3>
+      <br />
+      <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
+      <br /><br />
+      <div class="text-secondary text-center rounded-lg alert alert-danger">
+        {% for message in messages %}
+        <h4><i>{{ message }}</i></h4>
+        {% endfor %}
+      </div>
     </div>
-  </div>
-  <br />
-  <div class="container w-50 ml-auto mr-auto">
-    <h3>
-      <a href="{% url 'accounts:register' %}">Don't have an account: Sign Up</a>
-    </h3>
-  </div>
 
-  <br />
-  <div class="container w-50 ml-auto mr-auto">
-    <a href="/"
-      ><button type="submit" class="btn btn-primary">Home page</button></a
-    >
-  </div>
-  <br />
-  <div class="text-secondary text-center rounded-lg alert alert-danger">
-    {% for message in messages %}
-    <h4><i>{{ message }}</i></h4>
-    {% endfor %}
+    <div class="col-md-3"></div>
   </div>
 </div>
+
 {% block footer %}{% include 'footer.html' %}{% endblock footer %}
 <!--  -->
 {% endblock content %}

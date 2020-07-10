@@ -1,9 +1,11 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container bg-light">
-  <h2>History Page</h2>
+<div class="container-fluid">
   <div class="row">
-    <div class="col-8">
-      <table class="table">
+    <div class="col-md-2"></div>
+
+    <div class="col-md-8 bg-light">
+      <h2>History Page</h2>
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Page</th>
@@ -15,27 +17,26 @@
           {% for history in object_list %}
           <tr>
             <td>
-              <a href="{% url 'blog:post-detail' slug=history.content_object.slug %}" 
-                title="Back to the post"
-                >{{ history.content_object }}
-              >
+              {% if history.content_object %}
+              <a href="{% url 'blog:post-detail' slug=history.content_object.slug %}"
+                title="Back to the post">{{ history.content_object }}
+                >
+                {% endif %}
             </td>
             <td>{{ history.time_viewed }}</td>
             <td>
-              <a
-                href="{% url 'tracker:history-delete' page_id=history.pk %}"
-                class="btn btn-danger"
-                >Delete</a
-              >
+              <a href="{% url 'tracker:history-delete' page_id=history.pk %}"
+                class="btn btn-outline-danger btn-sm">Delete</a>
             </td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-    {% block sidebar %}{% include 'sidebar.html' %}{% endblock sidebar %}
   </div>
 </div>
+
+<div class="col-md-2"></div>
 {% block footer %}{% include 'footer.html' %}{% endblock footer %}
 <!--  -->
 {% endblock content %}

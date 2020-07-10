@@ -3,17 +3,13 @@
 {% block content %}
 <!-- the search box -->
 <div class="container-fluid p-2 search-gradient">
-  <form
-    action="{% url 'blog:search-query' %}"
-    method="GET"
-    class="form-white ml-2"
-  >
+  <form action="{% url 'blog:search-query' %}" method="GET" class="form-white ml-2">
     <div class="input-group">
       <div class="input-group-prepend">
         <div class="input-group-text">
           <label for="label"><i class="far fa-arrow-alt-circle-right"></i></label></div>
-          <input type="search" name="qs" id="label" placeholder="Search" required />
-          <button type="submit"><i class="fas fa-search"></i></button>
+        <input type="search" name="qs" id="label" placeholder="Search" required />
+        <button type="submit"><i class="fas fa-search"></i></button>
       </div>
     </div>
   </form>
@@ -29,104 +25,82 @@
   </li>
 </ul>
 
-<div class="row shadow p-3 mb-3 background-gradient rounded mx-auto">
-  <div class="col">
-    {% for post in post_list %}
-    <br />
-    <div class="card">
-      <div class="card-header">Worldgist News</div>
-      <div class="card-body">
-        <h5 class="card-title border border-light p-2 text-primary">
-          <a href="{% url 'blog:post-detail' slug=post.slug %}">{{ post.title }}</a>
-        </h5>
-        <p class="card-text">
-          <small>{{ post.date_created }}</small>
-        </p>
-        <div class="text-content">
+<div class="container-fluid">
+  <div class="row shadow p-3 mb-3 background-gradient rounded">
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-7">
+      {% for post in post_list %}
+      <br>
+      <div class="card">
+        <div class="card-header">Worldgist News</div>
+        <div class="card-body">
+          <h5 class="card-title border border-light text-primary">
+            <a href="{% url 'blog:post-detail' slug=post.slug %}"
+              title="Click to read more about the post">{{ post.title }}</a>
+          </h5>
           <p class="card-text">
-            {{ post.content | slice:":150" | linebreaks | urlize }}&raquo;
+            <small>{{ post.date_created }}</small>
           </p>
+          <div class="text-content">
+            <p class="card-text">
+              {{ post.content | slice:":150" | linebreaks | urlize }}&raquo;
+            </p>
+          </div>
+          <!-- This is the image field -->
+          {% if post.image %}
+          <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg border border-success" />
+          {% endif %}
+          <!-- the image field ends here  -->
+          <a href="{% url 'blog:post-detail' slug=post.slug %}" class="btn btn-info
+          btn-sm">Read more</a>
+          <!-- the below counts the comments in a post -->
+          <a href="" title="Total approved comments"
+            class="border border-primary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
+          <div class="sharethis-inline-share-buttons"></div>
         </div>
-        <!-- This is the image field -->
-        {% if post.image %}
-        <img
-          src="{{ post.image.url }}"
-          alt="Does'nt Exis!"
-          class="img-fluid rounded-lg border border-success"
-        />
-        {% endif %}
-        <!-- the image field ends here  -->
-        <a
-          href="{% url 'blog:post-detail' slug=post.slug %}"
-          class="btn btn-primary"
-          >Read more</a
-        >
-        <!-- the below counts the comments in a post -->
-        <a
-          href=""
-          title="Total approved comments"
-          class="border border-primary rounded-lg"
-          >Comments:({{ post.my_approved_comments.count }})</a
-        >
-        <div class="sharethis-inline-share-buttons"></div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  <div class="row">
-    <div class="col">
+
+    <div class="col-sm-3">
       <br />
       {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
-      <!--  -->
       <br />
       <br />
-      {% if user.is_authenticated %} 
+      {% if user.is_authenticated %}
       <!--  -->
-        {% if user.profile.image %}
-        <div class="media">
-          <img
-            src="{{ user.profile.image.url }}"
-            alt="Profile-img"
-            class="rounded-circle img-fluid mr-4"
-            id="image-size"
-          />
-        </div>
-        {% endif %}
-        <h4 class="white">Hello! {{ user.username }}</h4>
-        <hr />
-        <!-- This section goes fot User history -->
-        <a
-          href="{% url 'tracker:history-list' %}"
-          class="white"
-          title="About the user visited page history"
-          >Histories</a
-        >
-        <br />
-        <hr />
-        <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning"
-          >Logout</a
-        >
-        {% else %}
-        <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
-        <a href="{% url 'accounts:register' %}" class="btn btn-success"
-          >Sign Up</a
-        ><br />
-        <hr />
-        <a href="{% provider_login_url 'facebook' method='js_sdk' %}" 
-          class="btn btn-primary mt-2" style="width: 180px;">
-          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-        </a><br />
-        <!-- <a href="{% url 'social:begin' 'facebook' %}" 
-          class="btn btn-primary mt-2" style="width: 180px;">
-          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-        </a><br /> -->
-        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
-          <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
-        </a>
-        {% endif %}
+      {% if user.profile.image %}
+      <div class="media">
+        <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
+          id="image-size" />
       </div>
+      {% endif %}
+      <h4 class="white">Hello! {{ user.username }}</h4>
+      <hr />
+      <!-- This section goes fot User history -->
+      <a href="{% url 'tracker:history-list' %}" class="white" title="About the user visited page history">Histories</a>
+      <br />
+      <hr />
+      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning">Logout</a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
+      <a href="{% url 'accounts:register' %}" class="btn btn-success">Sign Up</a><br />
+      <hr />
+      <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="btn btn-primary mt-2" style="width: 180px;">
+        <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+      </a><br />
+      <!-- <a href="{% url 'social:begin' 'facebook' %}" 
+                class="btn btn-primary mt-2" style="width: 180px;">
+                <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+              </a><br /> -->
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
+        <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
+      </a>
+      {% endif %}
     </div>
   </div>
+
   <!-- Pagination section -->
   <div class="container-fluid">
     {% if is_paginated %}
@@ -134,21 +108,15 @@
       <ul class="pagination justify-content-left">
         {% if page_obj.has_previous %}
         <li class="page-item">
-          <a
-            class="page-link"
-            href="?page={{ page_obj.previous_page_number }}"
-            tabindex="-1"
-            aria-disabled="true"
-            >&laquo; Prev</a
-          >
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+            aria-disabled="true">&laquo;
+            Prev</a>
         </li>
         {% endif %}
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
         {% if page_obj.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
-            >Next &raquo;</a
-          >
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
         </li>
         {% endif %}
       </ul>
@@ -156,30 +124,25 @@
     {% endif %}
   </div>
   <div class="container rounded-circle" id="animation">
-    <marquee direction="rtl"
-      ><h3>
-        <a class="nav-link" href="{% url 'reaction:reaction-list' %}"
-          ><i>Click Me!... We Love To Here Your Comment!</i></a
-        >
-      </h3></marquee
-    >
+    <marquee direction="rtl">
+      <h3>
+        <a class="nav-link" href="{% url 'reaction:reaction-list' %}"><i>Click Me!... We Love To Here Your
+            Comment!</i></a>
+      </h3>
+    </marquee>
   </div>
   <!-- for convertKit email list -->
   <div class="container-fluid">
-    <script
-      async
-      data-uid="d15840a258"
-      src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"
-    ></script>
+    <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
   </div>
   <!-- convertKit ends here -->
 
   <!-- FOR COOKIEBOT -->
-  <script id="CookieDeclaration" 
-    src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js" 
+  <script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"
     type="text/javascript" async>
-  </script>
-  {% block footer %}{% include 'footer.html' %}{% endblock footer %}
-  <!--  -->
-  {% endblock content %}
+    </script>
+
 </div>
+{% block footer %}{% include 'footer.html' %}{% endblock footer %}
+</div>
+{% endblock content %}

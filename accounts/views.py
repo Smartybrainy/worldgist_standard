@@ -67,9 +67,8 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
+
 # Now for v4 of the app the user profile
-
-
 class Profile(ListView):
     model = Profile
     template_name = 'accounts/user_profile.html'

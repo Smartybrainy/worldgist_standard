@@ -1,37 +1,44 @@
 {% extends 'base.html' %} {% block content %}
-<main class="white" style="height: auto;">
-  <header style="text-align: center;" class="p-5 search-gradient">
+<main style="height: auto;" class="background-gradient">
+  <header style="text-align: center;" class="p-5 search-gradient white">
     WELCOME TO WORLDGIST VIDEOS
   </header>
   <br />
   <div class="container h-auto">
-    <a href="{% url 'blog:post-list' %}"
-      ><button class="btn btn-primary">&laquo;</button></a
-    >
+    <a href="{% url 'blog:post-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
+        Back</button></a>
+    <a href="{% url 'player:popular-video' %}"><button class="btn btn-outline-info float-right">Popular Videos &raquo;
+        <span class="spinner-border spinner-border-sm"></span>
+      </button></a>
+    <marquee behavior="" direction="rtl" class="white">View more videos on the popular video page.</marquee>
+
   </div>
   <hr />
-
-  <section>
-    {% for video in object_list %}
-    <a href="{% url 'player:video-detail' pk=video.id %}">
-      <div class="container">
-        <p>{{ video.name }}</p>
-        <video
-          style="width: 25%; height: auto;"
-          autoplay
-          muted
-          loop="1"
-          class="rounded-lg"
-        >
-          <source src="{{ video.video_file.url }}" type="video/mp4" />
-          Your browsers does not support video tag.
-        </video>
+  <div class="container-fluid-lg pl-3">
+    <div class="row">
+      <div class="col-sm-12 bg-light rounded-lg">
+        {% for video in object_list %}
+        <span style="float: left;width: 25%;">
+          <a href="{% url 'player:video-detail' pk=video.id %}">
+            <p>{{ video.name }}</p>
+            {% if video.video_file %}
+            <video autoplay muted loop="1" class="rounded-lg border border-secondary
+            w-75 h-auto">
+              <source src="{{ video.video_file.url }}" type="video/mp4" />
+              Your browsers does not support video tag.
+            </video>
+            {% endif %}
+          </a>
+        </span>
+        {% empty %}
+        <div class="container alert alert-info dismissible fade show">No videos uploaded.
+          <span type="button" class="close" data-dismiss="alert">&times;</span>
+        </div>
+        {% endfor %}
       </div>
-    </a>
-    {% empty %}
-    <div class="container alert alert-info">No videos uploaded.</div>
-    {% endfor %}
-  </section>
+    </div>
+  </div>
+
   <!-- Pagination section -->
   <div class="container">
     {% if is_paginated %}
@@ -39,26 +46,21 @@
       <ul class="pagination justify-content-left">
         {% if page_obj.has_previous %}
         <li class="page-item">
-          <a
-            class="page-link"
-            href="?page={{ page_obj.previous_page_number }}"
-            tabindex="-1"
-            aria-disabled="true"
-            >&laquo; Prev</a
-          >
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+            aria-disabled="true">&laquo; Prev</a>
         </li>
         {% endif %}
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
         {% if page_obj.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
-            >Next &raquo;</a
-          >
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
         </li>
         {% endif %}
       </ul>
     </nav>
     {% endif %}
   </div>
+
+  {% block footer %}{% include "footer.html" %}{% endblock footer %}
 </main>
 {% endblock content %}

@@ -1,39 +1,44 @@
 {% extends 'base.html' %} {% block content %}
-<main class="white" style="height: auto;">
+<main class="white background-gradient" style="height: auto;">
   <header style="text-align: center;" class="p-5 search-gradient">
     WELCOME TO WORLDGIST MUSIC
   </header>
   <br />
-  <div class="container h-auto">
-    <a href="{% url 'blog:post-list' %}"
-      ><button class="btn btn-primary">&laquo;</button></a
-    >
+  <div class="container">
+    <a href="{% url 'blog:post-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
+        Back</button></a>
   </div>
   <hr />
 
-  <section style="position: relative;">
-    {% for music in object_list %}
-    <a href="{% url 'player:audio-detail' pk=music.id %}">
-      <div class="container p-5">
-        <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
-        <hr />
-        <p>{{ music.name }}</p>
-        <audio
-          controls
-          controlsList="nodownload"
-          title="Click the music name to play in a download mode!"
-        >
-          <source src="{{ music.audio_file.url }}" type="audio/mp3" />
-          Your browsers does not support audio tag.
-        </audio>
-      </div>
-    </a>
-    <hr />
-    <br /><br />
+  <section>
+    <div class="container p-3">
+      <div class="row">
+        <div class="col-md-3"></div>
 
-    {% empty %}
-    <div class="container alert alert-info">No Audio uploaded.</div>
-    {% endfor %}
+        <div class="col-md-6">
+          {% for music in object_list %}
+          <a href="{% url 'player:audio-detail' pk=music.id %}" title="Click to navigate to detail/download page.">
+            <div class="container p-5 bg-secondary">
+              <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
+              <hr />
+              <p>{{ music.name }}</p>
+              <audio controls controlsList="nodownload" title="Click the music name to play in a download mode!">
+                <source src="{{ music.audio_file.url }}" type="audio/mp3" />
+                Your browsers does not support audio tag.
+              </audio>
+            </div>
+          </a>
+          <hr />
+          <br /><br />
+
+          {% empty %}
+          <div class="container alert alert-info">No Audio uploaded.</div>
+          {% endfor %}
+        </div>
+
+        <div class="col-md-3"></div>
+      </div>
+    </div>
   </section>
 
   <!-- Pagination section -->
@@ -43,21 +48,14 @@
       <ul class="pagination justify-content-left">
         {% if page_obj.has_previous %}
         <li class="page-item">
-          <a
-            class="page-link"
-            href="?page={{ page_obj.previous_page_number }}"
-            tabindex="-1"
-            aria-disabled="true"
-            >&laquo; Prev</a
-          >
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+            aria-disabled="true">&laquo; Prev</a>
         </li>
         {% endif %}
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
         {% if page_obj.has_next %}
         <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}"
-            >Next &raquo;</a
-          >
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
         </li>
         {% endif %}
       </ul>
@@ -65,4 +63,6 @@
     {% endif %}
   </div>
 </main>
+{% block footer %}{% include 'footer.html' %}{% endblock footer %}
+<!--  -->
 {% endblock content %}

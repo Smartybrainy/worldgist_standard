@@ -1,78 +1,70 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <!-- FOR THE COOKIEBOT -->
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="de8d01fc-4746-4e0d-9c25-915dd5e528d7" data-blockingmode="auto" type="text/javascript"></script>
 
-    <!-- Google Adsense -->
-    <script data-ad-client="ca-pub-6922361781329640" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <!-- google adsense ends here -->
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+<head>
+  <!-- FOR THE COOKIEBOT -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="de8d01fc-4746-4e0d-9c25-915dd5e528d7"
+    data-blockingmode="auto" type="text/javascript"></script>
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+  <!-- Google Adsense -->
+  <script data-ad-client="ca-pub-6922361781329640" async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- google adsense ends here -->
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Worldgist{% block title %}{% endblock title %}</title>
-    <!-- The below belongs to the share this reactions icons -->
-    <script type='text/javascript' 
-      src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=inline-reaction-buttons&cms=sop' 
-      async='async'>
-  </script>
-    <!-- The sticky share ths icon -->
-    <script type='text/javascript' 
-      src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=sticky-share-buttons&cms=sop' 
-      async='async'>
-  </script>
-  </head>
-  <body class="background bg-dark">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="sticky">
-      <span class="navbar-brand">
-        {% for logo in logos %} {% if logo.img %}
-          <img src="{{ logo.img.url }}" alt="Logo" />
-        {% endif %} {% endfor %}
-      </span>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-      <a class="navbar-brand" href="/">Worldgist</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'tracker:history-list' %}">Histories</a>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'tracker:history-alert' %}">Histories</a>
-          </li>
-          {% endif %}
-          <!-- Reaction section of the homepage -->
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'reaction:reaction-list' %}">Commentary</a>
-          </li>
-          <!-- <li class="nav-item dropdown">
+  <title>Worldgist{% block title %}{% endblock title %}</title>
+  <!-- The below belongs to the share this reactions icons -->
+  <script type='text/javascript'
+    src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=inline-reaction-buttons&cms=sop'
+    async='async'>
+    </script>
+  <!-- The sticky share ths icon -->
+  <script type='text/javascript'
+    src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=sticky-share-buttons&cms=sop'
+    async='async'>
+    </script>
+</head>
+
+<body class="background bg-dark">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light" id="sticky">
+    <span class="navbar-brand">
+      {% for logo in logos %} {% if logo.img %}
+      <img src="{{ logo.img.url }}" alt="Logo" />
+      {% endif %} {% endfor %}
+    </span>
+
+    <a class="navbar-brand" href="/" style="color: green;"><b>WorldGist
+        <span class="spinner-grow spinner-grow-md"></span>
+      </b></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:history-list' %}">Histories</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'tracker:history-alert' %}">Histories</a>
+        </li>
+        {% endif %}
+        <!-- Reaction section of the homepage -->
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'reaction:reaction-list' %}">Commentary</a>
+        </li>
+        <!-- <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -89,36 +81,31 @@
               <a class="dropdown-item" href="#">Another action</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div> -->
-            {% if user.profile and user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'accounts:profile-view' %}">Profiles</a>
-            </li>
-            {% endif %}
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="base-overflow">
-      {% block content %} {% endblock content %}
-    </div>   
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-      crossorigin="anonymous"
-    ></script>
-    <!-- font awesome -->
-    <script src="https://kit.fontawesome.com/891ba62f6f.js" crossorigin="anonymous"></script>
-  </body>
+        {% if user.profile and user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:profile-view' %}">Profiles</a>
+        </li>
+        {% endif %}
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="base-overflow">
+    {% block content %} {% endblock content %}
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+  <!-- font awesome -->
+  <script src="https://kit.fontawesome.com/891ba62f6f.js" crossorigin="anonymous"></script>
+</body>
+
 </html>

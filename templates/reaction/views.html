@@ -1,59 +1,61 @@
 {% extends 'base.html' %}{% block content %}
-<div class="px-5 background-gradient">
-  <!-- for the comment output -->
-  <div class="row mx-auto" id="output-font-family">
-    <div class="col">
+<div class="container-fluid background-gradient">
+  <div class="row">
+    <div class="col-md-2"></div>
+
+    <!-- for the comment output -->
+    <div class="col-md-8" id="output-font-family">
       <ul class="card">
         {% for obj in object_list %}
         <li>
           <h5><span class="text-black">{{ obj.email }}</span>
-          |
-          <span class="text-green"><i>{{ obj.added_date }}</i></span>
-        </li></h5>
-        <li><h6><span class="text-black">Anonymous: </span>{{ obj.name }}</h6></li>
-        <li><p></p>{{ obj.content | linebreaks }}</p></li>
+            |
+            <span class="text-green"><i>{{ obj.added_date }}</i></span>
+        </li>
+        </h5>
+        <li>
+          <h6><span class="text-black">Anonymous: </span>{{ obj.name }}</h6>
+        </li>
+        <li>
+          <p></p>{{ obj.content | linebreaks }}</p>
+        </li>
         <hr />
         {% endfor %}
       </ul>
-    </div>
-  </div>
-  <!-- for the frontend form -->
-  <form
-    action="add_reaction/"
-    class="form-block white mx-auto"
-    method="POST">
-    {% csrf_token %}
-    <fieldset class="border border-light p-3">
-      <legend>Enter your comment...</legend>
-      <div>
-        <textarea placeholder="Enter your comment..."
-                  name="content"
-                  cols="40"
-                  rows="5" 
-                  class="form-control"
-                  autofocus>
+      <!-- for the frontend form -->
+      <form action="add_reaction/" class="form-block white mx-auto" method="POST">
+        {% csrf_token %}
+        <fieldset class="border border-light p-3">
+          <legend>Enter your comment...</legend>
+          <div>
+            <textarea placeholder="Enter your comment..." name="content" cols="40" rows="5" class="form-control"
+              autofocus>
         </textarea>
-      </div>
+          </div>
 
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="text" name="visitor_name" placeholder="Name_optional:" />
-      </div>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="text" name="visitor_name" placeholder="Name_optional:" />
+          </div>
 
-      <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">@</div>
-        </div>
-        <input type="email" name="email" placeholder="you@email.com:" required />
-      </div>
-      <button type="submit" class="btn btn-success mb-2">Publish</button>
-        <!-- back nav -->
-        <a href="{% url 'blog:post-list' %}"><button type="button" 
-          class="btn btn-success mb-2">Back &laquo;</button></a>
-    </fieldset>
-  </form>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="email" name="email" placeholder="you@email.com:" required />
+          </div>
+          <button type="submit" class="btn btn-success mb-2">Publish</button>
+          <!-- back nav -->
+          <a href="{% url 'blog:post-list' %}"><button type="button" class="btn btn-success mb-2">Back
+              &laquo;</button></a>
+        </fieldset>
+      </form>
+    </div>
+
+    <div class="col-md-2"></div>
+  </div>
 </div>
 {% block footer %}{% include 'footer.html' %}{% endblock footer %}
 <!-- still work on the textarea extra spaces -->
