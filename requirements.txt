@@ -16,6 +16,8 @@ django-allauth==0.42.0
 django-crispy-forms==1.9.0
 django-heroku==0.3.1
 django-storages==1.9.1
+django-widget-tweaks==1.4.8
+djangorestframework==3.11.0
 dnspython==1.16.0
 docutils==0.15.2
 gitdb==4.0.4
