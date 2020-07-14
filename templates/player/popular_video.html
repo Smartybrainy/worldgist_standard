@@ -1,26 +1,27 @@
 {% extends 'base.html' %} {% block content %}
-<main style="height: auto;" class="background-gradient">
+<main>
     <header style="text-align: center;" class="p-5 search-gradient white">
         WELCOME TO WORLDGIST POPULAR VIDEOS
     </header>
     <br />
-    <div class="container h-auto">
+    <div class="container">
         <a href="{% url 'player:video-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
                 Back</button></a>
     </div>
     <hr />
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
-            <div class="col-sm-6 bg-secondary white rounded-lg p-3">
-                <iframe src="" width="100%" height="100%" name="iframe_video" frameborder="0" allowfullscreen
+            <div class="col bg-secondary rounded-lg p-2">
+                <iframe src="" width="100%" height="350;" name="iframe_video" frameborder="0" allowfullscreen
                     allow="autoplay; encripted-media" class="rounded-lg">
                 </iframe>
             </div>
 
-            <div class="col-md-4 white ml-3">
+            <div class="col-md-4 ml-3">
                 {% for i_video in video_tube %}
                 <p title="Click the play button">{{ i_video.name }}</p>
-                <h3><a href="{{ i_video.url_video }}" target="iframe_video" class="white">
+                <h3>
+                    <a href="{{ i_video.url_video }}" target="iframe_video">
                         <i class="fa fa-play" aria-hidden="true" title="Click to play the video"></i>
                     </a>
                 </h3>
@@ -38,13 +39,14 @@
     <!-- Pagination section -->
     <div class="container p-2">
         {% if users.has_other_pages %}
-        <ul class="pagination">
+        <ul class="pagination justify-content-left">
             {% if users.has_previous %}
             <li><a href="?page={{ users.previous_page_number }}"><button
                         class="btn btn-outline-primary">&laquo;</button></a></li>
             {% else %}
             <li class="disabled"><span><button class="btn btn-outline-primary">&laquo;</button></span></li>
             {% endif %}
+
             {% for i in users.paginator.page_range %}
             {% if users.number == i %}
             <li class="active"><span><button class="btn btn-outline-primary">{{ i }}</button><span
@@ -52,6 +54,7 @@
             {% else %}
             <li><a href="?page={{ i }}"><button class="btn btn-outline-primary">{{ i }}</button></a></li>
             {% endif %}
+
             {% endfor %}
             {% if users.has_next %}
             <li><a href="?page={{ users.next_page_number }}"><button

@@ -27,4 +27,4 @@ class PopularVideoAdmin(admin.ModelAdmin):
     list_filter = ('status',)
 
 
-admin.site.register(PopularVideo)
+admin.site.register(PopularVideo, PopularVideoAdmin)

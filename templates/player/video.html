@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<main style="height: auto;" class="background-gradient">
+<main>
   <header style="text-align: center;" class="p-5 search-gradient white">
     WELCOME TO WORLDGIST VIDEOS
   </header>
@@ -10,33 +10,33 @@
     <a href="{% url 'player:popular-video' %}"><button class="btn btn-outline-info float-right">Popular Videos &raquo;
         <span class="spinner-border spinner-border-sm"></span>
       </button></a>
-    <marquee behavior="" direction="rtl" class="white">View more videos on the popular video page.</marquee>
+    <marquee behavior="" direction="rtl">View more videos on the popular video page.</marquee>
 
   </div>
   <hr />
-  <div class="container-fluid-lg pl-3">
-    <div class="row">
-      <div class="col-sm-12 bg-light rounded-lg">
-        {% for video in object_list %}
-        <span style="float: left;width: 25%;">
-          <a href="{% url 'player:video-detail' pk=video.id %}">
-            <p>{{ video.name }}</p>
-            {% if video.video_file %}
-            <video autoplay muted loop="1" class="rounded-lg border border-secondary
-            w-75 h-auto">
-              <source src="{{ video.video_file.url }}" type="video/mp4" />
-              Your browsers does not support video tag.
-            </video>
-            {% endif %}
-          </a>
-        </span>
-        {% empty %}
-        <div class="container alert alert-info dismissible fade show">No videos uploaded.
-          <span type="button" class="close" data-dismiss="alert">&times;</span>
-        </div>
-        {% endfor %}
-      </div>
+  <div class="container">
+    {% for video in object_list %}
+    <!-- <div class="row"> -->
+    <!-- <div class="col"> -->
+    <span style="max-width: 33.33%;float:left;">
+      <a href="{% url 'player:video-detail' pk=video.id %}">
+        {% if video.video_file %}
+        <video autoplay muted loop="1" style="width: 100%;
+                height:150px;">
+          <source src="{{ video.video_file.url }}" type="video/mp4" />
+          Your browsers does not support video tag.
+        </video>
+        {% endif %}
+        <p style="text-align: center;">{{ video.name }}</p>
+      </a>
+    </span>
+    <!-- </div> -->
+    <!-- </div> -->
+    {% empty %}
+    <div class="container alert alert-info dismissible fade show">No videos uploaded.
+      <span type="button" class="close" data-dismiss="alert">&times;</span>
     </div>
+    {% endfor %}
   </div>
 
   <!-- Pagination section -->
@@ -47,7 +47,8 @@
         {% if page_obj.has_previous %}
         <li class="page-item">
           <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
-            aria-disabled="true">&laquo; Prev</a>
+            aria-disabled="true">&laquo;
+            Prev</a>
         </li>
         {% endif %}
         <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->

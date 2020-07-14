@@ -26,7 +26,7 @@
 </ul>
 
 <div class="container-fluid">
-  <div class="row shadow p-3 mb-3 background-gradient rounded">
+  <div class="row shadow p-3 mb-3 jumbotron rounded">
     <div class="col-sm-2"></div>
 
     <div class="col-sm-7">
@@ -49,13 +49,13 @@
           </div>
           <!-- This is the image field -->
           {% if post.image %}
-          <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg border border-success" />
+          <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg border" />
           {% endif %}
           <!-- the image field ends here  -->
           <a href="{% url 'blog:post-detail' slug=post.slug %}" class="btn btn-info
           btn-sm">Read more</a>
           <!-- the below counts the comments in a post -->
-          <a href="" title="Total approved comments"
+          <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
             class="border border-primary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
           <div class="sharethis-inline-share-buttons"></div>
         </div>
@@ -76,28 +76,33 @@
           id="image-size" />
       </div>
       {% endif %}
-      <h4 class="white">Hello! {{ user.username }}</h4>
+      <h4>Hello! {{ user.username }}</h4>
       <hr />
       <!-- This section goes fot User history -->
-      <a href="{% url 'tracker:history-list' %}" class="white" title="About the user visited page history">Histories</a>
+      <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
       <br />
       <hr />
-      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-warning">Logout</a>
+      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary">Logout</a>
       {% else %}
       <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
       <a href="{% url 'accounts:register' %}" class="btn btn-success">Sign Up</a><br />
       <hr />
-      <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="btn btn-primary mt-2" style="width: 180px;">
+      <!-- <a href="{% provider_login_url 'facebook' method='js_sdk' %}" class="btn btn-primary mt-2" style="width: 180px;">
         <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-      </a><br />
-      <!-- <a href="{% url 'social:begin' 'facebook' %}" 
-                class="btn btn-primary mt-2" style="width: 180px;">
-                <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-              </a><br /> -->
+      </a><br /> -->
+      <!-- <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mt-2" style="width: 180px;">
+        <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+      </a><br /> -->
       <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
         <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
       </a>
       {% endif %}
+      <br /><br />
+      <!-- for convertKit email list -->
+      <div>
+        <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
+      </div>
+      <!-- convertKit ends here -->
     </div>
   </div>
 
@@ -131,11 +136,6 @@
       </h3>
     </marquee>
   </div>
-  <!-- for convertKit email list -->
-  <div class="container-fluid">
-    <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
-  </div>
-  <!-- convertKit ends here -->
 
   <!-- FOR COOKIEBOT -->
   <script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"

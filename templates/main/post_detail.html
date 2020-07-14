@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container-fluid">
-  <div class="row shadow-sm p-3 mb-3 background-gradient rounded">
+  <div class="row shadow-sm p-3 mb-3 jumbotron rounded">
     <div class="col-md-2"></div>
 
     <div class="col-md-8">
@@ -30,7 +30,7 @@
           <!-- the image section -->
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid
-            rounded-lg border border-success" />
+            rounded-lg" />
           {% endif %}
           <!-- the image section ends here -->
 

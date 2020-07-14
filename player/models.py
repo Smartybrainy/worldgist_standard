@@ -9,8 +9,8 @@ STATUS = (
 
 
 class Video(models.Model):
-    name = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
     desc = models.TextField(blank=True, null=True)
     video_file = models.FileField(
         upload_to="videos/%y/%m/%d/")
@@ -26,8 +26,8 @@ class Video(models.Model):
 
 
 class PopularVideo(models.Model):
-    name = models.CharField(max_length=150)
-    slug = models.SlugField(max_length=150)
+    name = models.CharField(max_length=150, unique=True)
+    slug = models.SlugField(max_length=150, unique=True)
     desc = models.TextField(blank=True, null=True)
     url_video = models.CharField(max_length=2083, blank=True, null=True)
     time_added = models.DateTimeField()
@@ -43,8 +43,8 @@ class PopularVideo(models.Model):
 
 class Music(models.Model):
     audio_img = models.ImageField(upload_to='Audio_pics/%y/%m/')
-    name = models.CharField(max_length=150, null=True, blank=True)
-    slug = models.SlugField(max_length=100, null=True, blank=True)
+    name = models.CharField(max_length=150, null=True, blank=True, unique=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     desc = models.TextField(blank=True, null=True)
     audio_file = models.FileField(upload_to="Audios/%y/%m/%d/")
     time_added = models.DateTimeField()

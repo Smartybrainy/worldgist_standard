@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-3"></div>
 
-    <div class="col-md-6 bg-light rounded pt-2 mt-3 mb-3">
+    <div class="col-md-6 bg-light rounded shadow shadow-lg pt-2 mt-3 mb-3">
       <form action="{% url 'accounts:login' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
