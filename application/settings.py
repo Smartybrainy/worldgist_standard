@@ -23,7 +23,7 @@ ALLOWED_HOSTS = ['*']
 DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-    # 'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -46,10 +46,10 @@ THIRD_PARTY_APPS = [
     'widget_tweaks',  # for chat app
     'rest_framework',  # for chat app
 
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -98,10 +98,10 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 
     # For allauth
-    # 'django.contrib.auth.backends.ModelBackend',
-    # 'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
-SITE_ID = 2
+SITE_ID = 1
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
