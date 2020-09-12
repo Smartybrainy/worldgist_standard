@@ -42,7 +42,7 @@ class PopularVideo(models.Model):
 
 
 class Music(models.Model):
-    audio_img = models.ImageField(upload_to='Audio_pics/%y/%m/')
+    audio_img = models.ImageField(upload_to='Audio_pics')
     name = models.CharField(max_length=150, null=True, blank=True, unique=True)
     slug = models.SlugField(max_length=100, null=True, blank=True, unique=True)
     desc = models.TextField(blank=True, null=True)

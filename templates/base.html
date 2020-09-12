@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 
 <head>
   <!-- FOR THE COOKIEBOT -->
@@ -13,9 +13,11 @@
   <!-- google adsense ends here -->
   <!-- Required meta tags -->
   <meta charset="utf-8" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="myworldgist" content="News and latest upto date stories" />
+  <meta name="Smartybrainy" content="This site was written by Smartybrainy a 
+  computer science student of the national open university of Nigeria" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -32,80 +34,34 @@
     src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=sticky-share-buttons&cms=sop'
     async='async'>
     </script>
+
+  <!-- offline boostrap and jquery -->
+  <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/font-awesome/all.min.css' %}">
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light" id="sticky">
-    <span class="navbar-brand">
-      {% for logo in logos %} {% if logo.img %}
-      <img src="{{ logo.img.url }}" alt="Logo" />
-      {% endif %} {% endfor %}
-    </span>
 
-    <a class="navbar-brand" href="/" style="color: green;"><b>WorldGist
-        <span class="spinner-grow spinner-grow-md"></span>
-      </b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'tracker:history-list' %}">Histories</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'tracker:history-alert' %}">Histories</a>
-        </li>
-        {% endif %}
-        <!-- Reaction section of the homepage -->
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'reaction:reaction-list' %}">Commentary</a>
-        </li>
-        <!-- <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdownMenuLink"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div> -->
-        {% if user.profile and user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'accounts:profile-view' %}">Profiles</a>
-        </li>
-        {% endif %}
-        </li>
-      </ul>
+<body>
+  {% include 'nav_bar.html' %}
+
+  <div>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
     </div>
-  </nav>
-  <div class="base-overflow">
-    {% block content %} {% endblock content %}
+    {% endfor %}
+    {% endif %}
   </div>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
-  <!-- font awesome -->
-  <script src="https://kit.fontawesome.com/891ba62f6f.js" crossorigin="anonymous"></script>
+
+  {% block content %}
+  {% endblock content %}
+
+  {% include 'footer.html' %}
+
+  {% include 'scripts.html' %}
+
 </body>
 
 </html>

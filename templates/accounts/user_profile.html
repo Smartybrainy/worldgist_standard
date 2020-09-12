@@ -1,4 +1,6 @@
-{% extends 'base.html' %}{% load crispy_forms_tags %} {% block content %}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
 
 <div class="container-fluid p-5 background-gradient">
   <div class="row">
@@ -11,8 +13,8 @@
           <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
             id="image-size" />
           {% endif %}
-          <div class="media-body">
-            <h3 class="account-heading">Username: {{ user.username }}</h3>
+          <div class="media-body" style="overflow: auto;">
+            <h4 class="account-heading">User: {{ user.username }}</h4>
             <h4 class="text-secondary">Gender: {{ user.profile.gender }}</h4>
             <h5 style="word-wrap: break-word;" class="text-secondary">
               Email: {{ user.email }}
@@ -26,7 +28,6 @@
           <fieldset class="form-group">
             <legend class="border-bottom mb-4">Profile Info</legend>
             {{ u_form | crispy }}
-            <!--  -->
             {{ p_form | crispy }}
           </fieldset>
           <div class="form-group">
@@ -37,17 +38,11 @@
           </div>
         </form>
       </div>
+
     </div>
   </div>
-  <!-- For success message -->
-  <div class="white">
-    {% for message in messages %}
-    <h4><i>{{ message }}</i></h4>
-    {% endfor %}
-  </div>
-</div>
 
+</div>
 <div class="col-md-2"></div>
-{% block footer %}{% include 'footer.html' %}{% endblock footer %}
-<!--  -->
+
 {% endblock content %}

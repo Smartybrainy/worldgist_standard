@@ -1,0 +1,30 @@
+{% block sidebar %}
+<div class="container-fluid-lg">
+  <div class="row rounded">
+    {% for greeting in greetings %}
+    <div class="col">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <marquee behavior="rtl" direction="">
+            <h5 class="card-title text-primary">
+              {{ greeting.title }}
+            </h5>
+          </marquee>
+          <p class="card-text">
+            {{ greeting.content | urlizetrunc:20 | linebreaks }}
+          </p>
+          <!-- <a href="https://www.facebook.com/Worldgist-105412447839199/?modal=admin_todo_tour"
+            class="btn btn-outline-primary btn-sm">Admin Info
+            <span class="spinner-grow spinner-grow-sm"></span>
+          </a> -->
+          <a href="/reaction/">Connect Us
+            <span class="spinner-border spinner-border-sm"></span>
+          </a>
+          <a href="/reaction/" class="btn btn-outline-secondary btn-sm">Here</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock sidebar %}

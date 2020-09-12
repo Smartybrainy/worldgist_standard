@@ -2,18 +2,78 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from django.views import generic
+from django.contrib.auth.mixins import (LoginRequiredMixin,
+                                        UserPassesTestMixin
+                                        )
+from django.views.generic import ListView, DetailView
+from django.views.generic.edit import (CreateView,
+                                       UpdateView,
+                                       DeleteView
+                                       )
 from django.db.models import Q
+from django.core.paginator import Paginator
 
-from .models import Post, Like, Comment, Logo
+from .models import Post, Like, Comment, SideBar
 from .forms import CommentForm
 from tracker.mixins import ObjectViewedMixin
 
 
-class PostList(generic.ListView):
-    queryset = Post.objects.filter(status=1).order_by('-date_created')
-    template_name = 'main/home.html'
-    paginate_by = 15
+class PostListView(ListView):
+
+    def get(self, *args, **kwargs):
+        queryset = Post.objects.filter(status=1).order_by('-date_created')
+        greetings = SideBar.objects.filter(
+            status="P").order_by('-date_created')
+
+        paginator = Paginator(queryset, 25)
+        page = self.request.GET.get('page')
+        queryset = paginator.get_page(page)
+
+        context = {
+            'object_list': queryset,
+            'greetings': greetings
+        }
+        return render(self.request, "blog/post_list.html", context)
+
+
+class PostDetailView(ObjectViewedMixin, DetailView):
+    model = Post
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    fields = ['title', 'slug', 'content', 'image']
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(PostCreateView, self).form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['title', 'slug', 'content', 'image']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super(PostUpdateView, self).form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 
 def search_queryset(request):
@@ -24,11 +84,6 @@ def search_queryset(request):
         )
     return render(request, 'main/search_result.html',
                   {'search_list': search_list})
-
-
-class PostDetail(ObjectViewedMixin, generic.DetailView):
-    model = Post
-    template_name = 'main/post_detail.html'
 
 
 def post_likes(request, *args, **kwargs):
@@ -64,7 +119,7 @@ def add_comment_to_post(request, page_id, *args, **kwargs):
             new_comment.save()
             return redirect('blog:post-detail', slug=post.slug)
     else:
-        form = CommentForm
+        form = CommentForm(request.POST or None)
     return render(request, 'main/add_post_to_comment.html',
                   {'form': form, 'nav_post': post})
 
@@ -81,10 +136,3 @@ def comment_remove(request, page_id):
     comment = get_object_or_404(Comment, pk=page_id)
     comment.delete()
     return redirect('blog:post-detail', slug=comment.post.slug)
-
-
-# FOR THE LOGO
-def logo_image(request, template_name='base.html'):
-    logos = Logo.objects.all()
-    context = {"logos": logos}
-    return render(request, template_name, context)

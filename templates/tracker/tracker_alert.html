@@ -1,9 +1,11 @@
-{% extends 'base.html' %} {% block content %}
-<div class="alert alert-info dismissible">
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="alert alert-info" alert-dismissible role="alert">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   Please sign up first as a user to be able to view your page histories.
 </div>
-<div class="container">
+<div class="container mb-2">
   <a href="{% url 'accounts:register' %}"><button class="btn btn-success">Sign Up Here</button></a>
 </div>
 {% endblock content %}

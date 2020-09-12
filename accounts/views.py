@@ -48,9 +48,11 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
+            messages.success(
+                request, f'Successfully signed in as {user}')
             return redirect("/")
         else:
-            messages.error(request, 'Oops! Invalid credentail !')
+            messages.warning(request, 'Oops! Invalid credentail !')
             return redirect('accounts:login')
     else:
         return render(request, 'main/login.html')
@@ -64,15 +66,16 @@ def remember_user(request, template_name="main/login.html",
 
 
 def logout(request):
+    user = request.user
     auth.logout(request)
+    messages.success(
+        request, f'{user} Have a nice day.')
     return redirect('/')
 
 
-# Now for v4 of the app the user profile
 class Profile(ListView):
     model = Profile
     template_name = 'accounts/user_profile.html'
-    # context_object_name = 'user_nav'
 
 
 @login_required
@@ -85,7 +88,7 @@ def profile_view(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, 'Your account has been updated!')
             return redirect('accounts:profile-view')
 
     else:

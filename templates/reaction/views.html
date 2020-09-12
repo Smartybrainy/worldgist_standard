@@ -5,7 +5,7 @@
 
     <!-- for the comment output -->
     <div class="col-md-8" id="output-font-family">
-      <ul class="card">
+      <ul class="card p-5" style="list-style-type: square;">
         {% for obj in object_list %}
         <li>
           <h5><span class="text-black">{{ obj.email }}</span>
@@ -17,7 +17,7 @@
           <h6><span class="text-black">Anonymous: </span>{{ obj.name }}</h6>
         </li>
         <li>
-          <p></p>{{ obj.content | linebreaks }}</p>
+          <p></p>{{ obj.content | linebreaks | urlizetrunc:30 }}</p>
         </li>
         <hr />
         {% endfor %}
@@ -26,7 +26,7 @@
       <form action="add_reaction/" class="form-block white mx-auto" method="POST">
         {% csrf_token %}
         <fieldset class="border border-light p-3">
-          <legend>Enter your comment...</legend>
+          <legend class="text-dark">Enter your comment...</legend>
           <div>
             <textarea placeholder="Enter your comment..." name="content" cols="40" rows="5" class="form-control"
               autofocus>
@@ -57,6 +57,5 @@
     <div class="col-md-2"></div>
   </div>
 </div>
-{% block footer %}{% include 'footer.html' %}{% endblock footer %}
-<!-- still work on the textarea extra spaces -->
+
 {% endblock content %}

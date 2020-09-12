@@ -1,20 +1,32 @@
 from django.urls import path
-from . import views
+from .views import (PostListView,
+                    PostDetailView,
+                    post_likes,
+                    add_comment_to_post,
+                    comment_approve,
+                    comment_remove,
+                    search_queryset,
+                    PostCreateView,
+                    PostUpdateView,
+                    PostDeleteView
+                    )
 
 app_name = 'blog'
 
 urlpatterns = [
-    path('', views.PostList.as_view(), name="post-list"),
-    path('<slug>/post_detail/',
-         views.PostDetail.as_view(), name="post-detail"),
-    path('<pk>/post_likes/', views.post_likes, name="post-likes"),
-    path('<int:page_id>/comment/', views.add_comment_to_post,
-         name="add-comment-to-post"),
-    path('<int:page_id>/comment_approve', views.comment_approve,
-         name="comment-approve"),
-    path('<int:page_id>/comment_remove', views.comment_remove,
-         name="comment-remove"),
-    path('search/', views.search_queryset, name="search-query"),
+    path('', PostListView.as_view(), name="post-list"),
+    path('post-detail/<slug>/', PostDetailView.as_view(), name="post-detail"),
+    path('post/new/', PostCreateView.as_view(), name="post-create"),
+    path('post-detail/<slug>/update/',
+         PostUpdateView.as_view(), name="post-update"),
+    path('post-detail/<slug>/delete/',
+         PostDeleteView.as_view(), name="post-delete"),
 
-    path('logo/', views.logo_image, name="logo")
+    path('<pk>/post/likes/', post_likes, name="post-likes"),
+    path('<int:page_id>/comment/', add_comment_to_post,
+         name="add-comment-to-post"),
+    path('<int:page_id>/comment_approve',
+         comment_approve, name="comment-approve"),
+    path('<int:page_id>/comment_remove', comment_remove, name="comment-remove"),
+    path('search/', search_queryset, name="search-query"),
 ]

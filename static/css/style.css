@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 :root {
   --text-color: green;
 }
@@ -11,9 +16,6 @@
   color: green;
 }
 
-.base-overflow {
-  overflow-x: hidden;
-}
 /* for the background gradient */
 .search-gradient {
   background-image: radial-gradient(circle, #5c0067 0%, #00d4ff 100%);
@@ -49,10 +51,6 @@
 
 /* for the footer */
 #footer {
-  position: sticky;
-  position: -webkit-sticky !important;
-  position: -moz-sticky !important;
-  bottom: 0 !important;
   background-color: #222;
   padding: 20px;
   clear: both;

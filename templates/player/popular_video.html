@@ -38,34 +38,28 @@
 
     <!-- Pagination section -->
     <div class="container p-2">
-        {% if users.has_other_pages %}
+        {% if video_tube.has_other_pages %}
         <ul class="pagination justify-content-left">
-            {% if users.has_previous %}
-            <li><a href="?page={{ users.previous_page_number }}"><button
-                        class="btn btn-outline-primary">&laquo;</button></a></li>
-            {% else %}
-            <li class="disabled"><span><button class="btn btn-outline-primary">&laquo;</button></span></li>
+            {% if video_tube.has_previous %}
+            <li><a href="?page={{ video_tube.previous_page_number }}"><button class="btn btn-outline-primary">&laquo;
+                        Prev</button></a></li>
             {% endif %}
 
-            {% for i in users.paginator.page_range %}
-            {% if users.number == i %}
-            <li class="active"><span><button class="btn btn-outline-primary">{{ i }}</button><span
-                        class="sr-only">(current)</span></span></li>
-            {% else %}
-            <li><a href="?page={{ i }}"><button class="btn btn-outline-primary">{{ i }}</button></a></li>
+            {% for i in video_tube.paginator.page_range %}
+            {% if video_tube.number == i %}
+            <li class="page-item"><a class="page-link" href="">{{ i }}</a></li>
+            {% elif i > video_tube.number|add:"-1" and i < video_tube.number|add:"1" %}
+            <li class="page-item"><a class="page-link" href="">{{ i }}</a></li>
             {% endif %}
-
             {% endfor %}
-            {% if users.has_next %}
-            <li><a href="?page={{ users.next_page_number }}"><button
-                        class="btn btn-outline-primary">&raquo;</button></a></li>
-            {% else %}
-            <li class="disabled"><span>&raquo;</span></li>
+
+            {% if video_tube.has_next %}
+            <li><a href="?page={{ video_tube.next_page_number }}"><button class="btn btn-outline-primary">Next
+                        &raquo;</button></a></li>
             {% endif %}
         </ul>
         {% endif %}
     </div>
 
-    {% block footer %}{% include "footer.html" %}{% endblock footer %}
 </main>
 {% endblock content %}

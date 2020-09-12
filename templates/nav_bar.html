@@ -1,0 +1,45 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<body>
+    <nav class="my_navbar">
+        <header class="my_navbar__header">
+            <a href="/"><img src="{% static '/worldgist.png' %}" alt="Logo" class="navbar__logo"></a>
+
+            <!-- for width screen size -->
+            <ul class="navbar__links_media">
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'tracker:history-list' %}" class="navbar__single_link_media">History </a></li>
+                {% else %}
+                <li><a href="{% url 'tracker:history-alert' %}" class="navbar__single_link_media">History </a></li>
+                {% endif %}
+                <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link_media">Comment </a></li>
+                {% if user.profile and user.is_authenticated %}
+                <li><a href="{% url 'accounts:profile-view' %}" class="navbar__single_link_media">profile </a></li>
+                <li><a href="{% url 'blog:post-create' %}" class="navbar__single_link_media">Add Post </a></li>
+                {% endif %}
+            </ul>
+
+            <button class="header__btn">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </button>
+        </header>
+        <ul class="navbar__links">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'tracker:history-list' %}" class="navbar__single_link">History </a></li>
+            {% else %}
+            <li><a href="{% url 'tracker:history-alert' %}" class="navbar__single_link">History </a></li>
+            {% endif %}
+            <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link">Comment </a></li>
+            {% if user.profile and user.is_authenticated %}
+            <li><a href="{% url 'accounts:profile-view' %}" class="navbar__single_link">profile </a></li>
+            <li><a href="{% url 'blog:post-create' %}" class="navbar__single_link">Add Post </a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+</body>
+<script src="{% static 'js/nav_bar.js' %}"></script>

@@ -1,12 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
-
-# The migration from :4 is perfect
 
 STATUS = (
     (0, 'Draft'),
     (1, 'Publish')
+)
+
+SIDEBAR_CHOICE = (
+    ('D', 'Draft'),
+    ('P', "Publish")
 )
 
 
@@ -21,9 +25,9 @@ class Post(models.Model):
     width_field = models.IntegerField(default=0)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='blog_post')
-    updated = models.DateTimeField(timezone.now())
-    date_created = models.DateTimeField()
-    status = models.IntegerField(choices=STATUS, default=0)
+    updated = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(default=timezone.now)
+    status = models.IntegerField(choices=STATUS, default=1)
     liked = models.ManyToManyField(
         User, blank=True, default=None, related_name='likes')
 
@@ -43,6 +47,9 @@ class Post(models.Model):
     # the below function counts only the approved comments
     def my_approved_comments(self):
         return self.my_comments.filter(approved_comment=True)
+
+    def get_absolute_url(self):
+        return reverse("blog:post-detail", kwargs={'slug': self.slug})
 
 
 LIKE_CHOICES = (
@@ -89,12 +96,16 @@ class Comment(models.Model):
         verbose_name_plural = "Documentation of Comments"
 
 
-class Logo(models.Model):
-    img = models.ImageField(upload_to="Logo_pics")
-    name = models.CharField(max_length=20, null=True, blank=True)
+class SideBar(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date_created = models.DateTimeField(
+        auto_now_add=True)
+    status = models.CharField(choices=SIDEBAR_CHOICE,
+                              max_length=10, default="D")
 
     def __str__(self):
-        return f'{self.img}'
+        return self.title
 
     class Meta:
-        verbose_name_plural = "Logo Image"
+        verbose_name_plural = "SideBar Greetings"

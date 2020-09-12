@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
 
 from .models import Video, Music, PopularVideo
 
@@ -20,20 +20,19 @@ class VideoDetail(DetailView):
 def popular_video(request):
     video_list_tube = PopularVideo.objects.filter(
         status=1).order_by('-time_added')
-
-    user_list = User.objects.all()
-    page = request.GET.get('page', 1)
-    paginator = Paginator(user_list, 10)
     try:
-        users = paginator.page(page)
+        paginator = Paginator(video_list_tube, 10)
+        page = request.GET.get('page')
+        video_list_tube = paginator.get_page(page)
     except PageNotAnInteger:
-        users = paginator.page(1)
+        messages.info(request, "page not in order")
+        return redirect('player:popular-video')
     except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+        messages.info(request, "You are requesting an empty page!")
+        return redirect('player:popular-video')
 
     return render(request, 'player/popular_video.html',
-                  {'video_tube': video_list_tube,
-                   'users': users})
+                  {'video_tube': video_list_tube})
 
 
 class MusicList(ListView):
