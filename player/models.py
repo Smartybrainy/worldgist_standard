@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils import timezone
+from django.urls import reverse
 
 
 STATUS = (
@@ -55,3 +55,8 @@ class Music(models.Model):
 
     class Meta:
         verbose_name_plural = "List of Audios"
+
+    def get_absolute_url(self):
+        return reverse('player:audio-detail', kwargs={
+            'slug': self.slug
+        })

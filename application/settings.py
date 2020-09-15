@@ -192,7 +192,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_WORLDGIST')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_WORLDGIST')
+EMAIL_HOST_PASSWORD = 'dmsexlijvokftvcz'
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_WORLDGIST')
 
 # For the social login
 LOGIN_URL = 'accounts/login/'

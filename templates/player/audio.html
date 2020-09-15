@@ -17,7 +17,7 @@
 
         <div class="col-md-6">
           {% for music in object_list %}
-          <a href="{% url 'player:audio-detail' pk=music.id %}" title="Click to navigate to detail/download page.">
+          <a href="{{ music.get_absolute_url }}" title="Click to navigate to detail/download page.">
             <div class="container p-5 bg-secondary">
               <img src="{{ music.audio_img.url }}" alt="Art-work" class="img-fluid" />
               <hr />

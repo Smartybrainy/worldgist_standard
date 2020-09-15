@@ -18,11 +18,11 @@ urlpatterns = [
     path('profile_view/', views.profile_view, name='profile-view'),
 
     # For reset password
-    path('reset_password/', auth_views.PasswordResetView.as_view(
+    path('reset-password/', auth_views.PasswordResetView.as_view(
          template_name="registration/password_reset.html"
          ),
          name="password_reset"),
-    path('reset_password/done/',
+    path('reset-password-done/',
          auth_views.PasswordResetDoneView.as_view(
              template_name="registration/password_reset_done.html"
          ),
@@ -32,7 +32,7 @@ urlpatterns = [
              template_name="registration/password_reset_confirm.html"
          ),
          name="password_reset_comfirm"),
-    path('reset/done/',
+    path('password-reset-complete',
          auth_views.PasswordResetCompleteView.as_view(
              template_name="registration/password_reset_complete.html"
          ),
