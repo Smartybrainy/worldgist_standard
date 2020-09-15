@@ -90,8 +90,8 @@ input:focus {
 
 /* The user profile */
 #image-size {
-  max-width: 100px !important;
-  max-height: 100px !important;
+  max-width: 70px !important;
+  max-height: 70px !important;
 }
 
 /* ANIMATION FOR MARQUEE */

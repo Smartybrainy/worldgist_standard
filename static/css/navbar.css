@@ -3,9 +3,18 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+#my-sticky{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+}
+
 .navbar__logo {
-    max-width: 55px;
-    min-height: 65px;
+    max-width: 40px;
+    min-height: 60px;
     border-radius: 18px;
     box-shadow: 2px 0px 2px;
 }

@@ -79,27 +79,31 @@
           </div>
           {% endif %}
           {% empty %}
-          <h5><i>NO COMMENT YET :(</i></h5>
-          <h6>Be the first to comment here</h6>
+          <div class="ml-3">
+            <h5><i>NO COMMENT YET :(</i></h5>
+            <h6>Be the first to comment here</h6>
+          </div>
           {% endfor %}
           {% if user.is_authenticated %}
-          <div>
+          <div class="ml-3">
             <a href="{% url 'blog:add-comment-to-post' post.pk %}">
               <button type="submit" class="btn btn-outline-info btn-sm">Add Comment</button>
             </a>
             <strong>({{ post.my_comments.count }})</strong>
-          </div> <br />
+          </div>
+          <br />
           {% else %}
-          <div>
+          <div class="ml-3 mb-3">
             <a href="{% url 'accounts:register' %}">
-              <button type="submit" class="btn btn-info">Add Comment</button>
+              <button type="submit" class="btn btn-outline-info btn-sm">Add Comment</button>
             </a>
             <strong>({{ post.my_comments.count }})</strong>
           </div>
           {% endif %}
         </div>
+
         <!-- This section belongs to the like button -->
-        <div class="container pb-2">
+        <div class="container pb-2 ml-3">
           {% if user.is_authenticated %}
           <form action="{% url 'blog:post-likes' pk=post.pk %}" method="POST">
             {% csrf_token %}
@@ -107,21 +111,20 @@
               <input type="hidden" name="like_id" value="{{ post.pk }}" />
             </div>
             {% if user not in post.liked.all %}
-            <button type="submit" class="btn btn-success">Like</button>
+            <button type="submit" class="btn btn-primary"><i class="far fa-thumbs-up"></i></button>
             {% else %}
-            <button type="submit" class="btn btn-danger">Unlike</button>
+            <button type="submit" class="btn btn-danger"><i class="far fa-thumbs-down"></i></button>
             {% endif %}
             <strong class="white"><span class="like-count-color">({{ post.liked.count }})
               </span></strong>
           </form>
           {% else %}
           <a href="{% url 'accounts:register' %}">
-            <button type="button" class="btn btn-success">Like</button></a>
+            <button type="button" class="btn btn-primary"><i class="far fa-thumbs-up"></i></button></a>
           <strong class="white"><span class="like-count-color">({{ post.liked.count }})</span>
           </strong>
           {% endif %}
 
-          <!-- the end entire end for loop -->
         </div>
 
         <!-- like button ends here -->

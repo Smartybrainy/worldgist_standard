@@ -15,7 +15,7 @@
         <div class="form-group">
           <input type="password" class="form-control" placeholder="Password:" maxlength="12" name="password" required />
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary btn-sm">Login</button>
         <!-- Checkbox remember key -->
         <input type="checkbox" name="remember_me" id="me" value="false" />
         <label for="me" class="white-color">Remember me</label>
@@ -23,11 +23,11 @@
       <br />
       <a href="{% url 'accounts:password_reset' %}" class="rounded-sm">Forgot Password</a>
       <br />
-      <h3>
-        <a href="{% url 'accounts:register' %}">Don't have an account: Sign Up</a>
-      </h3>
+      <h5>
+        <a href="{% url 'accounts:register' %}">New User: Sign Up</a>
+      </h5>
       <br />
-      <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
+      <a href="/"><button type="submit" class="btn btn-primary btn-sm">Home page</button></a>
       <br /><br />
       <!-- messages goes here -->
     </div>

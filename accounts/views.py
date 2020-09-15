@@ -62,7 +62,7 @@ def remember_user(request, template_name="main/login.html",
                   extra_context=None):
     response = auth_views.login(request, template_name)
     if request.POST.has_key('remember_me'):
-        request.sessions.set_expiry(1209600)  # 2weeks
+        request.sessions.set_expiry(2419200)  # 4weeks in seconds
 
 
 def logout(request):
@@ -100,3 +100,7 @@ def profile_view(request):
         'p_form': p_form
     }
     return render(request, 'accounts/user_profile.html', context)
+
+
+def why_sign_up(request):
+    return render(request, 'accounts/why_sign_up.html')

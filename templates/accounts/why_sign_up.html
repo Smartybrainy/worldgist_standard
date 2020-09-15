@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p>The reason for sign up is to make sure that out team have you in the database and also to enable
+        you participate in liking or making your comment to a particular post.
+    </p>
+
+    <p>Myworldgist also need your bio to help keep you in the list of active user(s) for any
+        possible benefit(s) that may come forth.
+    </p>
+</div>
+<div class="container mb-2">
+    <a href="{% url 'accounts:register' %}"><button class="btn btn-success">Sign Up Here</button></a>
+</div>
+
+{% endblock content %}

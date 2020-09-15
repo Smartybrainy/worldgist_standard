@@ -30,7 +30,7 @@
 </script>
 
 <!-- the search box -->
-<div class="container-fluid">
+<div class="container-fluid pt-2">
   <form action="{% url 'blog:search-query' %}" method="GET" class="form-white ml-2">
     <div class="input-group">
       <div class="input-group-prepend">
@@ -111,22 +111,22 @@
       <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
       <br />
       <hr />
-      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary">Logout</a>
+      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary btn-sm">Logout</a>
       {% else %}
-      <a href="{% url 'accounts:login' %}" class="btn btn-success">Login</a>
-      <a href="{% url 'accounts:register' %}" class="btn btn-success">Sign Up</a><br />
+      <a href="{% url 'accounts:login' %}" class="btn btn-success btn-sm">Login</a>
+      <a href="{% url 'accounts:register' %}" class="btn btn-success btn-sm">Sign Up</a><br />
       <hr />
 
-      <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary mt-2" style="width: 180px;">
+      <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2" style="width: 180px;">
         <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
       </a><br />
-      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger mt-2" style="width: 180px;">
+      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2" style="width: 180px;">
         <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
       </a>
       {% endif %}
       <br /><br />
       <!-- for convertKit email list -->
-      <div>
+      <div style="z-index:-2;">
         <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
       </div>
       <!-- convertKit ends here -->

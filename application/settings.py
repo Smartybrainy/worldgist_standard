@@ -101,7 +101,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
-SITE_ID = 1
+SITE_ID = 2
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
@@ -184,7 +184,7 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 django_heroku.settings(locals())
 
 # FOR THE REMEMBER ME CHECKBOX
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # Fmail configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -216,4 +216,3 @@ ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
 # 1 day
 ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'

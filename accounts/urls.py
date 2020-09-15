@@ -7,6 +7,7 @@ app_name = "accounts"
 
 urlpatterns = [
     path('register/', views.register, name="register"),
+    path('why_sign_up/', views.why_sign_up, name="why-sign-up"),
     path('login/', views.login, name="login"),
     path('logout/', views.logout, name="logout"),
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path('profile/', views.Profile.as_view(), name="profile"),
     path('profile_view/', views.profile_view, name='profile-view'),
 
+    # For reset password
     path('reset_password/', auth_views.PasswordResetView.as_view(
          template_name="registration/password_reset.html"
          ),

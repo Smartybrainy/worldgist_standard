@@ -8,7 +8,8 @@ from .views import (PostListView,
                     search_queryset,
                     PostCreateView,
                     PostUpdateView,
-                    PostDeleteView
+                    PostDeleteView,
+                    privacy_policy
                     )
 
 app_name = 'blog'
@@ -29,4 +30,5 @@ urlpatterns = [
          comment_approve, name="comment-approve"),
     path('<int:page_id>/comment_remove', comment_remove, name="comment-remove"),
     path('search/', search_queryset, name="search-query"),
+    path('policy/', privacy_policy, name="policy"),
 ]

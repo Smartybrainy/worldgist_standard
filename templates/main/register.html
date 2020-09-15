@@ -7,12 +7,11 @@
     <div class="col-md-3"></div>
 
     <div class="col-md-6 bg-light shadow shadow-lg rounded pt-2 mb-3 mt-3">
-      <div class="container ml-4">
-        <div class="p-2 rounded-lg">
-          You Are Welcome To Worldgist Please Complete Your Credentials.
-        </div>
+      <div class="container text-center">
+        You Are Welcome To My-Worldgist Please Complete Your Credentials.
+        <p><a href="{% url 'accounts:why-sign-up' %}">Why sign up?</a></p>
       </div>
-      <br />
+
       <form action="{% url 'accounts:register' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
@@ -34,19 +33,52 @@
         <div class="form-group">
           <input type="password" class="form-control" placeholder="Confirm Password:" name="confirm_password"
             required />
+
+          <div>
+            <br />
+            <input type="checkbox" name="accept_policy" id="accept_policy">
+            <label for="accept_policy">By signing up, I agree to have read and accepted the
+              <a href="{% url 'blog:policy' %}">terms
+                of use, cookie and privacy policy</a> of <a href="/">myworldgist.com</a>
+            </label>
+          </div>
         </div>
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
-        <button type="reset" class="btn btn-outline-primary">Reset</button>
+
+        <input type="submit" class="btn btn-warning btn-sm" id="submit" name="submit" value="Sign Up" disabled />
+
+        <button type="reset" class="btn btn-outline-primary btn-sm">Reset</button>
       </form>
       <br />
-      <h3>
-        <a href="{% url 'accounts:login' %}">Already have an account: Login</a>
-      </h3>
-      <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
+
+      <h5>
+        <a href="{% url 'accounts:login' %}">Already a User: Login</a>
+      </h5>
+      <a href="/" class="btn btn-primary btn-sm">Home page</a>
+      <br /><br />
 
     </div>
-
   </div>
 </div>
+
+{% block extra_scripts %}
+<script type="text/javascript">
+  $(document).ready(function () {
+    var acceptPolicyBtn = document.querySelector("input[name=accept_policy]");
+
+    acceptPolicyBtn.addEventListener('change', function () {
+      if (this.checked) {
+        $(':input[type=submit]').prop({ 'disabled': false });
+        $(":input[type=submit]").removeClass("btn btn-warning btn-sm");
+        $(':input[type=submit]').addClass("btn btn-outline-success btn-sm")
+      } else {
+        $(':input[type=submit]').prop({ 'disabled': true });
+        $(":input[type=submit]").addClass("btn btn-warning btn-sm");
+        $(':input[type=submit]').removeClass("btn btn-outline-success btn-sm")
+      }
+    })
+  })
+
+</script>
+{% endblock extra_scripts %}
 
 {% endblock content %}

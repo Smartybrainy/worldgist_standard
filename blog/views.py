@@ -5,11 +5,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import (LoginRequiredMixin,
                                         UserPassesTestMixin
                                         )
-from django.views.generic import ListView, DetailView
-from django.views.generic.edit import (CreateView,
-                                       UpdateView,
-                                       DeleteView
-                                       )
+from django.views.generic import (ListView,
+                                  DetailView,
+                                  CreateView,
+                                  UpdateView,
+                                  DeleteView,
+                                  )
+
 from django.db.models import Q
 from django.core.paginator import Paginator
 
@@ -43,6 +45,8 @@ class PostDetailView(ObjectViewedMixin, DetailView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'slug', 'content', 'image']
+    login_url = 'accounts/login/'
+    redirect_field_name = '/post/new/'
     success_url = '/'
 
     def form_valid(self, form):
@@ -136,3 +140,7 @@ def comment_remove(request, page_id):
     comment = get_object_or_404(Comment, pk=page_id)
     comment.delete()
     return redirect('blog:post-detail', slug=comment.post.slug)
+
+
+def privacy_policy(request):
+    return render(request, 'main/privacy_policy.html')
