@@ -13,10 +13,11 @@
 }
 
 .navbar__logo {
-    max-width: 40px;
+    max-width: 50px;
     min-height: 60px;
     border-radius: 18px;
     box-shadow: 2px 0px 2px;
+    margin-left: 10px;
 }
 .my_navbar__header {
     background: #545454;
