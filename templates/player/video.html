@@ -1,66 +1,79 @@
-{% extends 'base.html' %} {% block content %}
-<main>
-  <header style="text-align: center;" class="p-5 search-gradient white">
-    WELCOME TO WORLDGIST VIDEOS
-  </header>
-  <br />
-  <div class="container h-auto">
-    <a href="{% url 'blog:post-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
-        Back</button></a>
-    <a href="{% url 'player:popular-video' %}"><button class="btn btn-outline-info float-right">Popular Videos &raquo;
-        <span class="spinner-border spinner-border-sm"></span>
-      </button></a>
-    <marquee behavior="" direction="rtl">View more videos on the popular video page.</marquee>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
-  </div>
-  <hr />
-  <div class="container">
-    {% for video in object_list %}
-    <!-- <div class="row"> -->
-    <!-- <div class="col"> -->
-    <span style="max-width: 33.33%;float:left;">
-      <a href="{% url 'player:video-detail' slug=video.slug %}">
-        {% if video.video_file %}
-        <video autoplay muted loop="1" style="width: 100%;
-                height:150px;">
-          <source src="{{ video.video_file.url }}" type="video/mp4" />
-          Your browsers does not support video tag.
-        </video>
-        {% endif %}
-        <p style="text-align: center;">{{ video.name }}</p>
-      </a>
-    </span>
-    <!-- </div> -->
-    <!-- </div> -->
-    {% empty %}
-    <div class="container alert alert-info dismissible fade show">No videos uploaded.
-      <span type="button" class="close" data-dismiss="alert">&times;</span>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/video_player.css' %}">
+</head>
+
+<body>
+  <main>
+    <header style="text-align: center;" class="p-5 search-gradient white">
+      WELCOME TO WORLDGIST VIDEOS
+    </header>
+    <br />
+    <div class="container h-auto">
+      <a href="{% url 'blog:post-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
+          Back</button></a>
+      <a href="{% url 'player:popular-video' %}"><button class="btn btn-outline-info float-right">Popular Videos &raquo;
+          <span class="spinner-border spinner-border-sm"></span>
+        </button></a>
+      <marquee behavior="" direction="rtl">View more videos on the popular video page.</marquee>
+
     </div>
-    {% endfor %}
-  </div>
+    <hr />
+    <div class="container-fluid">
+      {% for video in object_list %}
+      <span id="video_span" class="shadow shadow-md">
+        <a href="{% url 'player:video-detail' slug=video.slug %}">
+          {% if video.video_file %}
+          <video autoplay muted loop="1" style="width: 100%;
+                height:150px;margin-top:10px;">
+            <source src="{{ video.video_file.url }}" type="video/mp4" />
+            Your browsers does not support video tag.
+          </video>
+          {% endif %}
+          <p style="text-align: center;">{{ video.name }}</p>
+        </a>
+      </span>
+      {% empty %}
+      <div class="container alert alert-info dismissible fade show">No videos uploaded.
+        <span type="button" class="close" data-dismiss="alert">&times;</span>
+      </div>
+      {% endfor %}
+    </div>
 
-  <!-- Pagination section -->
-  <div class="container">
-    {% if is_paginated %}
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-left">
-        {% if page_obj.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
-            aria-disabled="true">&laquo;
-            Prev</a>
-        </li>
-        {% endif %}
-        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
-        {% if page_obj.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
-        </li>
-        {% endif %}
-      </ul>
-    </nav>
-    {% endif %}
-  </div>
+    <!-- Pagination section -->
+    <div class="container">
+      {% if is_paginated %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-left">
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+              aria-disabled="true">&laquo;
+              Prev</a>
+          </li>
+          {% endif %}
+          <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
 
-</main>
+  </main>
+
+</body>
+
+</html>
 {% endblock content %}

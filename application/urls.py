@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls', namespace="blog")),
@@ -17,7 +18,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     # For the social login
     path('oauth/', include('social_django.urls', namespace="social")),
-    path('accounts/', include('allauth.urls'))
+    path('accounts/', include('allauth.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,

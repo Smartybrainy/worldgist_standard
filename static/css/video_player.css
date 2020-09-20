@@ -1,0 +1,29 @@
+#video_span{
+    /* display: flex; */
+    width:25%;
+    float:left;
+    background-color: #ddd;
+}
+
+@media all and (max-width: 520px), (orientation:portrait) {
+    #video_span{
+      width: 100%;
+      height: auto;
+    }
+}
+
+@media all and (min-width: 520px) and (max-width: 630px) {
+    #video_span{
+        width: 50%;
+        height: auto;
+    }
+}
+
+@media all and (min-width: 630px) and (max-width: 930px) {
+    #video_span{
+        width: 33.33%;
+        height: auto;
+    }
+}
+
+

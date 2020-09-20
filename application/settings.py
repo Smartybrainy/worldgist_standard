@@ -46,11 +46,15 @@ THIRD_PARTY_APPS = [
     'widget_tweaks',  # for chat app
     'rest_framework',  # for chat app
 
+    'ckeditor',
+    'ckeditor_uploader',
+
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
 ]
+CKEDITOR_UPLOAD_PATH = "document/"
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -186,7 +190,7 @@ django_heroku.settings(locals())
 # FOR THE REMEMBER ME CHECKBOX
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
@@ -199,24 +203,28 @@ LOGIN_URL = 'accounts/login/'
 LOGOUT_URL = 'accounts/logout/'
 LOGIN_REDIRECT_URL = '/'
 
-SOCIAL_AUTH_FACEBOOK_KEY = '2824257444468967'  # APP ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '98d39eab009794789c5a8ed79ae96238'  # APP SECRET
+SOCIAL_AUTH_FACEBOOK_KEY = '2824257444468967'
+SOCIAL_AUTH_FACEBOOK_SECRET = '98d39eab009794789c5a8ed79ae96238'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']  # add this
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
+    'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
 
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'd6_9LrFkooGW5HAtaudDlaa-'
 
 
-# django-allauth registraion settings
-# ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 1
-# ACCOUNT_EMAIL_REQUIRED = True
-# ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-# ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,  # You can change this based on your requirements.
+        'width': 'auto',
 
-# 1 day
-# ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
-# ACCOUNT_LOGOUT_REDIRECT_URL = '/'
-
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_SSL_REDIRECT = False
+    },
+}

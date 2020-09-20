@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load url_target_blank %}
+
 {% block content %}
 
 
@@ -35,7 +37,9 @@
           </h5>
           <hr />
           <div class="text-content">
-            <p class="card-text">{{ post.content | linebreaks | urlizetrunc:30 }}</p>
+            <p class="card-text">
+              {{ post.content|safe |linebreaks |urlizetrunc:30|url_target_blank }}
+            </p>
           </div>
 
           <!-- the image section -->
@@ -49,6 +53,14 @@
           <div class="sharethis-inline-reaction-buttons">
           </div>
         </div>
+
+        {% if object.url_video %}
+        <object style="height: 40vh; width: 90%; margin-left:auto;margin-right:auto;margin-bottom:30px;">
+          <param name="movie" value="{{ object.url_video }}">
+          <param name="allowFullScreen" value="true">
+          <param name="allowScriptAccess" value="always">
+        </object>
+        {% endif %}
 
         <!-- the below code belongs to comment -->
         <div class="container">

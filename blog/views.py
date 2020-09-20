@@ -14,6 +14,7 @@ from django.views.generic import (ListView,
 
 from django.db.models import Q
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 from .models import Post, Like, Comment, SideBar
 from .forms import CommentForm
@@ -44,22 +45,25 @@ class PostDetailView(ObjectViewedMixin, DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['title', 'slug', 'content', 'image']
+
+    fields = ['title', 'slug', 'content', 'image', 'url_video']
     login_url = 'accounts/login/'
     redirect_field_name = '/post/new/'
     success_url = '/'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        messages.info(self.request, "Post added successfully")
         return super(PostCreateView, self).form_valid(form)
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ['title', 'slug', 'content', 'image']
+    fields = ['title', 'slug', 'content', 'image', 'url_video']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        messages.info(self.request, "Post updated successfully")
         return super(PostUpdateView, self).form_valid(form)
 
     def test_func(self):

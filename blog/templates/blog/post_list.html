@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load url_target_blank  %}
 <!-- {% load socialaccount %}
 {% providers_media_js %} -->
 <!-- <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="btn btn-primary mt-2" style="width: 180px;">
@@ -58,7 +59,7 @@
   <div class="row shadow p-3 jumbotron rounded">
     <div class="col-sm-2"></div>
 
-    <div class="col-sm-7">
+    <div class="col-md-7">
       {% for post in object_list %}
       <br>
       <div class="card">
@@ -73,7 +74,7 @@
           </p>
           <div class="text-content">
             <p class="card-text">
-              {{ post.content | slice:":150" | linebreaks | urlize }}&raquo;
+              {{ post.content|safe | slice:":150" |linebreaks |urlize|url_target_blank }}&raquo;
             </p>
           </div>
           <!-- This is the image field -->
@@ -86,13 +87,14 @@
           <!-- the below counts the comments in a post -->
           <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
             class="border border-primary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
+
           <div class="sharethis-inline-share-buttons"></div>
         </div>
       </div>
       {% endfor %}
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-md-3">
       <br />
       {% include 'sidebar_list.html' %}
       <br />
@@ -131,6 +133,7 @@
       </div>
       <!-- convertKit ends here -->
     </div>
+
   </div>
 
   <!-- <div>
