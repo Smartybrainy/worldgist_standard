@@ -215,6 +215,7 @@ EMAIL_HOST_USER = 'myworldgist@gmail.com'
 # EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_WORLDGIST')
 EMAIL_HOST_PASSWORD = 'dmsexlijvokftvcz'
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_WORLDGIST')
+DEFAULT_EMAIL_FROM = 'myworldgist.com'
 
 # For the social login
 LOGIN_URL = 'accounts/login/'
