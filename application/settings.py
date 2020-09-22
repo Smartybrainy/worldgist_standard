@@ -55,6 +55,21 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount.providers.facebook',
 ]
 CKEDITOR_UPLOAD_PATH = "document/"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',  # You can change this based on your requirements.
+        'width': 'auto',
+        "removePlugins": "stylesheetparser",
+
+    },
+}
+CKEDITOR_RESTRICT_BY_USER = True
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+CKEDITOR_BROWSE_SHOW_DIRS = True
+CKEDITOR_RESTRICT_BY_DATE = True
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+AWS_QUERYSTRING_AUTH = False
+
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -68,6 +83,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # below are third party for social login effect
     'social_django.middleware.SocialAuthExceptionMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'application.urls'
@@ -173,7 +190,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -194,7 +211,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_WORLDGIST')
+EMAIL_HOST_USER = 'myworldgist@gmail.com'
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER_WORLDGIST')
 EMAIL_HOST_PASSWORD = 'dmsexlijvokftvcz'
 # EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD_WORLDGIST')
 
@@ -205,7 +223,7 @@ LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2824257444468967'
 SOCIAL_AUTH_FACEBOOK_SECRET = '98d39eab009794789c5a8ed79ae96238'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']  # add this
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']  # add this , 'user_link'
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
     'fields': 'id, name, email, picture.type(large), link'
 }
@@ -219,12 +237,3 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'd6_9LrFkooGW5HAtaudDlaa-'
-
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': None,  # You can change this based on your requirements.
-        'width': 'auto',
-
-    },
-}
