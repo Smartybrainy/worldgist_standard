@@ -36,11 +36,8 @@
             </div>
           </h5>
           <hr />
-          <div class="text-content">
-            <p class="card-text">
-              {{ post.content|safe |linebreaks |urlizetrunc:30|url_target_blank }}
-            </p>
-          </div>
+
+          {{ post.content|safe |linebreaks |url_target_blank }}
 
           <!-- the image section -->
           {% if post.image %}
@@ -55,7 +52,7 @@
         </div>
 
         {% if object.url_video %}
-        <object style="height: 40vh; width: 90%; margin-left:auto;margin-right:auto;margin-bottom:30px;">
+        <object style="height: 50vh; width: 95%; margin-left:auto;margin-right:auto;margin-bottom:30px;">
           <param name="movie" value="{{ object.url_video }}">
           <param name="allowFullScreen" value="true">
           <param name="allowScriptAccess" value="always">

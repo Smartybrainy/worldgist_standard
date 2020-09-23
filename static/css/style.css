@@ -92,6 +92,7 @@ input:focus {
 #image-size {
   max-width: 70px !important;
   max-height: 70px !important;
+  border-radius: 70px !important;
 }
 
 /* ANIMATION FOR MARQUEE */

@@ -68,7 +68,7 @@ CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_RESTRICT_BY_DATE = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-AWS_QUERYSTRING_AUTH = False
+AWS_QUERYSTRING_AUTH = True
 
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_PARTY_APPS
@@ -195,7 +195,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 # AWS_S3_REGION_NAME = "ap-south-1"
@@ -224,16 +223,6 @@ LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '2824257444468967'
 SOCIAL_AUTH_FACEBOOK_SECRET = '98d39eab009794789c5a8ed79ae96238'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']  # add this , 'user_link'
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
-    'fields': 'id, name, email, picture.type(large), link'
-}
-SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [                 # add this
-    ('name', 'name'),
-    ('email', 'email'),
-    ('picture', 'picture'),
-    ('link', 'profile_url'),
-]
 
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '449947140519-ju7jjjgdsu0u08uiokd41msdcofv1ka2.apps.googleusercontent.com'

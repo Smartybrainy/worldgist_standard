@@ -1,4 +1,7 @@
-{% extends 'base.html' %}{% block content %}
+{% extends 'base.html' %}
+{% load url_target_blank  %}
+
+{% block content %}
 <div class="container-fluid jumbotron">
   <div class="row">
     <div class="col-md-2"></div>
@@ -17,7 +20,7 @@
           <h6><span class="text-black">Anonymous: </span>{{ obj.name }}</h6>
         </li>
         <li>
-          <p></p>{{ obj.content | linebreaks | urlizetrunc:30 }}</p>
+          <p></p>{{ obj.content | linebreaks | urlizetrunc:30|url_target_blank }}</p>
         </li>
         <hr />
         {% endfor %}

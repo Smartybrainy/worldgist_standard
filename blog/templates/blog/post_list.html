@@ -39,7 +39,6 @@
           <label for="label"><span class="spinner-grow spinner-grow-sm"></span></label>
         </div>
         <input type="search" name="qs" id="label" placeholder="Search" required />
-        <button type="submit"><i class="fas fa-search"></i></button>
       </div>
     </div>
   </form>
@@ -72,21 +71,20 @@
           <p class="card-text">
             <small>{{ post.date_created }}</small>
           </p>
-          <div class="text-content">
-            <p class="card-text">
-              {{ post.content|safe | slice:":150" |linebreaks |urlize|url_target_blank }}&raquo;
-            </p>
-          </div>
+
+          {{ post.content|safe|linebreaks | slice:":150" |url_target_blank }}&raquo;
+
           <!-- This is the image field -->
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg border" />
           {% endif %}
-          <!-- the image field ends here  -->
+
           <a href="{% url 'blog:post-detail' slug=post.slug %}" class="btn btn-info
           btn-sm">Read more</a>
+
           <!-- the below counts the comments in a post -->
           <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
-            class="border border-primary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
+            class="border border-secondary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
 
           <div class="sharethis-inline-share-buttons"></div>
         </div>
