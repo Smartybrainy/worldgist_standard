@@ -1,140 +1,151 @@
 {% extends 'base.html' %}
 {% load url_target_blank  %}
-<!-- {% load socialaccount %}
-{% providers_media_js %} -->
-<!-- <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="btn btn-primary mt-2" style="width: 180px;">
-        <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-      </a><br /> -->
+
+{% load embed_video_tags %}
+
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- For FB Oauth -->
-<script>
-  window.fbAsyncInit = function () {
-    FB.init({
-      appId: '2824257444468967',
-      cookie: true,
-      xfbml: true,
-      version: '8.0'
-    });
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- For FB Oauth -->
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        appId: '2824257444468967',
+        cookie: true,
+        xfbml: true,
+        version: '8.0'
+      });
 
-    FB.AppEvents.logPageView();
+      FB.AppEvents.logPageView();
 
-  };
+    };
 
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
+    (function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) { return; }
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</head>
 
-<!-- the search box -->
-<div class="container-fluid pt-2">
-  <form action="{% url 'blog:search-query' %}" method="GET" class="form-white ml-2">
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <div class="input-group-text">
-          <label for="label"><span class="spinner-grow spinner-grow-sm"></span></label>
-        </div>
-        <input type="search" name="qs" id="label" placeholder="Search" required />
-      </div>
-    </div>
-  </form>
-
-  <!-- FOR THE SUB MENUS -->
-  <ul class="nav white bg-light">
-    <li class="nav-item">
-      <a class="nav-link active" href="{% url 'player:video-list' %}">Videos</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'player:audio-list' %}">Music</a>
-    </li>
-  </ul>
-</div>
-
-<div class="container-fluid">
-  <div class="row shadow p-3 jumbotron rounded">
-    <div class="col-sm-2"></div>
-
-    <div class="col-md-7">
-      {% for post in object_list %}
-      <br>
-      <div class="card">
-        <div class="card-header">MyWorldGist Blog</div>
-        <div class="card-body">
-          <h5 class="card-title border border-light text-primary">
-            <a href="{% url 'blog:post-detail' slug=post.slug %}"
-              title="Click to read more about the post">{{ post.title }}</a>
-          </h5>
-          <p class="card-text">
-            <small>{{ post.date_created }}</small>
-          </p>
-
-          {{ post.content|safe|linebreaks | slice:":150" |url_target_blank }}&raquo;
-
-          <!-- This is the image field -->
-          {% if post.image %}
-          <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg border" />
-          {% endif %}
-
-          <a href="{% url 'blog:post-detail' slug=post.slug %}" class="btn btn-info
-          btn-sm">Read more</a>
-
-          <!-- the below counts the comments in a post -->
-          <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
-            class="border border-secondary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
-
-          <div class="sharethis-inline-share-buttons"></div>
+<body>
+  <!-- the search box -->
+  <div class="container-fluid pt-2">
+    <form action="{% url 'blog:search-query' %}" method="GET" class="form-white ml-2">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <label for="label"><span class="spinner-grow spinner-grow-sm"></span></label>
+          </div>
+          <input type="search" name="qs" id="label" placeholder="Search" required />
         </div>
       </div>
-      {% endfor %}
-    </div>
+    </form>
 
-    <div class="col-md-3">
-      <br />
-      {% include 'sidebar_list.html' %}
-      <br />
-      <br />
-      {% if user.is_authenticated %}
-
-      {% if user.profile.image %}
-      <div class="media">
-        <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
-          id="image-size" />
-      </div>
-      {% endif %}
-      <h4>Hello! {{ user.username }}</h4>
-      <hr />
-      <!-- This section goes fot User history -->
-      <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
-      <br />
-      <hr />
-      <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary btn-sm">Logout</a>
-      {% else %}
-      <a href="{% url 'accounts:login' %}" class="btn btn-success btn-sm">Login</a>
-      <a href="{% url 'accounts:register' %}" class="btn btn-success btn-sm">Sign Up</a><br />
-      <hr />
-
-      <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2" style="width: 180px;">
-        <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-      </a><br />
-      <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2" style="width: 180px;">
-        <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
-      </a>
-      {% endif %}
-      <br /><br />
-      <!-- for convertKit email list -->
-      <div style="z-index:-2;">
-        <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
-      </div>
-      <!-- convertKit ends here -->
-    </div>
-
+    <!-- FOR THE SUB MENUS -->
+    <ul class="nav white bg-light">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'player:video-list' %}">Videos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'player:audio-list' %}">Music</a>
+      </li>
+    </ul>
   </div>
 
-  <!-- <div>
+  <div class="container-fluid">
+    <div class="row shadow p-3 jumbotron rounded">
+      <div class="col-sm-2"></div>
+
+      <div class="col-md-7">
+        {% for post in object_list %}
+
+        <br>
+        <div class="card">
+          <div class="card-header">MyWorldGist Blog</div>
+          <div class="card-body">
+            <h5 class="card-title border border-light text-primary">
+              <a href="{% url 'blog:post-detail' slug=post.slug %}"
+                title="Click to read more about the post">{{ post.title }}</a>
+            </h5>
+            <p class="card-text">
+              <small>{{ post.date_created }}</small>
+            </p>
+
+            {{ post.content|safe|linebreaks | slice:":150" |url_target_blank }}&raquo;
+
+            {% if post.image %}
+            <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg" />
+            {% endif %}
+
+            <a href=""></a>
+
+            <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;">
+              {% video post.url_video 'tiny' %}
+            </div>
+
+            <a href="{{ post.get_absolute_url }}" class="btn btn-info
+            btn-sm">Read more</a>
+
+            <!-- the below counts the comments in a post -->
+            <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
+              class="border border-secondary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
+
+            <div class="sharethis-inline-share-buttons"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-md-3">
+        <br />
+        {% include 'sidebar_list.html' %}
+        <br />
+        <br />
+        {% if user.is_authenticated %}
+
+        {% if user.profile.image %}
+        <div class="media">
+          <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
+            id="image-size" />
+        </div>
+        {% endif %}
+        <h4>Hello! {{ user.username }}</h4>
+        <hr />
+        <!-- This section goes fot User history -->
+        <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
+        <br />
+        <hr />
+        <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary btn-sm">Logout</a>
+        {% else %}
+        <a href="{% url 'accounts:login' %}" class="btn btn-success btn-sm">Login</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-success btn-sm">Sign Up</a><br />
+        <hr />
+
+        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2" style="width: 180px;">
+          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+        </a><br />
+        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2" style="width: 180px;">
+          <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
+        </a>
+        {% endif %}
+        <br /><br />
+        <!-- for convertKit email list -->
+        <div style="z-index:-2;">
+          <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
+        </div>
+        <!-- convertKit ends here -->
+      </div>
+
+    </div>
+
+    <!-- <div>
     {{ object_list.object_list }}
     {{ object_list.has_previous }}
     {{ object_list.has_other_pages }}
@@ -145,52 +156,56 @@
     {{ object_list.has_next }}
   </div> -->
 
-  <!-- Pagination section -->
-  <div class="container-fluid">
+    <!-- Pagination section -->
+    <div class="container-fluid">
 
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-left">
-        {% if object_list.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1"
-            aria-disabled="true">&laquo;
-            Prev</a>
-        </li>
-        {% endif %}
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-left">
+          {% if object_list.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1"
+              aria-disabled="true">&laquo;
+              Prev</a>
+          </li>
+          {% endif %}
 
-        {% for num  in object_list.paginator.page_range %}
-        {% if object_list.number == num %}
-        <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
-        {% elif num > object_list.number|add:'-1' and num < object_list.number|add:'1' %}
-        <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
-        {% endif %}
-        {% endfor %}
+          {% for num  in object_list.paginator.page_range %}
+          {% if object_list.number == num %}
+          <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+          {% elif num > object_list.number|add:'-1' and num < object_list.number|add:'1' %}
+          <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+          {% endif %}
+          {% endfor %}
 
-        {% if object_list.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
-        </li>
-        {% endif %}
-      </ul>
-    </nav>
+          {% if object_list.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+
+    </div>
+
+
+    <div class="container rounded-circle" id="animation">
+      <marquee direction="rtl">
+        <h3>
+          <a class="nav-link" href="{% url 'reaction:reaction-list' %}"><i>Click Me!... We Love To Here Your
+              Comment!</i></a>
+        </h3>
+      </marquee>
+    </div>
+
+    <!-- FOR COOKIEBOT -->
+    <script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"
+      type="text/javascript" async>
+      </script>
 
   </div>
 
+</body>
 
-  <div class="container rounded-circle" id="animation">
-    <marquee direction="rtl">
-      <h3>
-        <a class="nav-link" href="{% url 'reaction:reaction-list' %}"><i>Click Me!... We Love To Here Your
-            Comment!</i></a>
-      </h3>
-    </marquee>
-  </div>
-
-  <!-- FOR COOKIEBOT -->
-  <script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"
-    type="text/javascript" async>
-    </script>
-
-</div>
+</html>
 
 {% endblock content %}

@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from embed_video.fields import EmbedVideoField
 
 STATUS = (
     (0, 'Draft'),
@@ -24,8 +25,9 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='document/%y/%m/%d/', blank=True, null=True,
         width_field="width_field", height_field="height_field")
-    url_video = models.CharField(
-        max_length=2083, blank=True, null=True)
+    # url_video = models.CharField(
+    #     max_length=2083, blank=True, null=True)
+    url_video = EmbedVideoField(blank=True, null=True)
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     author = models.ForeignKey(

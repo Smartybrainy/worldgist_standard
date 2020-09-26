@@ -1,3 +1,4 @@
+from django.conf import settings
 import os
 import django_heroku
 
@@ -48,6 +49,7 @@ THIRD_PARTY_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+    'embed_video',
 
     'allauth',
     'allauth.account',
@@ -57,17 +59,12 @@ THIRD_PARTY_APPS = [
 CKEDITOR_UPLOAD_PATH = "document/"
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'full',  # You can change this based on your requirements.
+        'toolbar': 'full',
         'width': 'auto',
         "removePlugins": "stylesheetparser",
 
     },
 }
-CKEDITOR_RESTRICT_BY_USER = True
-CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
-CKEDITOR_BROWSE_SHOW_DIRS = True
-CKEDITOR_RESTRICT_BY_DATE = True
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 AWS_QUERYSTRING_AUTH = True
 
 

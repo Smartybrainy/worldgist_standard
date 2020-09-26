@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load url_target_blank %}
+{% load embed_video_tags %}
 
 {% block content %}
 
@@ -47,17 +48,21 @@
           <!-- the image section ends here -->
 
           <!-- THE SHARE THIS SECTION -->
-          <div class="sharethis-inline-reaction-buttons">
-          </div>
+          <div class="sharethis-inline-reaction-buttons"></div>
+
         </div>
 
-        {% if object.url_video %}
+        <!-- {% if object.url_video %}
         <object style="height: 50vh; width: 95%; margin-left:auto;margin-right:auto;margin-bottom:30px;">
           <param name="movie" value="{{ object.url_video }}">
           <param name="allowFullScreen" value="true">
           <param name="allowScriptAccess" value="always">
         </object>
-        {% endif %}
+        {% endif %} -->
+
+        <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;">
+          {% video object.url_video 'medium' %}
+        </div>
 
         <!-- the below code belongs to comment -->
         <div class="container">

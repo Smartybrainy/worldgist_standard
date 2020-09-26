@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import (Post, Like, Comment, SideBar)
+from embed_video.admin import AdminVideoMixin
 
 
-class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date_created', 'updated', 'status', 'author')
+class PostAdmin(AdminVideoMixin, admin.ModelAdmin):
+    list_display = ('title', 'date_created', 'updated',
+                    'status', 'author')
     list_filter = ('status',)
     search_fields = ['title', 'content']
     prepopulated_fields = {'slug': ('title',)}
