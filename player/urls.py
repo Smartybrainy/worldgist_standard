@@ -9,5 +9,6 @@ urlpatterns = [
     path('video-detail/<slug>/',
          views.VideoDetail.as_view(), name="video-detail"),
     path('audio/', views.MusicList.as_view(), name="audio-list"),
-    path('audio-detail/<slug>/', views.MusicDetail.as_view(), name="audio-detail")
+    path('audio-detail/<slug>/', views.MusicDetail.as_view(), name="audio-detail"),
+    path('trending-vid/', views.TrendingVideosView.as_view(), name="trending-vid"),
 ]

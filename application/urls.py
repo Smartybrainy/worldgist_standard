@@ -7,7 +7,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls', namespace="blog")),
+    path('', include('core.urls', namespace="core")),
+    path('blog/', include('blog.urls', namespace="blog")),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('tracker/', include('tracker.urls', namespace="tracker")),
     path('reaction/', include('reaction.urls', namespace="reaction")),

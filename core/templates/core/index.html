@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content="5; blog/post-list/"> -->
+    {% include 'google_conversion.html' %}
+
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bolder;
+        }
+
+        #home-view-bg {
+            background-color: lightgray;
+            margin: 0;
+        }
+
+        #home-view-header {
+            text-align: center;
+            color: coral;
+            background: #fff;
+            padding: 1rem;
+            border-radius: 5px;
+            width: calc(100% - 10%);
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .youtube {
+            color: red;
+            text-decoration: none;
+        }
+
+        #home-icon-links:hover {
+            text-decoration: none;
+        }
+
+        #content-section>span {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        #content-section>span a {
+            padding: 2rem;
+            margin: auto;
+        }
+
+        #content-section>span a:hover {
+            transform: scale(1.2, 1.2);
+            transition: all 2s ease-out;
+        }
+
+        .home-icons {
+            color: coral;
+        }
+
+        .home-icons-house {
+            color: green;
+        }
+
+        .home-icons-store {
+            color: purple;
+        }
+
+        .map-btn {
+            margin: auto;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .brige {
+            width: 100%;
+            height: 20px;
+            background-color: #ccc;
+        }
+
+        @media all and (max-width: 540px) {
+            #content-section>span a {
+                padding: 0;
+            }
+        }
+
+        @media all and (min-width: 530px) {
+            div>.ml-4 {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+
+<div class="container-fluid pt-2" id="home-view-bg">
+
+    <header id="home-view-header">
+        <h1>Welcome To MyWorldGist <i class="fas fa-globe"></i></h1>
+    </header>
+
+    <section>
+        <div class="row">
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4 mb-3 ml-4">
+                {% if user.is_authenticated %}
+
+                {% if user.profile.image %}
+                <div class="media">
+                    <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
+                        id="image-size" />
+                </div>
+                {% endif %}
+                <h4>Hello! {{ user.username }}</h4>
+
+                <!-- This section goes fot User history -->
+                <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
+                <br />
+                <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary btn-sm">Logout</a>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="btn btn-success btn-sm">Login</a>
+                <a href="{% url 'accounts:register' %}" class="btn btn-success btn-sm">Sign Up</a>
+                <br />
+
+                <details>
+                    <summary>Social Login</summary>
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2"
+                        style="width: 180px;">
+                        <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+                    </a><br />
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2"
+                        style="width: 180px;">
+                        <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
+                    </a>
+                </details>
+
+                {% endif %}
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="container" id="content-section">
+        <span>
+            <a href="/blog/post-list/" id="home-icon-links" title="Go to the blog page"><i
+                    class="fas fa-blog fa-10x"></i>
+                <h4>Blog</h4>
+            </a>
+
+            <a href="/player/trending-vid/" id="home-icon-links" class="youtube" title="Go to trending videos"><i
+                    class="fab fa-youtube fa-10x"></i>
+                <h4>Trending Videos</h4>
+            </a>
+
+            <a href="/reaction/" id="home-icon-links" class="home-icons" title="Go to forum"><i
+                    class="fab fa-forumbee fa-10x"></i></i>
+                <h4>Page Forum</h4>
+            </a>
+
+            <a href="#" id="home-icon-links" class="text-secondary" title="Not ready!"><i
+                    class="fas fa-video fa-10x"></i>
+                <h4>Music Videos</h4>
+            </a>
+
+            <a href="#" id="home-icon-links" class="home-icons-store" title="Not ready!"><i
+                    class="fas fa-store fa-10x"></i>
+                <h4>Modern Store</h4>
+            </a>
+
+            <a href="#" id="home-icon-links" class="home-icons-house" title="Not ready!"><i
+                    class="fas fa-house-user fa-10x"></i>
+                <h4>Housing Agent</h4>
+            </a>
+        </span>
+
+    </section>
+
+
+    <section class="map-btn mt-5">
+        <h4>GEOLOCATION</h4>
+
+        <button class="btn btn-primary btn-sm mapbox-toggle-show mt-3">Hide Current Location Map & Show Google Map
+            <i class="fas fa-map-marker-alt fa-2x"></i>
+        </button>
+
+        <button class="btn btn-danger btn-sm mapbox-toggle-hide mt-3" style="display:none;">
+            Hide Google Map & Show Current Location Map
+            <i class="fas fa-map-marker-alt fa-2x"></i>
+        </button>
+    </section>
+
+    {% include 'live_chat.html' %}
+
+    <div class="mapbox" style="display:none;">
+        {% include 'google_map.html' %}
+    </div>
+
+    <div class="brige"></div>
+
+    <div class="google-map">
+        {% include 'map.html' %}
+    </div>
+
+</div>
+
+<!-- FOR COOKIEBOT -->
+<script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"
+    type="text/javascript" async>
+    </script>
+<!-- End cookiebot -->
+
+</html>
+
+<!-- For the map toggle scripts -->
+{% block extra_scripts %}
+<script type="text/javascript">
+    var mapBoxShowBtn = document.querySelector('.mapbox-toggle-show');
+    var mapBoxHideBtn = document.querySelector('.mapbox-toggle-hide');
+
+    mapBoxShowBtn.addEventListener('click', function () {
+        if (this.click) {
+            $('.mapbox').slideDown(1000);
+            $('.google-map').slideUp(1000);
+            $('.mapbox-toggle-hide').show(1000);
+            $('.mapbox-toggle-show').hide(1000);
+        };
+    });
+
+    mapBoxHideBtn.addEventListener('click', function () {
+        if (this.click) {
+            $('.mapbox').slideUp(1000);
+            $('.google-map').slideDown(1000);
+            $('.mapbox-toggle-hide').hide(1000);
+            $('.mapbox-toggle-show').show(1000);
+        };
+    });
+
+</script>
+{% endblock extra_scripts %}
+
+{% endblock content %}

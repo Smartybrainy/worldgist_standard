@@ -10,6 +10,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %} | Advert page{% endblock title %}</title>
+  {% include 'google_conversion.html' %}
   <!-- For FB Oauth -->
   <script>
     window.fbAsyncInit = function () {
@@ -32,6 +34,12 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
+  <style>
+    .scale-zoom:hover {
+      transform: scale(1.2, 1.2);
+      transition: all 2s ease-out;
+    }
+  </style>
 </head>
 
 <body>
@@ -81,12 +89,12 @@
             {{ post.content|safe|linebreaks | slice:":150" |url_target_blank }}&raquo;
 
             {% if post.image %}
-            <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg" />
+            <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg scale-zoom ml-3" />
             {% endif %}
 
             <a href=""></a>
 
-            <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;">
+            <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;" class="scale-zoom">
               {% video post.url_video 'tiny' %}
             </div>
 
@@ -110,14 +118,6 @@
         <br />
         {% if user.is_authenticated %}
 
-        {% if user.profile.image %}
-        <div class="media">
-          <img src="{{ user.profile.image.url }}" alt="Profile-img" class="rounded-circle img-fluid mr-4"
-            id="image-size" />
-        </div>
-        {% endif %}
-        <h4>Hello! {{ user.username }}</h4>
-        <hr />
         <!-- This section goes fot User history -->
         <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
         <br />
@@ -128,19 +128,17 @@
         <a href="{% url 'accounts:register' %}" class="btn btn-success btn-sm">Sign Up</a><br />
         <hr />
 
-        <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2" style="width: 180px;">
-          <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
-        </a><br />
-        <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2" style="width: 180px;">
-          <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
-        </a>
+        <details>
+          <summary>Social Login</summary>
+          <a href="{% url 'social:begin' 'facebook' %}" class="btn btn-primary btn-sm mt-2" style="width: 180px;">
+            <i class="fab fa-facebook-f fa-fw"></i>Facebook Login
+          </a><br />
+          <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger btn-sm mt-2" style="width: 180px;">
+            <i class="fab fa-google fa-fw"></i> Google Login &nbsp;
+          </a>
+        </details>
         {% endif %}
-        <br /><br />
-        <!-- for convertKit email list -->
-        <div style="z-index:-2;">
-          <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
-        </div>
-        <!-- convertKit ends here -->
+
       </div>
 
     </div>
@@ -197,13 +195,14 @@
       </marquee>
     </div>
 
-    <!-- FOR COOKIEBOT -->
-    <script id="CookieDeclaration" src="https://consent.cookiebot.com/de8d01fc-4746-4e0d-9c25-915dd5e528d7/cd.js"
-      type="text/javascript" async>
-      </script>
+    {% include 'live_chat.html' %}
 
   </div>
-
+  <!-- for convertKit email list -->
+  <div style="z-index:-2;">
+    <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
+  </div>
+  <!-- convertKit ends here -->
 </body>
 
 </html>

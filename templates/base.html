@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
-  <title>Myworldgist Latest News{% block title %}{% endblock title %}</title>
+  <title>Latest News{% block title %}{% endblock title %}</title>
   <!-- The below belongs to the share this reactions icons -->
   <script type='text/javascript'
     src='https://platform-api.sharethis.com/js/sharethis.js#property=5edd9a5b701431001210de30&product=inline-reaction-buttons&cms=sop'
@@ -39,6 +39,8 @@
   <!-- offline boostrap and jquery -->
   <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/font-awesome/all.min.css' %}">
+
+  {% include 'google_conversion.html' %}
 </head>
 
 

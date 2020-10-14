@@ -3,7 +3,7 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 
-from .models import Video, Music, PopularVideo
+from .models import Video, Music, PopularVideo, TrendingVideo
 
 
 class VideoList(ListView):
@@ -45,3 +45,16 @@ class MusicList(ListView):
 class MusicDetail(DetailView):
     model = Music
     template_name = 'player/audio_detail.html'
+
+
+class TrendingVideosView(ListView):
+
+    def get(self, *args, **kwargs):
+        qs = TrendingVideo.objects.filter(status=1).order_by('-date_created')
+
+        paginator = Paginator(qs, 20)
+        page = self.request.GET.get('page')
+        qs = paginator.get_page(page)
+
+        context = {'object_list': qs}
+        return render(self.request, 'player/trending.html', context)

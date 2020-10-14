@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+{% include 'google_conversion.html' %}
+{% block title %} | Trending Videos {% endblock title %}
+
+{% block content %}
+<style>
+    * {
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    #trend-center {
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .trend-vid-align>span {
+        padding: 10px;
+        display: inline-block;
+    }
+</style>
+
+<div class="jumbotron trend-vid-align">
+    <h1 id="trend-center">Trending Videos</h1>
+
+    <div>
+        {% for vid in object_list %}
+        {% video vid.url_vid '280 x 200' %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Pagination section -->
+<div class="container-fluid">
+    {% if object_list.has_other_pages %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-left">
+            {% if object_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1"
+                    aria-disabled="true">&laquo;
+                    Prev</a>
+            </li>
+            {% endif %}
+
+            {% for num  in object_list.paginator.page_range %}
+            {% if object_list.number == num %}
+            <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+            {% elif num > object_list.number|add:'-1' and num < object_list.number|add:'1' %}
+            <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if object_list.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+{% include 'live_chat.html' %}
+
+{% endblock content %}

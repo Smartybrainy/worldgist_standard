@@ -1,7 +1,10 @@
 from django.contrib import admin
 from .models import (Video,
                      Music,
-                     PopularVideo)
+                     PopularVideo,
+                     TrendingVideo
+                     )
+from embed_video.admin import AdminVideoMixin
 
 
 @admin.register(Video)
@@ -25,6 +28,15 @@ class PopularVideoAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     search_fields = ['name']
     list_filter = ('status',)
+
+
+@admin.register(TrendingVideo)
+class TrendingVideoAdmin(AdminVideoMixin, admin.ModelAdmin):
+    list_display = ('title', 'description', 'url_vid')
+    list_display_links = ('url_vid',)
+    list_filter = ['status']
+    search_fields = ['title']
+    prepopulated_fields = {'slug': ('title',)}
 
 
 admin.site.register(PopularVideo, PopularVideoAdmin)

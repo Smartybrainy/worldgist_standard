@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- For the myLiveChat -->
+    <div style="position: fixed; bottom:30px; right:5px;">
+        <script type="text/javascript">
+            function add_chatinline() {
+                var hccid = 21422277;
+                var nt = document.createElement("script");
+                nt.async = true;
+                nt.src = "https://mylivechat.com/chatinline.aspx?hccid=" + hccid;
+                var ct = document.getElementsByTagName("script")[0]; ct.parentNode.insertBefore(nt, ct);
+            }
+            add_chatinline(); 
+        </script>
+    </div>
+    <!-- End myLiveChat -->
+</body>
+
+</html>

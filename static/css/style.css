@@ -82,8 +82,8 @@
 
 /* for search bar */
 input:focus {
-  background-color: #222;
-  color: white;
+  background-color: #fff !important;
+  color: black;
   border: 1px outset white !important;
   border-radius: 5px;
 }

@@ -4,6 +4,15 @@
 
 {% block content %}
 
+{% include 'google_conversion.html' %}
+
+<style>
+  .scale-zoom:hover {
+    transform: scale(1.2, 1.2);
+    transition: all 2s ease-out;
+  }
+</style>
+
 
 <div class="container-fluid">
   <div class="row shadow-sm p-3 jumbotron rounded">
@@ -43,7 +52,7 @@
           <!-- the image section -->
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid
-            rounded-lg" />
+            rounded-lg scale-zoom ml-3" />
           {% endif %}
           <!-- the image section ends here -->
 
@@ -60,7 +69,7 @@
         </object>
         {% endif %} -->
 
-        <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;">
+        <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;" class="scale-zoom">
           {% video object.url_video 'medium' %}
         </div>
 
@@ -158,4 +167,7 @@
     </div>
   </div>
 </div>
+
+{% include 'live_chat.html' %}
+
 {% endblock content %}

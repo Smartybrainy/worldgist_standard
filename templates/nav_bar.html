@@ -14,7 +14,7 @@
                 {% else %}
                 <li><a href="{% url 'tracker:history-alert' %}" class="navbar__single_link_media">History </a></li>
                 {% endif %}
-                <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link_media">Comment </a></li>
+                <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link_media">Forum </a></li>
                 {% if user.profile and user.is_authenticated %}
                 <li><a href="{% url 'accounts:profile-view' %}" class="navbar__single_link_media">profile </a></li>
                 <li><a href="{% url 'blog:post-create' %}" class="navbar__single_link_media">Add Post </a></li>
@@ -33,7 +33,7 @@
             {% else %}
             <li><a href="{% url 'tracker:history-alert' %}" class="navbar__single_link">History </a></li>
             {% endif %}
-            <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link">Comment </a></li>
+            <li><a href="{% url 'reaction:reaction-list' %}" class="navbar__single_link">Forum </a></li>
             {% if user.profile and user.is_authenticated %}
             <li><a href="{% url 'accounts:profile-view' %}" class="navbar__single_link">profile </a></li>
             <li><a href="{% url 'blog:post-create' %}" class="navbar__single_link">Add Post </a></li>
