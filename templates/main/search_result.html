@@ -7,8 +7,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Search result</title>
-
+  <title>{% block title %} | Search Result {% endblock title %}</title>
   <!-- for the styling -->
   <style>
     #background-gradient {
@@ -31,7 +30,7 @@
           <strong>Content: <i class="fas fa-arrow-down"></i></strong>
           {{ result.content|safe | slice:":1000" | linebreaks }}
           <hr />
-          <a href="/"><button class="btn btn-outline-primary">&laquo;</button></a>
+          <a href="/blog/post-list/"><button class="btn btn-outline-primary">&laquo;</button></a>
           <a href="{% url 'blog:post-detail' slug=result.slug %}">
             <button class="btn btn-outline-primary">Read more &raquo;</button></a>
         </p>
@@ -47,7 +46,7 @@
           </h5>
         </marquee>
         <hr />
-        <a href="/"><button class="btn btn-outline-primary">&laquo; Back</button></a>
+        <a href="/blog/post-list/"><button class="btn btn-outline-primary">&laquo; Back</button></a>
         {% endfor %}
       </div>
     </div>

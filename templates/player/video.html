@@ -14,12 +14,14 @@
 <body>
   <main>
     <header style="text-align: center;" class="p-5 search-gradient white">
-      WELCOME TO WORLDGIST VIDEOS
+      WELCOME TO MYWORLDGIST VIDEOS
     </header>
     <br />
     <div class="container h-auto">
       <a href="{% url 'blog:post-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
           Back</button></a>
+      <a href="/"><button class="btn btn-primary" title="Click to go back">&laquo;
+          Home</button></a>
       <a href="{% url 'player:popular-video' %}"><button class="btn btn-outline-info float-right">Popular Videos &raquo;
           <span class="spinner-border spinner-border-sm"></span>
         </button></a>
@@ -29,6 +31,7 @@
     <hr />
     <div class="container-fluid">
       {% for video in object_list %}
+
       <span id="video_span" class="shadow shadow-md">
         <a href="{% url 'player:video-detail' slug=video.slug %}">
           {% if video.video_file %}
@@ -45,6 +48,7 @@
       <div class="container alert alert-info dismissible fade show">No videos uploaded.
         <span type="button" class="close" data-dismiss="alert">&times;</span>
       </div>
+
       {% endfor %}
     </div>
 

@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 
 <!DOCTYPE html>
@@ -9,6 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <meta http-equiv="refresh" content="5; blog/post-list/"> -->
     {% include 'google_conversion.html' %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'amazon_store/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'amazon_store/css/modern-business.css' %}" rel="stylesheet">
 
     <style>
         body {
@@ -27,48 +35,38 @@
             background: #fff;
             padding: 1rem;
             border-radius: 5px;
-            width: calc(100% - 10%);
+            width: calc(100% - 0);
             margin: auto;
             margin-bottom: 20px;
         }
 
-        .youtube {
-            color: red;
+        #home-icon-links {
             text-decoration: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        #home-icon-text {
+            display: flex;
+            justify-content: center;
         }
 
         #home-icon-links:hover {
-            text-decoration: none;
-        }
-
-        #content-section>span {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-        }
-
-        #content-section>span a {
-            padding: 2rem;
-            margin: auto;
-        }
-
-        #content-section>span a:hover {
             transform: scale(1.2, 1.2);
             transition: all 2s ease-out;
+        }
+
+        /* For the icon color */
+        .youtube {
+            color: red;
         }
 
         .home-icons {
             color: coral;
         }
 
-        .home-icons-house {
+        .home-house-icon {
             color: green;
-        }
-
-        .home-icons-store {
-            color: purple;
         }
 
         .map-btn {
@@ -83,31 +81,29 @@
             background-color: #ccc;
         }
 
-        @media all and (max-width: 540px) {
-            #content-section>span a {
-                padding: 0;
-            }
+        #carousel-height {
+            height: 10% !important;
+            background-size: 100% 100% !important;
         }
 
-        @media all and (min-width: 530px) {
-            div>.ml-4 {
-                margin: 0;
-            }
+        /* For carousel text */
+        .smarty-hide-caption {
+            z-index: 1;
         }
     </style>
 </head>
 
-<div class="container-fluid pt-2" id="home-view-bg">
+<header id="home-view-header" class="shadow-lg">
+    <h1>Welcome To MyWorldGist <i class="fas fa-globe"></i></h1>
+</header>
 
-    <header id="home-view-header">
-        <h1>Welcome To MyWorldGist <i class="fas fa-globe"></i></h1>
-    </header>
+<div class="container-fluid pt-2" id="home-view-bg">
 
     <section>
         <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-lg-1"></div>
 
-            <div class="col-md-4 mb-3 ml-4">
+            <div class="col-lg-3 py-3 ml-4 shadow-lg">
                 {% if user.is_authenticated %}
 
                 {% if user.profile.image %}
@@ -142,47 +138,252 @@
                 {% endif %}
             </div>
 
+            <div class="col-lg-6 shadow-md">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators smarty-hide-caption">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="6"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="7"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="8"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <!-- Slide One - Set the background image for this slide in the line below -->
+                        <div class="carousel-item active" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/slide-1.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Two - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/slide-2.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Three - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/slide-3.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Four - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/frontpage-1.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Five - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/frontpage-2.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Six - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/frontpage-3.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Seven - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/frontpage-4.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Eight - Set the background image for this slide in the line below -->
+                        <div class="carousel-item" id="carousel-height"
+                            style="background-image: url('{% static 'amazon_store/images/frontpage-5.jpg' %}')">
+                            <div class="carousel-caption d-md-block smarty-hide-caption">
+                                <h2>Advertise With Us</h2>
+                                <p>Contact the live chat for more info
+                                    <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin"
+                                        class="btn btn-outline-info">
+                                        Send E-mail
+                                    </a>
+                                    <a href="/store/products/" title="Visit our store" class="btn btn-outline-info">
+                                        Goto Store
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+
+                <!-- For amazon recommendations -->
+                <div class="col-lg-6">
+                    <div id="amzn-assoc-ad-21123a9b-1660-419e-b658-47c068d57b96"></div>
+                    <script async
+                        src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=21123a9b-1660-419e-b658-47c068d57b96">
+                        </script>
+
+                </div>
+                <!-- amazon recommendations end -->
+
+            </div>
+    </section>
+    <hr />
+
+    <!-- start first row -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/blog/post-list/" id="home-icon-links" title="Go to the blog page"><i
+                        class="fas fa-blog fa-7x"></i>
+                </a>
+                <h4 id="home-icon-text">Blog</h4>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/store/products/" id="home-icon-links" class="home-house-icon"
+                    title="Go to MyWorldGist store"><i class="fa fa-shopping-cart fa-5x" aria-hidden="true"></i>
+                </a>
+                <h4 id="home-icon-text">My Store</h4>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/reaction/" id="home-icon-links" class="home-icons" title="Go to forum"><i
+                        class="fab fa-forumbee fa-8x"></i></i>
+                </a>
+                <h4 id="home-icon-text">Page Forum</h4>
+            </div>
+
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/player/trending-vid/" id="home-icon-links" class="youtube" title="Go to trending videos"><i
+                        class="fab fa-youtube fa-8x"></i>
+                </a>
+                <h4 id="home-icon-text">Trending Videos</h4>
+            </div>
+
         </div>
+    </div>
+    <!-- end first row -->
+    <br /><br />
 
-    </section>
+    <!-- start second row -->
+    <div class="container">
+        <div class="row">
 
-    <section class="container" id="content-section">
-        <span>
-            <a href="/blog/post-list/" id="home-icon-links" title="Go to the blog page"><i
-                    class="fas fa-blog fa-10x"></i>
-                <h4>Blog</h4>
-            </a>
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/player/video/popular/" id="home-icon-links" class="home-icons" title="Not ready!"><i
+                        class="fas fa-video fa-8x"></i>
+                </a>
+                <h4 id="home-icon-text">Music Videos</h4>
+            </div>
 
-            <a href="/player/trending-vid/" id="home-icon-links" class="youtube" title="Go to trending videos"><i
-                    class="fab fa-youtube fa-10x"></i>
-                <h4>Trending Videos</h4>
-            </a>
+            {% if user.is_authenticated %}
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/agent/agent/" id="home-icon-links" class="home-house-icon" title="Not ready!"><i
+                        class="fas fa-house-user fa-6x"></i>
+                </a>
+                <h4 id="home-icon-text">Housing Agent</h4>
+            </div>
+            {% else %}
+            <div class="col-lg-3 col-sm-6 my-2 p-3 shadow-lg">
+                <a href="/agent/sign-up-first/" id="home-icon-links" class="home-house-icon" title="Not ready!"><i
+                        class="fas fa-house-user fa-6x"></i>
+                </a>
+                <h4 id="home-icon-text">Housing Agent</h4>
+            </div>
+            {% endif %}
 
-            <a href="/reaction/" id="home-icon-links" class="home-icons" title="Go to forum"><i
-                    class="fab fa-forumbee fa-10x"></i></i>
-                <h4>Page Forum</h4>
-            </a>
+        </div>
+    </div>
+    <!-- end second row -->
+    <hr />
 
-            <a href="#" id="home-icon-links" class="text-secondary" title="Not ready!"><i
-                    class="fas fa-video fa-10x"></i>
-                <h4>Music Videos</h4>
-            </a>
-
-            <a href="#" id="home-icon-links" class="home-icons-store" title="Not ready!"><i
-                    class="fas fa-store fa-10x"></i>
-                <h4>Modern Store</h4>
-            </a>
-
-            <a href="#" id="home-icon-links" class="home-icons-house" title="Not ready!"><i
-                    class="fas fa-house-user fa-10x"></i>
-                <h4>Housing Agent</h4>
-            </a>
-        </span>
-
-    </section>
-
-
-    <section class="map-btn mt-5">
+    <section class="map-btn mt-5 shadow-md">
         <h4>GEOLOCATION</h4>
 
         <button class="btn btn-primary btn-sm mapbox-toggle-show mt-3">Hide Current Location Map & Show Google Map
@@ -243,5 +444,9 @@
 
 </script>
 {% endblock extra_scripts %}
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'amazon_store/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'amazon_store/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 {% endblock content %}

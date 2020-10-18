@@ -1,0 +1,318 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Smartybrainy">
+    <title>{% block title %} | MyWorldGist Store {% endblock title %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'amazon_store/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'amazon_store/css/modern-business.css' %}" rel="stylesheet">
+    <style>
+        .smarty-hide-caption {
+            z-index: 1;
+        }
+
+        #smarty-carousel-height {
+            height: 20% !important;
+            background-size: 100% 100% !important;
+        }
+
+        #home-view-bg {
+            background-color: lightgray;
+            margin: 0;
+        }
+
+        #smarty-no-underline:hover {
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<h3 class="text-center text-light bg-secondary mb-0 py-2">Welcome to MyWorldGist Store</h3>
+
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators smarty-hide-caption">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="5"></li>
+        </ol>
+
+        <!-- carousel inner -->
+        <div class="carousel-inner" role="listbox">
+
+            <!-- Slide One - Set the background image for this slide in the line below -->
+            <div class="carousel-item active" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/amazon-1.jpg' %}')">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide Two - Set the background image for this slide in the line below -->
+            <div class="carousel-item" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/slide-1.jpg' %}') ">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide Three - Set the background image for this slide in the line below -->
+            <div class="carousel-item" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/amazon-2.jpg' %}') ">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide Four - Set the background image for this slide in the line below -->
+            <div class="carousel-item" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/slide-2.jpg' %}') ">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide Five - Set the background image for this slide in the line below -->
+            <div class="carousel-item" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/amazon-3.jpg' %}') ">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Slide Six - Set the background image for this slide in the line below -->
+            <div class="carousel-item" id="smarty-carousel-height"
+                style="background: url('{% static 'amazon_store/images/slide-3.jpg' %}') ">
+                <div class="carousel-caption d-md-block smarty-hide-caption">
+                    <h3>Advertise With Us</h3>
+                    <p>Contact the live chat for more info
+                        <a href="mailto:myworldgist@gmail.com? subject=Contact MyworldGist Admin."
+                            class="btn btn-outline-info">
+                            Send E-mail
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- end carousel inner -->
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+
+<main class="container-fluid pt-2" id="home-view-bg">
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+
+        <!-- Portfolio Section -->
+        <h4 class="text-center text-light bg-secondary mb-0 py-2 rounded-lg">Shopping Has Never Been This Easier</h4>
+
+
+        <!-- Search box -->
+        <form action="{% url 'store:search-engine' %}" method="GET">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <label for="label"><span class="spinner-grow spinner-grow-sm"></span></label>
+                    </div>
+                    <input type="search" name="qs" id="label" placeholder="Search" required />
+                </div>
+            </div>
+        </form>
+        <!-- end search -->
+
+
+        <div class="row">
+            {% for item in object_list %}
+            <a href="{{ item.get_absolute_url }}" class="col-lg-2 col-sm-6 portfolio-item p-1 my-4 shadow-lg"
+                id="smarty-no-underline" title="Go to the detail page > ">
+                <div class="card h-100">
+
+                    <div class="badge badge-{{ item.get_label_display }}">
+                        <var class="float-right">{{ item.get_status_display }}</var>
+                    </div>
+
+                    {% if item.img %}
+                    <img class="card-img-top" src="{{ item.img.url }}" alt="img">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title text-info">{{ item.title }}</h5>
+
+                        {% if item.discount_price %}
+                        <div>
+                            <del>${{ item.price }}</del>
+                            <span class="btn btn-info btn-sm">${{ item.discount_price }}</span>
+                        </div>
+                        {% else %}
+                        <p class="btn btn-info btn-sm">${{ item.price }}</p>
+                        {% endif %}
+
+                        {% if item.shipping_country %}
+                        <div class="card-text">
+                            <i class="fas fa-fighter-jet text-warning"></i>
+                            <span>{{ item.shipping_country }}</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+            <h4 class="text-center">Product are not available.</h4>
+            {% endfor %}
+        </div>
+
+        <!-- pagination -->
+        {% if is_paginated %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-left">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1"
+                        aria-disabled="true">&laquo; Prev</a>
+                </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+
+                {% elif num > page_obj.number|add:-1 and num < page_obj.number|add:1 %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+
+                {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+        <!-- end pagination -->
+
+        <hr />
+
+        <marquee behavior="" direction="rtl">Search any product(s) in the box below to purchase.</marquee>
+
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-6 shadow-lg">
+                <script type="text/javascript">
+                    amzn_assoc_placement = "adunit0";
+                    amzn_assoc_search_bar = "true";
+                    amzn_assoc_tracking_id = "247071-20";
+                    amzn_assoc_search_bar_position = "bottom";
+                    amzn_assoc_ad_mode = "search";
+                    amzn_assoc_ad_type = "smart";
+                    amzn_assoc_marketplace = "amazon";
+                    amzn_assoc_region = "US";
+                    amzn_assoc_title = "Shop Related Products";
+                    amzn_assoc_default_search_phrase = "clothing";
+                    amzn_assoc_default_category = "All";
+                    amzn_assoc_linkid = "d12e55316868fcf0d0e520e2563b3c3d";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+            </div>
+
+            <div class="col-lg-6 shadow-lg">
+                <script type="text/javascript">
+                    amzn_assoc_placement = "adunit0";
+                    amzn_assoc_search_bar = "true";
+                    amzn_assoc_tracking_id = "247071-20";
+                    amzn_assoc_search_bar_position = "bottom";
+                    amzn_assoc_ad_mode = "search";
+                    amzn_assoc_ad_type = "smart";
+                    amzn_assoc_marketplace = "amazon";
+                    amzn_assoc_region = "US";
+                    amzn_assoc_title = "Shop Related Products";
+                    amzn_assoc_default_search_phrase = "Android phones";
+                    amzn_assoc_default_category = "All";
+                    amzn_assoc_linkid = "e1b6353bae3536ed44aa005a9cfe3fb1";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Call to Action Section -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <p>We searched all amazon products and offers you the best deal!.</p>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-secondary btn-block" href="/reaction/">Visit site forum</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'amazon_store/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'amazon_store/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</main>
+{% include 'live_chat.html' %}
+
+</html>
+{% endblock content %}

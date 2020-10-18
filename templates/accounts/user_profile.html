@@ -2,11 +2,11 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<title>{% block title %} | Account Profile {% endblock title %}</title>
 <div class="container-fluid p-5 background-gradient">
   <div class="row">
-    <div class="col-md-2"></div>
 
-    <div class="col-md-8">
+    <div class="col-md-8 shadow-lg offset-2">
       <div class="content-section border border-light rounded p-3 white responsive">
         {% if user.profile.image %}
         <div class="media">
@@ -43,7 +43,6 @@
   </div>
 
 </div>
-<div class="col-md-2"></div>
 
 {% include 'live_chat.html' %}
 

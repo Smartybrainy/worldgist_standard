@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load amazon_url_target_blank %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Smartybrainy">
+    <title>{% block title %} | MyWorldGist Store {% endblock title %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'amazon_store/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'amazon_store/css/modern-business.css' %}" rel="stylesheet">
+    <style>
+        .smarty-hide-caption {
+            z-index: 1;
+        }
+
+        #smarty-carousel-height {
+            height: 10% !important;
+        }
+
+        #home-view-bg {
+            background-color: lightgray;
+            margin: 0;
+        }
+    </style>
+
+</head>
+
+<main class="container-fluid pt-2" id="home-view-bg">
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+
+        <!-- Portfolio Section -->
+        <h4 class="text-center text-light bg-secondary mb-0 py-2 rounded">Shopping Deals Made Easy</h4>
+
+        <div class="row">
+
+            <!-- the empty div -->
+            <div class="col-lg-1 portfolio-item p-1 my-4"></div>
+            <!-- end the empty div -->
+
+            <a href="{{ object.amazon_affiliate_link }}" class="col-lg-4 col-sm-6 portfolio-item p-1 my-4"
+                title="Continue to purchase > ">
+
+
+                <div class="card h-100 shadow-lg">
+                    {% if object.img %}
+                    <img class="card-img-top" src="{{ object.img.url }}" alt="img">
+                    {% endif %}
+                </div>
+            </a>
+
+            <!-- the empty div -->
+            <div class="col-lg-1 portfolio-item p-1 my-4"></div>
+            <!-- end the empty div -->
+
+            <div class="col-lg-4 col-sm-6 portfolio-item p-1 my-4 bg-light rounded-lg shadow-lg">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-info">{{ object.title }}</h5>
+
+                        <div class="card-text">
+                            <p class="badge badge-md badge-primary">Category: {{ object.get_category_display }}</p>
+                        </div>
+
+                        <div class="card-text">
+                            <span>{{ object.description|safe|linebreaks| blank_target }}</span>
+                        </div>
+
+                        {% if object.discount_price %}
+                        <div>
+                            <del>${{ object.price }}</del>
+                            <span class="btn btn-info btn-sm">${{ object.discount_price }}</span>
+                        </div>
+                        {% else %}
+                        <p class="btn btn-info btn-sm">${{ object.price }}</p>
+                        {% endif %}
+
+                        {% if object.shipping_country %}
+                        <div class="card-text">
+                            <i class="fas fa-fighter-jet text-warning"></i>
+                            <span>{{ object.shipping_country }}</span>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-5"></div>
+
+            <div class="col-lg-3">
+                <a href="/store/products/" class="btn btn-primary float-right mb-2">Continue Shopping &raquo;</a>
+            </div>
+            <div class="col-lg-2">
+                <a href="{{ object.amazon_affiliate_link }}" class="btn btn-warning float-right">Proceed to Buy <i
+                        class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </div>
+
+            <div class="col-lg-2"></div>
+        </div>
+
+        <hr />
+
+        <marquee behavior="" direction="rtl" class="text-success">Search any product(s) in the box below to purchase.
+        </marquee>
+
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-6 shadow-lg">
+                <script type="text/javascript">
+                    amzn_assoc_placement = "adunit0";
+                    amzn_assoc_search_bar = "true";
+                    amzn_assoc_tracking_id = "247071-20";
+                    amzn_assoc_search_bar_position = "bottom";
+                    amzn_assoc_ad_mode = "search";
+                    amzn_assoc_ad_type = "smart";
+                    amzn_assoc_marketplace = "amazon";
+                    amzn_assoc_region = "US";
+                    amzn_assoc_title = "Shop Related Products";
+                    amzn_assoc_default_search_phrase = "clothing";
+                    amzn_assoc_default_category = "All";
+                    amzn_assoc_linkid = "d12e55316868fcf0d0e520e2563b3c3d";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+            </div>
+
+            <div class="col-lg-6 shadow-lg">
+                <script type="text/javascript">
+                    amzn_assoc_placement = "adunit0";
+                    amzn_assoc_search_bar = "true";
+                    amzn_assoc_tracking_id = "247071-20";
+                    amzn_assoc_search_bar_position = "bottom";
+                    amzn_assoc_ad_mode = "search";
+                    amzn_assoc_ad_type = "smart";
+                    amzn_assoc_marketplace = "amazon";
+                    amzn_assoc_region = "US";
+                    amzn_assoc_title = "Shop Related Products";
+                    amzn_assoc_default_search_phrase = "Android phones";
+                    amzn_assoc_default_category = "All";
+                    amzn_assoc_linkid = "e1b6353bae3536ed44aa005a9cfe3fb1";
+                </script>
+                <script src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+        <!-- Call to Action Section -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <h5 class="text-center">We searched all amazon products and offer you the best deal!.</h5>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-secondary btn-block" href="/reaction/">Visit site forum</a>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'amazon_store/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'amazon_store/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</main>
+{% include 'live_chat.html' %}
+
+</html>
+{% endblock content %}

@@ -42,10 +42,11 @@
   </style>
 </head>
 
-<body>
+<body class="jumbotron">
   <!-- the search box -->
-  <div class="container-fluid pt-2">
-    <form action="{% url 'blog:search-query' %}" method="GET" class="form-white ml-2">
+  <div class="container pt-2">
+
+    <form action="{% url 'blog:search-query' %}" method="GET">
       <div class="input-group">
         <div class="input-group-prepend">
           <div class="input-group-text">
@@ -57,26 +58,30 @@
     </form>
 
     <!-- FOR THE SUB MENUS -->
-    <ul class="nav white bg-light">
+    <ul class="nav bg-secondary rounded shadow-lg">
       <li class="nav-item">
-        <a class="nav-link active" href="{% url 'player:video-list' %}">Videos</a>
+        <a class="nav-link text-light active" href="{% url 'player:video-list' %}" title="Watch videos">Videos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'player:audio-list' %}">Music</a>
+        <a class="nav-link text-light" href="{% url 'player:audio-list' %}" title="Listen to music">Music</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/amazon-store/store/" title="Visit our store">Store</a>
       </li>
     </ul>
+
   </div>
 
-  <div class="container-fluid">
-    <div class="row shadow p-3 jumbotron rounded">
-      <div class="col-sm-2"></div>
 
-      <div class="col-md-7">
-        {% for post in object_list %}
+  <!-- main content -->
+  <div class="container">
+    <div class="row">
 
-        <br>
-        <div class="card">
-          <div class="card-header">MyWorldGist Blog</div>
+      {% for post in object_list %}
+      <div class="col-lg-4 col-sm-6 portfolio-item p-1 my-4 shadow-lg">
+
+        <div class="card h-100 my-3 mb-5">
+
           <div class="card-body">
             <h5 class="card-title border border-light text-primary">
               <a href="{% url 'blog:post-detail' slug=post.slug %}"
@@ -86,16 +91,16 @@
               <small>{{ post.date_created }}</small>
             </p>
 
-            {{ post.content|safe|linebreaks | slice:":150" |url_target_blank }}&raquo;
+            {{ post.content|safe| slice:":100" |url_target_blank }}&raquo;
 
             {% if post.image %}
             <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg scale-zoom ml-3" />
             {% endif %}
 
-            <a href=""></a>
+            <!-- <a href=""></a> -->
 
             <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;" class="scale-zoom">
-              {% video post.url_video 'tiny' %}
+              {% video post.url_video '200 x 120' %}
             </div>
 
             <a href="{{ post.get_absolute_url }}" class="btn btn-info
@@ -103,25 +108,39 @@
 
             <!-- the below counts the comments in a post -->
             <a href="{% url 'blog:post-detail' slug=post.slug %}" title="Total approved comments"
-              class="border border-secondary rounded-lg">Comments:({{ post.my_approved_comments.count }})</a>
+              class="border border-secondary rounded-lg">Comments:({{ post.my_approved_comments.count }})
+            </a>
 
             <div class="sharethis-inline-share-buttons"></div>
+
           </div>
+
         </div>
-        {% endfor %}
+
+        <hr style="background-color: skyblue;" />
+
       </div>
 
-      <div class="col-md-3">
-        <br />
-        {% include 'sidebar_list.html' %}
-        <br />
-        <br />
+      {% empty %}
+      <h3>No Available Here.</h3>
+      {% endfor %}
+
+    </div>
+  </div>
+  <br><br><br>
+
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-2 col-sm-4 portfolio-item p-1 my-4 shadow-lg">
         {% if user.is_authenticated %}
 
         <!-- This section goes fot User history -->
         <a href="{% url 'tracker:history-list' %}" title="About the user visited page history">User History</a>
         <br />
         <hr />
+        <a href="/" class="btn btn-outline-primary btn-sm">Home page</a>
         <a href="{% url 'accounts:logout' %}" class="btn btn-outline-primary btn-sm">Logout</a>
         {% else %}
         <a href="{% url 'accounts:login' %}" class="btn btn-success btn-sm">Login</a>
@@ -141,68 +160,69 @@
 
       </div>
 
-    </div>
 
-    <!-- <div>
-    {{ object_list.object_list }}
-    {{ object_list.has_previous }}
-    {{ object_list.has_other_pages }}
-    {{ object_list.number }}
-    {{ object_list.paginator.count }}
-    {{ object_list.paginator.page_range }}
-    {{ object_list.paginator.num_pages }}
-    {{ object_list.has_next }}
-  </div> -->
+      <div class="col-lg-6 col-sm-4 portfolio-item p-1 my-4 shadow-lg">
+        {% include 'sidebar_list.html' %}
+      </div>
 
-    <!-- Pagination section -->
-    <div class="container-fluid">
 
-      <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-left">
-          {% if object_list.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1"
-              aria-disabled="true">&laquo;
-              Prev</a>
-          </li>
-          {% endif %}
-
-          {% for num  in object_list.paginator.page_range %}
-          {% if object_list.number == num %}
-          <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
-          {% elif num > object_list.number|add:'-1' and num < object_list.number|add:'1' %}
-          <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
-          {% endif %}
-          {% endfor %}
-
-          {% if object_list.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
+      <div class="col-lg-4 col-sm-4 portfolio-item p-1 my-4 shadow-sm">
+        <!-- for convertKit email list -->
+        <div style="z-index:-2;">
+          <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
+        </div>
+        <!-- convertKit ends here -->
+      </div>
 
     </div>
+  </div>
 
 
-    <div class="container rounded-circle" id="animation">
-      <marquee direction="rtl">
-        <h3>
-          <a class="nav-link" href="{% url 'reaction:reaction-list' %}"><i>Click Me!... We Love To Here Your
-              Comment!</i></a>
-        </h3>
-      </marquee>
-    </div>
+  <!-- Pagination section -->
+  <div class=" container-fluid">
 
-    {% include 'live_chat.html' %}
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-left">
+        {% if object_list.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ object_list.previous_page_number }}" tabindex="-1"
+            aria-disabled="true">&laquo;
+            Prev</a>
+        </li>
+        {% endif %}
+
+        {% for num  in object_list.paginator.page_range %}
+        {% if object_list.number == num %}
+        <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+        {% elif num > object_list.number|add:'-1' and num < object_list.number|add:'1' %}
+        <li class="page-item"><a class="page-link" href="">{{ num }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if object_list.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ object_list.next_page_number }}">Next &raquo;</a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
 
   </div>
-  <!-- for convertKit email list -->
-  <div style="z-index:-2;">
-    <script async data-uid="d15840a258" src="https://awesome-innovator-8071.ck.page/d15840a258/index.js"></script>
+
+
+  <div class="container rounded-lg" id="animation">
+    <marquee direction="rtl">
+      <h3>
+        <a class="nav-link" href="{% url 'reaction:reaction-list' %}"><i>Click Me!... We Love To Here Your
+            Comment!</i></a>
+      </h3>
+    </marquee>
   </div>
-  <!-- convertKit ends here -->
+
+  {% include 'live_chat.html' %}
+
+  </div>
+
 </body>
 
 </html>

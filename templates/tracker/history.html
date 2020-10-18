@@ -1,10 +1,11 @@
 {% extends 'base.html' %} {% block content %}
+
+<title>{% block title %} | History {% endblock title %}</title>
 <div class="container-fluid jumbotron">
   <div class="row">
-    <div class="col-md-2"></div>
 
-    <div class="col-md-8 bg-light">
-      <h2>History Page</h2>
+    <div class="col-md-8 bg-light shadow-lg offset-2 p-5 rounded-lg">
+      <h2 class="text-center p-3 shadow-lg w-50 offset-3">History Page</h2>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -34,9 +35,10 @@
       </table>
     </div>
   </div>
+
+  <a href="/" class="btn btn-primary offset-2">Home page</a>
 </div>
 
-<div class="col-md-2"></div>
 
 {% include 'live_chat.html' %}
 

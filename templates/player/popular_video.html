@@ -1,19 +1,30 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    iframe {
+        overflow: hidden !important;
+    }
+</style>
 <main>
     <header style="text-align: center;" class="p-5 search-gradient white">
-        WELCOME TO WORLDGIST POPULAR VIDEOS
+        WELCOME TO MY-WORLD-GIST POPULAR VIDEOS
     </header>
     <br />
     <div class="container">
         <a href="{% url 'player:video-list' %}"><button class="btn btn-primary" title="Click to go back">&laquo;
                 Back</button></a>
+        <a href="/"><button class="btn btn-primary" title="Click to go back">&laquo;
+                Home</button></a>
     </div>
     <hr />
     <div class="container">
         <div class="row">
-            <div class="col bg-secondary rounded-lg p-2">
-                <iframe src="" width="100%" height="350;" name="iframe_video" frameborder="0" allowfullscreen="true"
-                    allow="autoplay; encripted-media" class="rounded-lg">
+            <div class="col bg-light rounded-lg p-2">
+                <iframe src="{% static 'iframe_img/iframe-defaul.jpg' %}" width="100%" height="350;" name="iframe_video"
+                    scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; encripted-media"
+                    class="rounded-lg">
                 </iframe>
             </div>
 
@@ -48,7 +59,7 @@
             {% for i in video_tube.paginator.page_range %}
             {% if video_tube.number == i %}
             <li class="page-item"><a class="page-link" href="">{{ i }}</a></li>
-            {% elif i > video_tube.number|add:"-1" and i < video_tube.number|add:"1" %}
+            {% elif i > video_tube.number|add:-1 and i < video_tube.number|add:1 %}
             <li class="page-item"><a class="page-link" href="">{{ i }}</a></li>
             {% endif %}
             {% endfor %}

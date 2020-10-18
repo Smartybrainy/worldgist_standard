@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="alert alert-info alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+    <h2 class="my-5 py-5 text-center">SIGN UP BEFORE YOU CAN ACCESS THIS PAGE !
+    </h2>
+    <p class="my-5 text-center">Your visit is highly appreciated.</p>
+
+</div>
+<div class="container mb-2">
+    <a href="{% url 'accounts:register' %}" class="btn btn-success">Sign Up</button></a>
+</div>
+
+{% include 'live_chat.html' %}
+
+{% endblock content %}

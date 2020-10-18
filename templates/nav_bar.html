@@ -1,13 +1,21 @@
 {% load static %}
+<html>
 
-<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<head>
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+    <!-- offline boostrap and jquery -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/font-awesome/all.min.css' %}">
+
+</head>
 
 <body>
-    <nav class="my_navbar" id="my-sticky">
+    <nav class="my_navbar shadow-md" id="my-sticky">
         <header class="my_navbar__header">
-            <a href="/"><img src="{% static '/worldgist.png' %}" alt="Logo" class="navbar__logo"></a>
+            <a href="/"><img src="{% static '/worldgist.png' %}" alt="Logo" class="navbar__logo" title="Home"></a>
 
-            <!-- for width screen size -->
+            <!-- for wide screen size -->
             <ul class="navbar__links_media">
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'tracker:history-list' %}" class="navbar__single_link_media">History </a></li>
@@ -43,3 +51,7 @@
 
 </body>
 <script src="{% static 'js/nav_bar.js' %}"></script>
+
+{% include 'scripts.html' %}
+
+</html>

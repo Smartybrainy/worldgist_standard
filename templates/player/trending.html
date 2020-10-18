@@ -23,9 +23,9 @@
 </style>
 
 <div class="jumbotron trend-vid-align">
-    <h1 id="trend-center">Trending Videos</h1>
+    <h1 id="trend-center" class="shadow-lg w-50 offset-3">Trending Videos</h1>
 
-    <div>
+    <div class="shadow-lg p-3">
         {% for vid in object_list %}
         {% video vid.url_vid '280 x 200' %}
         {% endfor %}

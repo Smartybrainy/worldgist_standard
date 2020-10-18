@@ -18,13 +18,12 @@
   <div class="row shadow-sm p-3 jumbotron rounded">
     <div class="col-md-2"></div>
 
-    <div class="col-md-8">
+    <div class="col-md-8 shadow-lg">
       <div class="card">
-        <div class="card-header">Share My World</div>
+        <div class="card-header">{% block title %} {{ object.title }} {% endblock title %}</div>
         <div class="card-body">
-          <h5 class="border border-light p-2 text-primary">
-            {% block title %} {{ object.title }} {% endblock title %}</h5>
           <h5 class="card-text background-gradient p-2 rounded-lg">
+
             <!-- For profile picture -->
             {% if post.author.profile.image %}
             <div class="media">
@@ -61,14 +60,6 @@
 
         </div>
 
-        <!-- {% if object.url_video %}
-        <object style="height: 50vh; width: 95%; margin-left:auto;margin-right:auto;margin-bottom:30px;">
-          <param name="movie" value="{{ object.url_video }}">
-          <param name="allowFullScreen" value="true">
-          <param name="allowScriptAccess" value="always">
-        </object>
-        {% endif %} -->
-
         <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;" class="scale-zoom">
           {% video object.url_video 'medium' %}
         </div>
@@ -101,6 +92,7 @@
             <!-- comments approval ends here -->
           </div>
           {% endif %}
+
           {% empty %}
           <div class="ml-3">
             <h5><i>NO COMMENT YET :(</i></h5>
@@ -117,7 +109,7 @@
           <br />
           {% else %}
           <div class="ml-3 mb-3">
-            <a href="{% url 'accounts:register' %}">
+            <a href="{% url 'accounts:login' %}">
               <button type="submit" class="btn btn-outline-info btn-sm">Add Comment</button>
             </a>
             <strong>({{ post.my_comments.count }})</strong>
@@ -142,7 +134,7 @@
               </span></strong>
           </form>
           {% else %}
-          <a href="{% url 'accounts:register' %}">
+          <a href="{% url 'accounts:login' %}">
             <button type="button" class="btn btn-primary"><i class="far fa-thumbs-up"></i></button></a>
           <strong class="white"><span class="like-count-color">({{ post.liked.count }})</span>
           </strong>
@@ -158,15 +150,10 @@
 
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-2"></div>
-
-    <div class="col-md-8 pl-0 pb-2">
-      <a href="/"><button type="submit" class="btn btn-primary">Home page</button></a>
-    </div>
-  </div>
+<div class="col-md-8 pb-2 offset-2">
+  <a href="{% url 'blog:post-list' %}" class="btn btn-primary">&laquo; Back</a>
 </div>
+
 
 {% include 'live_chat.html' %}
 

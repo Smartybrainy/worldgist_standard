@@ -39,6 +39,8 @@ LOCAL_APPS = [
     'player.apps.PlayerConfig',
     'chat.apps.ChatConfig',
     'core',
+    'amazon_store',
+    'real_estate',
 ]
 
 THIRD_PARTY_APPS = [

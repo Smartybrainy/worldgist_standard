@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} | Search Result {% endblock title %}</title>
+    <!-- for the styling -->
+    <style>
+        #background-gradient {
+            background-image: linear-gradient(90deg,
+                    #020024 0%,
+                    #090979 35%,
+                    #00d4ff 100%);
+        }
+    </style>
+</head>
+
+<body class="text-light" id="background-gradient">
+    <div class="container p-5">
+        <div class="row mx-auto">
+            <div class="col">
+                {% for result in search_list %}
+                <p class="card-text">
+                <h4>Title: {{ result.title }}</h4>
+                <p>
+                    <strong>Content: <i class="fas fa-arrow-down"></i></strong>
+                    {{ result.get_category_display|safe | slice:":250" | linebreaks }}
+                    <hr />
+                    <a href="/store/products/"><button class="btn btn-outline-primary">&laquo;</button></a>
+                    <a href="{% url 'store:product-detail' slug=result.slug %}">
+                        <button class="btn btn-outline-primary">Read more &raquo;</button></a>
+                </p>
+                </p>
+                <br />
+                <br />
+                <br />
+
+                {% empty %}
+                <h4><i>No result match for your search :( {{ search_list }} </i></h4>
+                <marquee behavior="async" direction="rtl">
+                    <h5>Try searching for more random words.
+                    </h5>
+                </marquee>
+                <hr />
+                <a href="/store/products/"><button class="btn btn-outline-primary">&laquo; Back</button></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

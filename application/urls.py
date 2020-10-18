@@ -14,12 +14,14 @@ urlpatterns = [
     path('reaction/', include('reaction.urls', namespace="reaction")),
     path('player/', include('player.urls', namespace="player")),
     path('chat/', include('chat.urls', namespace="chat")),
+    path('store/', include('amazon_store.urls', namespace="store")),
+    path('agent/', include('real_estate.urls', namespace="agent")),
 
     # For Email reset
     path('accounts/', include('django.contrib.auth.urls')),
     # For the social login
     path('oauth/', include('social_django.urls', namespace="social")),
-    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 if settings.DEBUG:
