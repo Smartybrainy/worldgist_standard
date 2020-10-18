@@ -24,4 +24,6 @@ class AmazonStoreAdmin(admin.ModelAdmin):
                           'category',)
     search_fields = ['title', 'author']
 
+    list_per_page = 50
+
     prepopulated_fields = {'slug': ('title',)}

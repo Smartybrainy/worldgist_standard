@@ -75,3 +75,5 @@ class AmazonStore(models.Model):
         return reverse('store:product-detail', kwargs={
             'slug': self.slug
         })
+
+    ordering = ['-timestamp']
