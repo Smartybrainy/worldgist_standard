@@ -8,7 +8,7 @@
 
 <style>
   .scale-zoom:hover {
-    transform: scale(1.2, 1.2);
+    transform: scale(1.1, 1.1);
     transition: all 2s ease-out;
   }
 </style>
@@ -18,7 +18,7 @@
   <div class="row shadow-sm p-3 jumbotron rounded">
     <div class="col-md-2"></div>
 
-    <div class="col-md-8 shadow-lg">
+    <div class="col-md-8 shadow-md">
       <div class="card">
         <div class="card-header">{% block title %} {{ object.title }} {% endblock title %}</div>
         <div class="card-body">
@@ -51,7 +51,7 @@
           <!-- the image section -->
           {% if post.image %}
           <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid
-            rounded-lg scale-zoom ml-3" />
+            rounded-lg scale-zoom mx-2 mt-3" />
           {% endif %}
           <!-- the image section ends here -->
 

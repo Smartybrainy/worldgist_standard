@@ -78,7 +78,7 @@
     <div class="row">
 
       {% for post in object_list %}
-      <div class="col-lg-4 col-sm-6 portfolio-item p-1 my-4 shadow-lg">
+      <div class="col-lg-4 col-sm-6 portfolio-item p-1 my-4 shadow-md">
 
         <div class="card h-100 my-3 mb-5">
 
@@ -94,10 +94,11 @@
             {{ post.content|safe| slice:":100" |url_target_blank }}&raquo;
 
             {% if post.image %}
-            <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg scale-zoom ml-3" />
+            <img src="{{ post.image.url }}" alt="Does'nt Exis!" class="img-fluid rounded-lg scale-zoom mx-2" />
+            <br><br>
+            <hr>
             {% endif %}
 
-            <!-- <a href=""></a> -->
 
             <div style="height: auto; margin-bottom:30px;display:flex;justify-content:center;" class="scale-zoom">
               {% video post.url_video '200 x 120' %}
