@@ -6,15 +6,14 @@
 <head>
   <!-- FOR THE COOKIEBOT as first script -->
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="de8d01fc-4746-4e0d-9c25-915dd5e528d7"
-    data-blockingmode="true" type="text/javascript"></script>
-
-  <!-- for the gravitec push notifications -->
-  <script src="https://cdn.gravitec.net/storage/5c43347c12b0c3931dd512638b37e5b6/client.js" async></script>
+    data-blockingmode="true" type="text/javascript">
+    </script>
 
 
   <!-- Google Adsense -->
   <script data-ad-client="ca-pub-6922361781329640" async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+    </script>
   <!-- google adsense ends here -->
 
   <!-- Required meta tags -->
@@ -47,6 +46,18 @@
   <link rel="stylesheet" type="text/css" href="{% static 'style-sheet/font-awesome/all.min.css' %}">
 
   {% include 'google_conversion.html' %}
+
+
+  <!-- PushAlert.co -->
+  <script type="text/javascript">
+    (function (d, t) {
+      var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      g.src = "https://cdn.pushalert.co/integrate_6ead8921a20208e05657c3e85cdc4b8a.js";
+      s.parentNode.insertBefore(g, s);
+    }(document, "script"));
+  </script>
+  <!-- End PushAlert -->
 
 </head>
 
