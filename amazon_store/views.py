@@ -7,7 +7,7 @@ from .models import AmazonStore
 
 class StoreListView(ListView):
     model = AmazonStore
-    paginate_by = 12
+    paginate_by = 24
     ordering = ['-timestamp']
 
 
