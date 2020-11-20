@@ -1,6 +1,5 @@
 from django.conf import settings
 import os
-import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -10,11 +9,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '*1wvt%2rb%1=hh5*8(kwlc2d-72wyp0n#%p#6yg_@1!!f#m%kb'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '*1wvt%2rb%1=hh5*8(kwlc2d-72wyp0n#%p#6yg_@1!!f#m%kb'
+# SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,17 +47,17 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'storages',
     'social_django',  # I already install social-auth-app-django
-    'widget_tweaks',  # for chat app
-    'rest_framework',  # for chat app
+    # 'widget_tweaks',  # for chat app
+    # 'rest_framework',  # for chat app
 
     'ckeditor',
     'ckeditor_uploader',
     'embed_video',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.facebook',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
 ]
 CKEDITOR_UPLOAD_PATH = "document/"
 CKEDITOR_CONFIGS = {
@@ -84,7 +84,7 @@ MIDDLEWARE = [
     # below are third party for social login effect
     'social_django.middleware.SocialAuthExceptionMiddleware',
 
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'application.urls'
@@ -119,10 +119,10 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 
     # For allauth
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
+    # 'allauth.account.auth_backends.AuthenticationBackend',
 ]
-SITE_ID = 2
+# SITE_ID = 1
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
@@ -190,7 +190,7 @@ MEDIA_URL = '/media/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
@@ -200,8 +200,6 @@ AWS_DEFAULT_ACL = None
 # AWS_S3_REGION_NAME = "ap-south-1"
 AWS_S3_REGION_NAME = 'us-east-2'
 AWS_S3_SIGNATURE_VERSION = "s3v4"
-
-django_heroku.settings(locals())
 
 # FOR THE REMEMBER ME CHECKBOX
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
