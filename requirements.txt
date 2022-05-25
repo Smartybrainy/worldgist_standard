@@ -70,7 +70,7 @@ pycparser==2.20
 pygame==1.9.6
 PyHamcrest==2.0.2
 PyInstaller==3.6
-PyJWT==1.7.1
+PyJWT==2.4.0
 PyMySQL==0.9.3
 pyOpenSSL==19.1.0
 pyparsing==2.4.7
